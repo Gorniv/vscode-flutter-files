@@ -3,9 +3,9 @@ import 'package:bloc/bloc.dart';
 import 'package:${appName}/${inputName}/index.dart';
 
 class ${upperName}Bloc extends Bloc<${upperName}Event, ${upperName}State> {
-  static final ${upperName}Bloc _${upperName}BlocSingleton = new ${upperName}Bloc._internal();
+  static final ${upperName}Bloc _${privateName}BlocSingleton = new ${upperName}Bloc._internal();
   factory ${upperName}Bloc() {
-    return _${upperName}BlocSingleton;
+    return _${privateName}BlocSingleton;
   }
   ${upperName}Bloc._internal();
   

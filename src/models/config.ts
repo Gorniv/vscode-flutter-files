@@ -10,7 +10,6 @@ export interface IEnvironments {
 }
 
 export interface IApp {
-  root: string;
   outDir?: string;
   assets?: string[];
   index?: string;
@@ -38,8 +37,6 @@ export interface IDefaults {
 }
 
 export interface IConfig {
-  project?: IProject;
-  apps: IApp[];
   defaults: IDefaults;
   appName: string;
 }

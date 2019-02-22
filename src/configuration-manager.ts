@@ -20,11 +20,12 @@ export class ConfigurationManager {
 
       const data = await readFileAsync(filePath, 'utf8');
 
-      let config = {};
+      const config: any = {};
 
       // prevent parsing issues
       try {
-        config = jsYaml.safeLoad(data);
+        const pubspec = jsYaml.safeLoad(data);
+        config.appName = pubspec.name;
       } catch (ex) {
         window.showErrorMessage(
           'Invalid schema detected in pubspec.yaml, please correct and try again!',
@@ -39,17 +40,13 @@ export class ConfigurationManager {
   }
 
   private parseConfig(config): IConfig {
-    if (config.hasOwnProperty('projects')) {
-      const newConfig: IConfig = JSON.parse(JSON.stringify(defaultConfig));
-      return newConfig;
-    }
-
     return deepMerge({}, defaultConfig, config);
   }
 
   public async getConfig() {
     const configFile = await this.readConfigFile();
-    return this.parseConfig(configFile);
+    const result = this.parseConfig(configFile);
+    return result;
   }
 
   public watchConfigFiles(callback) {

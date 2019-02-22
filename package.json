@@ -2,7 +2,7 @@
   "name": "vscode-flutter-files",
   "displayName": "Flutter Files",
   "description": "Quickly scaffold flutter bloc file templates",
-  "version": "0.3.0",
+  "version": "0.5.0",
   "icon": "images/icon.png",
   "publisher": "gorniv",
   "author": {
@@ -18,9 +18,21 @@
   "bugs": {
     "url": "https://github.com/Gorniv/vscode-flutter-files/issues"
   },
-  "keywords": ["Flutter", "angular-cli", "Dart", "BLoC", "Templates"],
-  "categories": ["Other", "Programming Languages", "Snippets"],
-  "activationEvents": ["*"],
+  "keywords": [
+    "Flutter",
+    "angular-cli",
+    "Dart",
+    "BLoC",
+    "Templates"
+  ],
+  "categories": [
+    "Other",
+    "Programming Languages",
+    "Snippets"
+  ],
+  "activationEvents": [
+    "*"
+  ],
   "main": "./out/extension.js",
   "contributes": {
     "configuration": {
@@ -168,7 +180,8 @@
     "vscode:prepublish": "npm run templates && tsc -p ./",
     "compile": "npm run templates && tsc -p ./",
     "postinstall": "node ./node_modules/vscode/bin/install",
-    "test": "npm run compile && node ./node_modules/vscode/bin/test"
+    "test": "npm run compile && node ./node_modules/vscode/bin/test",
+    "format:check": "prettier --write --config ./.prettierrc --list-different \"src/**/*{.ts,.json}\""
   },
   "devDependencies": {
     "typescript": "3.2.4",
@@ -177,7 +190,8 @@
     "@types/node": "11.9.4",
     "@types/mocha": "5.2.6",
     "tslint-config-airbnb": "5.11.1",
-    "copyfiles": "2.1.0"
+    "copyfiles": "2.1.0",
+    "prettier": "1.16.4"
   },
   "dependencies": {
     "js-yaml": "3.12.1",

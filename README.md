@@ -1,65 +1,50 @@
-# flutter-files README
+# VS Code Flutter Files
 
-This is the README for your extension "flutter-files". After writing up a brief description, we recommend including the following sections.
+This extension allows **quickly scaffold flutter BLoC templates** in VS Code project.
+
+![](https://user-images.githubusercontent.com/1618071/38100803-0bb64a90-3387-11e8-80c9-b5c5883bfb38.gif)
+
+## Changelog
+
+### 1.0.0
+* Init
+
 
 ## Features
 
-Describe specific features of your extension including screenshots of your extension in action. Image paths are relative to this README file.
+Right click on a file or a folder in your current project. 
+You can find multiple options been added to the context menu:
 
-For example if there is an image subfolder under your extension project workspace:
+Menu Options  |
+---           | 
+New Component |
+New Directive | 
+New Pipe      |
+New Service   | 
+New Module    |
 
-\!\[feature X\]\(images/feature-x.png\)
+Menu Options  |
+---           | 
+New Class     | 
+New Interface |
+New Enum      | 
 
-> Tip: Many popular extensions utilize animations. This is an excellent way to show off your extension! We recommend short, focused animations that are easy to follow.
+## Installation
 
-## Requirements
+1. Install Visual Studio Code 1.5.0 or higher
+2. Launch Code
+3. From the command palette `Ctrl`-`Shift`-`P` (Windows, Linux) or `Cmd`-`Shift`-`P` (OSX)
+4. Select `Install Extension`
+5. Type `flutter files` and press enter
+6. Reload Visual Studio Code
 
-If you have any requirements or dependencies, add a section describing those and how to install and configure them.
+# Disclaimer
 
-## Extension Settings
+**Important:** This extension due to the nature of it's purpose will create
+files on your hard drive and if necessary create the respective folder structure.
+While it should not override any files during this process, I'm not giving any guarantees
+or take any responsibility in case of lost data. 
 
-Include if your extension adds any VS Code settings through the `contributes.configuration` extension point.
+# License
 
-For example:
-
-This extension contributes the following settings:
-
-* `myExtension.enable`: enable/disable this extension
-* `myExtension.thing`: set to `blah` to do something
-
-## Known Issues
-
-Calling out known issues can help limit users opening duplicate issues against your extension.
-
-## Release Notes
-
-Users appreciate release notes as you update your extension.
-
-### 1.0.0
-
-Initial release of ...
-
-### 1.0.1
-
-Fixed issue #.
-
-### 1.1.0
-
-Added features X, Y, and Z.
-
------------------------------------------------------------------------------------------------------------
-
-## Working with Markdown
-
-**Note:** You can author your README using Visual Studio Code.  Here are some useful editor keyboard shortcuts:
-
-* Split the editor (`Cmd+\` on macOS or `Ctrl+\` on Windows and Linux)
-* Toggle preview (`Shift+CMD+V` on macOS or `Shift+Ctrl+V` on Windows and Linux)
-* Press `Ctrl+Space` (Windows, Linux) or `Cmd+Space` (macOS) to see a list of Markdown snippets
-
-### For more information
-
-* [Visual Studio Code's Markdown Support](http://code.visualstudio.com/docs/languages/markdown)
-* [Markdown Syntax Reference](https://help.github.com/articles/markdown-basics/)
-
-**Enjoy!**
+MIT

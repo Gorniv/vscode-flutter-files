@@ -13,5 +13,4 @@ export const optionsCommands = new Map<OptionType, OptionItem>([
   ],
   [OptionType.AppName, { commands: ['-a', '-p'], description: 'Package name' }],
   [OptionType.ShowOptions, { commands: ['-o'], description: 'Allow to override options' }],
-
 ]);

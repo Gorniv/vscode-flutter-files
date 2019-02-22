@@ -3,7 +3,7 @@ import 'package:${appName}/${inputName}/index.dart';
 abstract class ${upperName}Event {
   Future<${upperName}State> apply(
       {${upperName}State currentState, ${upperName}Bloc bloc});
-  ${upperName}Provider _${upperName}Provider = new ${upperName}Provider();
+  ${upperName}Provider _${privateName}Provider = new ${upperName}Provider();
 }
 
 class Load${upperName}Event extends ${upperName}Event {
@@ -15,7 +15,7 @@ class Load${upperName}Event extends ${upperName}Event {
       {${upperName}State currentState, ${upperName}Bloc bloc}) async {
     try {
       await Future.delayed(new Duration(seconds: 2));
-      this._${upperName}Provider.test();
+      this._${privateName}Provider.test();
       return new In${upperName}State();
     } catch (_) {
       print(_);

@@ -3,16 +3,16 @@ import 'package:${appName}/common/drawer.dart';
 import 'package:${appName}/${inputName}/index.dart';
 
 class ${upperName}Page extends StatelessWidget {
-  static const String routeName = "/${upperName}";
+  static const String routeName = "/${privateName}";
 
   @override
   Widget build(BuildContext context) {
-    var _${upperName}Bloc = new ${upperName}Bloc();
+    var _${privateName}Bloc = new ${upperName}Bloc();
     return new Scaffold(
       appBar: new AppBar(
         title: new Text("${upperName}"),
       ),
-      body: new ${upperName}Screen(${upperName}Bloc: _${upperName}Bloc),
+      body: new ${upperName}Screen(${privateName}Bloc: _${privateName}Bloc),
       endDrawer: getNavDrawer(context, ${upperName}Page.routeName),
     );
   }

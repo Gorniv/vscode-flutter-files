@@ -59,6 +59,7 @@ export class AngularCli {
     const endOfLastImportInx = data.indexOf('\n', lastImportInx);
     const fileLength = data.length;
     return (
+      // tslint:disable-next-line:prefer-template
       data.substring(0, endOfLastImportInx) +
       `\nimport { ${fileNameUpper}${typeUpper} } from '${relativePath}/${fileName}.${type}';` +
       data.substring(endOfLastImportInx, fileLength)
@@ -89,7 +90,9 @@ export class AngularCli {
         .replace('[', '')
         .replace(']', '')
         .split(',')
+        // tslint:disable-next-line:ter-arrow-parens
         .map((item) => item.trim())
+        // tslint:disable-next-line:ter-arrow-parens
         .filter((item) => item !== '');
 
       return [key.trim(), values] as [string, string[]];
@@ -111,6 +114,7 @@ export class AngularCli {
         const moduleStr = JSON.stringify(obj, null, 3)
           .split('"')
           .join('');
+        // tslint:disable-next-line:prefer-template
         return before + `@NgModule(${moduleStr})` + after;
       },
     };
@@ -139,6 +143,7 @@ export class AngularCli {
 
   private getRelativePath(dst: string, src: string) {
     const modulePath = path.parse(dst).dir;
+    // tslint:disable-next-line:prefer-template
     return '.' + src.replace(modulePath, '').replace(/\\/g, '/');
   }
 
@@ -213,23 +218,45 @@ export class AngularCli {
       );
     }
 
-    const files: IFiles[] = resource.files
+    const filesASync: Promise<IFiles>[] = resource.files
+      // tslint:disable-next-line:ter-arrow-parens
       .filter((file) => (file.condition ? file.condition(config, loc.params) : true))
-      .map((file) => {
+      .map(async (file) => {
         const fileName: string = file.name(config);
-        return {
-          name: path.join(
-            loc.dirPath,
-            fileName.startsWith('_') ? `${loc.fileName}${fileName}` : `${loc.fileName}_${fileName}`,
-          ),
+        let newName: string;
+        if (fileName === 'index.dart') {
+          const files: string[] = await fsReaddir(loc.dirPath);
+          let contentStr = '';
+          for (const file of files) {
+            if (file === 'index.dart') {
+              continue;
+            }
+            contentStr += `export '${file}';\r\n`;
+          }
+          const result: IFiles = {
+            name: path.join(loc.dirPath, fileName),
+            content: contentStr,
+          };
+          return result;
+        }
+
+        newName = path.join(
+          loc.dirPath,
+          fileName.startsWith('_') ? `${loc.fileName}${fileName}` : `${loc.fileName}_${fileName}`,
+        );
+        const result: IFiles = {
+          name: newName,
           content: this.fc.getTemplateContent(file.type, config, loc.fileName, loc.params),
         };
+        return result;
       });
+    // tslint:disable-next-line:ter-arrow-parens
+
+    const files = await Promise.all(filesASync);
 
     if (resource.hasOwnProperty('createFolder') && resource.createFolder(config)) {
       await createFolder(loc);
     }
-
     await createFiles(loc, files);
   }
 }

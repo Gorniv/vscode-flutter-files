@@ -5,26 +5,26 @@ import 'package:${appName}/${inputName}/index.dart';
 class ${upperName}Screen extends StatefulWidget {
   const ${upperName}Screen({
     Key key,
-    @required ${upperName}Bloc ${upperName}Bloc,
-  })  : _${upperName}Bloc = ${upperName}Bloc,
+    @required ${upperName}Bloc ${privateName}Bloc,
+  })  : _${privateName}Bloc = ${privateName}Bloc,
         super(key: key);
 
-  final ${upperName}Bloc _${upperName}Bloc;
+  final ${upperName}Bloc _${privateName}Bloc;
 
   @override
   ${upperName}ScreenState createState() {
-    return new ${upperName}ScreenState(_${upperName}Bloc);
+    return new ${upperName}ScreenState(_${privateName}Bloc);
   }
 }
 
 class ${upperName}ScreenState extends State<${upperName}Screen> {
-  final ${upperName}Bloc _${upperName}Bloc;
-  ${upperName}ScreenState(this._${upperName}Bloc);
+  final ${upperName}Bloc _${privateName}Bloc;
+  ${upperName}ScreenState(this._${privateName}Bloc);
 
   @override
   void initState() {
     super.initState();
-    this._${upperName}Bloc.dispatch(Load${upperName}Event());
+    this._${privateName}Bloc.dispatch(Load${upperName}Event());
   }
 
   @override
@@ -35,7 +35,7 @@ class ${upperName}ScreenState extends State<${upperName}Screen> {
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<${upperName}Event, ${upperName}State>(
-        bloc: widget._${upperName}Bloc,
+        bloc: widget._${privateName}Bloc,
         builder: (
           BuildContext context,
           ${upperName}State currentState,

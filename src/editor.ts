@@ -45,10 +45,13 @@ export const showFileNameDialog = async (
   if (vscode.workspace.rootPath === undefined) {
     throw new Error('Please open a project first. Thanks! :-)');
   } else {
-    let fileName = await vscode.window.showInputBox({
-      prompt: `Type the name of the new ${type}`,
-      value: `${defaultTypeName}`,
-    });
+    let fileName = `${type}`;
+    if (type !== ResourceType.Index) {
+      fileName = await vscode.window.showInputBox({
+        prompt: `Type the name of the new ${type}`,
+        value: `${defaultTypeName}`,
+      });
+    }
 
     if (!fileName) {
       throw new Error("That's not a valid name! (no whitespaces or special characters)");

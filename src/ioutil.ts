@@ -8,7 +8,7 @@ const fsWriteFile = promisify(fs.writeFile);
 const fsExists = promisify(fs.exists);
 const fsMkdir = promisify(fs.mkdir);
 
-// Get file contents and create the new files in the folder 
+// Get file contents and create the new files in the folder
 export const createFiles = async (loc: IPath, files: IFiles[]) => {
   try {
     await writeFiles(files);
@@ -20,11 +20,11 @@ export const createFiles = async (loc: IPath, files: IFiles[]) => {
 };
 
 const writeFiles = async (files: IFiles[]) => {
-  const filesPromises: Promise<any>[] = files.map(file => fsWriteFile(file.name, file.content));
+  // tslint:disable-next-line:ter-arrow-parens
+  const filesPromises: Promise<any>[] = files.map((file) => fsWriteFile(file.name, file.content));
 
   await Promise.all(filesPromises);
 };
-
 
 // Create the new folder
 export const createFolder = async (loc: IPath) => {

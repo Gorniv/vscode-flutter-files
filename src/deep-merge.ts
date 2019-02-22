@@ -3,7 +3,7 @@
  * @param item
  * @returns {boolean}
  */
-const isObject = item => (item && typeof item === 'object' && !Array.isArray(item));
+const isObject = (item) => item && typeof item === 'object' && !Array.isArray(item);
 
 /**
  * Deep merge two objects.

@@ -1,6 +1,6 @@
 export enum OptionType {
-    ShowOptions = 'ShowOption',
-    Flat = 'Flat',
-    SkipImport = 'SkipImport',
-    AppName = 'AppName',
+  ShowOptions = 'ShowOption',
+  Flat = 'Flat',
+  SkipImport = 'SkipImport',
+  AppName = 'AppName',
 }

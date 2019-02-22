@@ -4,12 +4,12 @@
     "version": "2.0.0",
     "tasks": [
         {
-            "type": "typescript",
-            "tsconfig": "tsconfig.json",
-            "option": "watch",
+            "type": "npm",
+            "script": "watch",
             "problemMatcher": [
                 "$tsc-watch"
-            ]
+            ],
+            "isBackground": true
         }
     ]
 }
