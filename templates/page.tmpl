@@ -1,0 +1,19 @@
+import 'package:flutter/material.dart';
+import 'package:${appName}/common/drawer.dart';
+import 'package:${appName}/${inputName}/index.dart';
+
+class ${upperName}Page extends StatelessWidget {
+  static const String routeName = "/${upperName}";
+
+  @override
+  Widget build(BuildContext context) {
+    var _${upperName}Bloc = new ${upperName}Bloc();
+    return new Scaffold(
+      appBar: new AppBar(
+        title: new Text("${upperName}"),
+      ),
+      body: new ${upperName}Screen(${upperName}Bloc: _${upperName}Bloc),
+      endDrawer: getNavDrawer(context, ${upperName}Page.routeName),
+    );
+  }
+}

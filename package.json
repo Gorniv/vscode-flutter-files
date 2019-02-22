@@ -1,38 +1,186 @@
 {
-	"name": "flutter-files",
-	"displayName": "flutter-files",
-	"description": "",
-	"version": "0.0.1",
-	"engines": {
-		"vscode": "^1.31.0"
-	},
-	"categories": [
-		"Other"
-	],
-	"activationEvents": [
-		"onCommand:extension.helloWorld"
-	],
-	"main": "./out/extension.js",
-	"contributes": {
-		"commands": [
-			{
-				"command": "extension.helloWorld",
-				"title": "Hello World"
-			}
-		]
-	},
-	"scripts": {
-		"vscode:prepublish": "npm run compile",
-		"compile": "tsc -p ./",
-		"watch": "tsc -watch -p ./",
-		"postinstall": "node ./node_modules/vscode/bin/install",
-		"test": "npm run compile && node ./node_modules/vscode/bin/test"
-	},
-	"devDependencies": {
-		"typescript": "^3.3.1",
-		"vscode": "^1.1.28",
-		"tslint": "^5.12.1",
-		"@types/node": "^10.12.21",
-		"@types/mocha": "^2.2.42"
-	}
+  "name": "vscode-flutter-files",
+  "displayName": "Flutter Files",
+  "description": "Quickly scaffold flutter bloc file templates",
+  "version": "0.3.0",
+  "icon": "images/icon.png",
+  "publisher": "gorniv",
+  "author": {
+    "name": "Kravchenko Igor"
+  },
+  "engines": {
+    "vscode": "1.31.1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Gorniv/vscode-flutter-files"
+  },
+  "bugs": {
+    "url": "https://github.com/Gorniv/vscode-flutter-files/issues"
+  },
+  "keywords": ["Flutter", "angular-cli", "Dart", "BLoC", "Templates"],
+  "categories": ["Other", "Programming Languages", "Snippets"],
+  "activationEvents": ["*"],
+  "main": "./out/extension.js",
+  "contributes": {
+    "configuration": {
+      "type": "object",
+      "title": "Flutter Files menu option configuration",
+      "properties": {
+        "flutter-files.menu.bloc": {
+          "type": "boolean",
+          "default": true,
+          "description": "Shows or hides the menu item."
+        },
+        "flutter-files.menu.event": {
+          "type": "boolean",
+          "default": true,
+          "description": "Shows or hides the menu item."
+        },
+        "flutter-files.menu.model": {
+          "type": "boolean",
+          "default": true,
+          "description": "Shows or hides the menu item."
+        },
+        "flutter-files.menu.page": {
+          "type": "boolean",
+          "default": true,
+          "description": "Shows or hides the menu item."
+        },
+        "flutter-files.menu.provider": {
+          "type": "boolean",
+          "default": true,
+          "description": "Shows or hides the menu item."
+        },
+        "flutter-files.menu.repository": {
+          "type": "boolean",
+          "default": true,
+          "description": "Shows or hides the menu item."
+        },
+        "flutter-files.menu.screen": {
+          "type": "boolean",
+          "default": true,
+          "description": "Shows or hides the menu item."
+        },
+        "flutter-files.menu.state": {
+          "type": "boolean",
+          "default": true,
+          "description": "Shows or hides the menu item."
+        },
+        "flutter-files.menu.index": {
+          "type": "boolean",
+          "default": true,
+          "description": "Shows or hides the menu item."
+        }
+      }
+    },
+    "commands": [
+      {
+        "command": "extension.addFlutter2Bloc",
+        "title": "Generate Bloc"
+      },
+      {
+        "command": "extension.addFlutter2Event",
+        "title": "Generate Event"
+      },
+      {
+        "command": "extension.addFlutter2Model",
+        "title": "Generate Model"
+      },
+      {
+        "command": "extension.addFlutter2Page",
+        "title": "Generate Page"
+      },
+      {
+        "command": "extension.addFlutter2Provider",
+        "title": "Generate Provider"
+      },
+      {
+        "command": "extension.addFlutter2Repository",
+        "title": "Generate Repository"
+      },
+      {
+        "command": "extension.addFlutter2Screen",
+        "title": "Generate Screen"
+      },
+      {
+        "command": "extension.addFlutter2State",
+        "title": "Generate State"
+      },
+      {
+        "command": "extension.addFlutter2Index",
+        "title": "Generate Index"
+      }
+    ],
+    "menus": {
+      "explorer/context": [
+        {
+          "when": "config.flutter-files.menu.bloc",
+          "command": "extension.addFlutter2Bloc",
+          "group": "Flutter"
+        },
+        {
+          "when": "config.flutter-files.menu.event",
+          "command": "extension.addFlutter2Event",
+          "group": "Flutter"
+        },
+        {
+          "when": "config.flutter-files.menu.model",
+          "command": "extension.addFlutter2Model",
+          "group": "Flutter"
+        },
+        {
+          "when": "config.flutter-files.menu.page",
+          "command": "extension.addFlutter2Page",
+          "group": "Flutter"
+        },
+        {
+          "when": "config.flutter-files.menu.provider",
+          "command": "extension.addFlutter2Provider",
+          "group": "Flutter"
+        },
+        {
+          "when": "config.flutter-files.menu.repository",
+          "command": "extension.addFlutter2Repository",
+          "group": "Flutter"
+        },
+        {
+          "when": "config.flutter-files.menu.screen",
+          "command": "extension.addFlutter2Screen",
+          "group": "Flutter"
+        },
+        {
+          "when": "config.flutter-files.menu.state",
+          "command": "extension.addFlutter2State",
+          "group": "Flutter"
+        },
+        {
+          "when": "config.flutter-files.menu.index",
+          "command": "extension.addFlutter2Index",
+          "group": "Flutter"
+        }
+      ]
+    }
+  },
+  "scripts": {
+    "watch": "npm run templates && tsc -watch -p ./",
+    "templates": "copyfiles templates/**/*.tmpl templates/**/*.tmpl ./out/",
+    "vscode:prepublish": "npm run templates && tsc -p ./",
+    "compile": "npm run templates && tsc -p ./",
+    "postinstall": "node ./node_modules/vscode/bin/install",
+    "test": "npm run compile && node ./node_modules/vscode/bin/test"
+  },
+  "devDependencies": {
+    "typescript": "3.2.4",
+    "vscode": "1.1.30",
+    "tslint": "5.12.1",
+    "@types/node": "11.9.4",
+    "@types/mocha": "5.2.6",
+    "tslint-config-airbnb": "5.11.1",
+    "copyfiles": "2.1.0"
+  },
+  "dependencies": {
+    "js-yaml": "3.12.1",
+    "express-es6-template-engine": "2.1.7"
+  }
 }

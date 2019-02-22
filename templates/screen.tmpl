@@ -1,0 +1,54 @@
+import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:${appName}/${inputName}/index.dart';
+
+class ${upperName}Screen extends StatefulWidget {
+  const ${upperName}Screen({
+    Key key,
+    @required ${upperName}Bloc ${upperName}Bloc,
+  })  : _${upperName}Bloc = ${upperName}Bloc,
+        super(key: key);
+
+  final ${upperName}Bloc _${upperName}Bloc;
+
+  @override
+  ${upperName}ScreenState createState() {
+    return new ${upperName}ScreenState(_${upperName}Bloc);
+  }
+}
+
+class ${upperName}ScreenState extends State<${upperName}Screen> {
+  final ${upperName}Bloc _${upperName}Bloc;
+  ${upperName}ScreenState(this._${upperName}Bloc);
+
+  @override
+  void initState() {
+    super.initState();
+    this._${upperName}Bloc.dispatch(Load${upperName}Event());
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return BlocBuilder<${upperName}Event, ${upperName}State>(
+        bloc: widget._${upperName}Bloc,
+        builder: (
+          BuildContext context,
+          ${upperName}State currentState,
+        ) {
+          if (currentState is Un${upperName}State) {
+            return Center(
+              child: CircularProgressIndicator(),
+            );
+          }
+          return new Container(
+              child: new Center(
+            child: new Text("В разработке"),
+          ));
+        });
+  }
+}

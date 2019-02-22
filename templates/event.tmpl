@@ -1,0 +1,25 @@
+import 'package:${appName}/${inputName}/index.dart';
+
+abstract class ${upperName}Event {
+  Future<${upperName}State> apply(
+      {${upperName}State currentState, ${upperName}Bloc bloc});
+  ${upperName}Provider _${upperName}Provider = new ${upperName}Provider();
+}
+
+class Load${upperName}Event extends ${upperName}Event {
+  @override
+  String toString() => 'Load${upperName}Event';
+
+  @override
+  Future<${upperName}State> apply(
+      {${upperName}State currentState, ${upperName}Bloc bloc}) async {
+    try {
+      await Future.delayed(new Duration(seconds: 2));
+      this._${upperName}Provider.test();
+      return new In${upperName}State();
+    } catch (_) {
+      print(_);
+      return new Error${upperName}State();
+    }
+  }
+}

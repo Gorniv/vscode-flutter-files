@@ -1,0 +1,21 @@
+import 'package:equatable/equatable.dart';
+
+abstract class ${upperName}State extends Equatable {
+  ${upperName}State([Iterable props]) : super(props);
+}
+
+class Un${upperName}State extends ${upperName}State {
+  @override
+  String toString() => 'Un${upperName}State';
+}
+
+class In${upperName}State extends ${upperName}State {
+
+  @override
+  String toString() => 'In${upperName}State';
+}
+
+class Error${upperName}State extends ${upperName}State {
+  @override
+  String toString() => 'Error${upperName}State';
+}

@@ -1,27 +1,61 @@
-// The module 'vscode' contains the VS Code extensibility API
-// Import the module and reference it with the alias vscode in your code below
-import * as vscode from 'vscode';
+import { ExtensionContext, commands, window, workspace } from 'vscode';
+import { ConfigurationManager } from './configuration-manager';
+import {
+  showFileNameDialog,
+  showWarning,
+  showOptionsDialog,
+  displayStatusMessage,
+  configureOptionsValues,
+  mapConfigValues,
+} from './editor';
+import { commandsMap } from './commands';
+import { toTileCase } from './formatting';
+import { AngularCli } from './angular-cli';
+import { ResourceType } from './enums/resource-type';
+import { IConfig } from './models/config';
+import { OptionType } from './enums/option-type';
 
-// this method is called when your extension is activated
-// your extension is activated the very first time the command is executed
-export function activate(context: vscode.ExtensionContext) {
+export async function activate(context: ExtensionContext) {
+  const angularCli = new AngularCli();
+  const cm = new ConfigurationManager();
+  let config: IConfig;
 
-	// Use the console to output diagnostic information (console.log) and errors (console.error)
-	// This line of code will only be executed once when your extension is activated
-		console.log('Congratulations, your extension "flutter-files" is now active!');
+  setImmediate(async () => (config = await cm.getConfig()));
 
-	// The command has been defined in the package.json file
-	// Now provide the implementation of the command with registerCommand
-	// The commandId parameter must match the command field in package.json
-	let disposable = vscode.commands.registerCommand('extension.helloWorld', () => {
-		// The code you place here will be executed every time your command is executed
+  // watch and update on config file changes
+  cm.watchConfigFiles(async () => (config = await cm.getConfig()));
 
-		// Display a message box to the user
-		vscode.window.showInformationMessage('Hello World!');
-	});
+  const showDynamicDialog = async (args: any, fileName: string, resource: ResourceType) => {
+    const loc = await showFileNameDialog(args, resource, fileName);
 
-	context.subscriptions.push(disposable);
+    let resourceConfig = config;
+
+    if (loc.params.includes(OptionType.ShowOptions)) {
+      const selectedOptions = await showOptionsDialog(config, loc, resource);
+      if (selectedOptions) {
+        const optionsValuesMap = await configureOptionsValues(
+          config,
+          loc,
+          resource,
+          selectedOptions,
+        );
+        loc.params = [...new Set([...loc.params, ...optionsValuesMap.keys()])];
+        resourceConfig = mapConfigValues(config, resource, optionsValuesMap);
+      }
+    } else {
+      if (loc && loc.paramsMap && loc.paramsMap.size > 0) {
+        resourceConfig = mapConfigValues(config, resource, loc.paramsMap);
+      }
+    }
+
+    await angularCli.generateResources(resource, loc, resourceConfig);
+    displayStatusMessage(toTileCase(resource), loc.fileName);
+  };
+
+  for (const [key, value] of commandsMap) {
+    const command = commands.registerCommand(key, (args) => {
+      return showDynamicDialog(args, value.fileName, value.resource);
+    });
+    context.subscriptions.push(command);
+  }
 }
-
-// this method is called when your extension is deactivated
-export function deactivate() {}
