@@ -2,7 +2,7 @@
 
 This extension allows **quickly scaffold flutter BLoC templates** in VS Code project.
 
-![](./assets/flutter.gif)
+![](https://github.com/Gorniv/vscode-flutter-files/raw/master/assets/flutter.gif)
 
 ## Changelog
 
