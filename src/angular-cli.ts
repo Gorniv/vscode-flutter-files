@@ -218,16 +218,50 @@ export class AngularCli {
       );
     }
 
+    // tslint:disable-next-line:ter-arrow-parens
+    if (resource.hasOwnProperty('createFolder') && resource.createFolder(config)) {
+      await createFolder(loc);
+    }
+
     const filesASync: Promise<IFiles>[] = resource.files
       // tslint:disable-next-line:ter-arrow-parens
       .filter((file) => (file.condition ? file.condition(config, loc.params) : true))
+      // tslint:disable-next-line:ter-arrow-parens
+      .filter((file) => file.name(config) !== 'index.dart')
       .map(async (file) => {
-        const fileName: string = file.name(config);
-        let newName: string;
-        if (fileName === 'index.dart') {
+        try {
+          const fileName: string = file.name(config);
+          const newName: string = path.join(
+            loc.dirPath,
+            fileName.startsWith('_') ? `${loc.fileName}${fileName}` : `${loc.fileName}_${fileName}`,
+          );
+          const result: IFiles = {
+            name: newName,
+            content: this.fc.getTemplateContent(file.type, config, loc.fileName, loc.params, loc),
+          };
+          return result;
+        } catch (ex) {
+          console.log(ex);
+          await window.showErrorMessage(`Error: ${ex}`);
+        }
+      });
+
+    const files = await Promise.all(filesASync);
+
+    await createFiles(loc, files);
+
+    const filesIndex: Promise<IFiles>[] = resource.files
+      // tslint:disable-next-line:ter-arrow-parens
+      .filter((file) => (file.condition ? file.condition(config, loc.params) : true))
+      // tslint:disable-next-line:ter-arrow-parens
+      .filter((file) => file.name(config) === 'index.dart')
+      .map(async (file) => {
+        try {
+          const fileName: string = file.name(config);
           const files: string[] = await fsReaddir(loc.dirPath);
           let contentStr = '';
-          for (const file of files) {
+          // tslint:disable-next-line:ter-arrow-parens
+          for (const file of files.filter((c) => c.toLowerCase().includes('.dart'))) {
             if (file === 'index.dart') {
               continue;
             }
@@ -238,25 +272,12 @@ export class AngularCli {
             content: contentStr,
           };
           return result;
+        } catch (ex) {
+          console.log(ex);
+          await window.showErrorMessage(`Error: ${ex}`);
         }
-
-        newName = path.join(
-          loc.dirPath,
-          fileName.startsWith('_') ? `${loc.fileName}${fileName}` : `${loc.fileName}_${fileName}`,
-        );
-        const result: IFiles = {
-          name: newName,
-          content: this.fc.getTemplateContent(file.type, config, loc.fileName, loc.params),
-        };
-        return result;
       });
-    // tslint:disable-next-line:ter-arrow-parens
-
-    const files = await Promise.all(filesASync);
-
-    if (resource.hasOwnProperty('createFolder') && resource.createFolder(config)) {
-      await createFolder(loc);
-    }
-    await createFiles(loc, files);
+    const indexFiles = await Promise.all(filesIndex);
+    await createFiles(loc, indexFiles);
   }
 }

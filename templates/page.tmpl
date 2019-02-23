@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:${appName}/common/drawer.dart';
-import 'package:${appName}/${inputName}/index.dart';
+import 'package:${appName}/${relative}/index.dart';
 
 class ${upperName}Page extends StatelessWidget {
   static const String routeName = "/${privateName}";
@@ -13,7 +12,6 @@ class ${upperName}Page extends StatelessWidget {
         title: new Text("${upperName}"),
       ),
       body: new ${upperName}Screen(${privateName}Bloc: _${privateName}Bloc),
-      endDrawer: getNavDrawer(context, ${upperName}Page.routeName),
     );
   }
 }

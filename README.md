@@ -2,7 +2,7 @@
 
 This extension allows **quickly scaffold flutter BLoC templates** in VS Code project.
 
-![](https://user-images.githubusercontent.com/1618071/38100803-0bb64a90-3387-11e8-80c9-b5c5883bfb38.gif)
+![](./assets/flutter.gif)
 
 ## Changelog
 
@@ -17,17 +17,23 @@ You can find multiple options been added to the context menu:
 
 Menu Options  |
 ---           | 
-New Component |
-New Directive | 
-New Pipe      |
-New Service   | 
-New Module    |
+New Big Pack Bloc |
+New Small Pack Bloc | 
 
 Menu Options  |
 ---           | 
-New Class     | 
-New Interface |
-New Enum      | 
+New Bloc     | 
+New Event |
+New Model      | 
+New Page      | 
+New Provider      | 
+New Repository      | 
+New Screen      | 
+New State      | 
+
+Menu Options  |
+---           | 
+New Index      | 
 
 ## Installation
 

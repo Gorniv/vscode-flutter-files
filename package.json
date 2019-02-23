@@ -3,7 +3,7 @@
   "displayName": "Flutter Files",
   "description": "Quickly scaffold flutter bloc file templates",
   "version": "0.5.0",
-  "icon": "images/icon.png",
+  "icon": "assets/icon.png",
   "publisher": "gorniv",
   "author": {
     "name": "Kravchenko Igor"
@@ -18,27 +18,25 @@
   "bugs": {
     "url": "https://github.com/Gorniv/vscode-flutter-files/issues"
   },
-  "keywords": [
-    "Flutter",
-    "angular-cli",
-    "Dart",
-    "BLoC",
-    "Templates"
-  ],
-  "categories": [
-    "Other",
-    "Programming Languages",
-    "Snippets"
-  ],
-  "activationEvents": [
-    "*"
-  ],
+  "keywords": ["Flutter", "angular-cli", "Dart", "BLoC", "Templates"],
+  "categories": ["Other", "Programming Languages", "Snippets"],
+  "activationEvents": ["*"],
   "main": "./out/extension.js",
   "contributes": {
     "configuration": {
       "type": "object",
       "title": "Flutter Files menu option configuration",
       "properties": {
+        "flutter-files.menu.bigpack": {
+          "type": "boolean",
+          "default": true,
+          "description": "Shows or hides the menu item."
+        },
+        "flutter-files.menu.smallpack": {
+          "type": "boolean",
+          "default": true,
+          "description": "Shows or hides the menu item."
+        },
         "flutter-files.menu.bloc": {
           "type": "boolean",
           "default": true,
@@ -51,7 +49,7 @@
         },
         "flutter-files.menu.model": {
           "type": "boolean",
-          "default": true,
+          "default": false,
           "description": "Shows or hides the menu item."
         },
         "flutter-files.menu.page": {
@@ -61,12 +59,12 @@
         },
         "flutter-files.menu.provider": {
           "type": "boolean",
-          "default": true,
+          "default": false,
           "description": "Shows or hides the menu item."
         },
         "flutter-files.menu.repository": {
           "type": "boolean",
-          "default": true,
+          "default": false,
           "description": "Shows or hides the menu item."
         },
         "flutter-files.menu.screen": {
@@ -88,88 +86,106 @@
     },
     "commands": [
       {
+        "command": "extension.addFlutter2BigPack",
+        "title": "New Big Pack Bloc"
+      },
+      {
+        "command": "extension.addFlutter2SmallPack",
+        "title": "New Small Pack Bloc"
+      },
+      {
         "command": "extension.addFlutter2Bloc",
-        "title": "Generate Bloc"
+        "title": "New Bloc"
       },
       {
         "command": "extension.addFlutter2Event",
-        "title": "Generate Event"
+        "title": "New Event"
       },
       {
         "command": "extension.addFlutter2Model",
-        "title": "Generate Model"
+        "title": "New Model"
       },
       {
         "command": "extension.addFlutter2Page",
-        "title": "Generate Page"
+        "title": "New Page"
       },
       {
         "command": "extension.addFlutter2Provider",
-        "title": "Generate Provider"
+        "title": "New Provider"
       },
       {
         "command": "extension.addFlutter2Repository",
-        "title": "Generate Repository"
+        "title": "New Repository"
       },
       {
         "command": "extension.addFlutter2Screen",
-        "title": "Generate Screen"
+        "title": "New Screen"
       },
       {
         "command": "extension.addFlutter2State",
-        "title": "Generate State"
+        "title": "New State"
       },
       {
-        "command": "extension.addFlutter2Index",
-        "title": "Generate Index"
+        "command": "extension.addFlutter2zIndex",
+        "title": "New Index"
       }
     ],
     "menus": {
       "explorer/context": [
         {
+          "when": "config.flutter-files.menu.bigpack",
+          "command": "extension.addFlutter2BigPack",
+          "group": "0Flutter Pack"
+        },
+        {
+          "when": "config.flutter-files.menu.smallpack",
+          "command": "extension.addFlutter2SmallPack",
+          "group": "0Flutter Pack"
+        },
+        {
           "when": "config.flutter-files.menu.bloc",
           "command": "extension.addFlutter2Bloc",
-          "group": "Flutter"
+          "group": "1Flutter"
         },
         {
           "when": "config.flutter-files.menu.event",
           "command": "extension.addFlutter2Event",
-          "group": "Flutter"
+          "group": "1Flutter"
         },
         {
           "when": "config.flutter-files.menu.model",
           "command": "extension.addFlutter2Model",
-          "group": "Flutter"
+          "group": "1Flutter"
         },
         {
           "when": "config.flutter-files.menu.page",
           "command": "extension.addFlutter2Page",
-          "group": "Flutter"
+          "group": "1Flutter"
         },
         {
           "when": "config.flutter-files.menu.provider",
           "command": "extension.addFlutter2Provider",
-          "group": "Flutter"
+          "group": "1Flutter"
         },
         {
           "when": "config.flutter-files.menu.repository",
           "command": "extension.addFlutter2Repository",
-          "group": "Flutter"
+          "group": "1Flutter"
         },
         {
           "when": "config.flutter-files.menu.screen",
           "command": "extension.addFlutter2Screen",
-          "group": "Flutter"
+          "group": "1Flutter"
         },
         {
           "when": "config.flutter-files.menu.state",
           "command": "extension.addFlutter2State",
-          "group": "Flutter"
+          "group": "1Flutter"
         },
         {
           "when": "config.flutter-files.menu.index",
-          "command": "extension.addFlutter2Index",
-          "group": "Flutter"
+          "command": "extension.addFlutter2zIndex",
+          "group": "2Flutter Index"
         }
       ]
     }

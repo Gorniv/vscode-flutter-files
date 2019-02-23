@@ -29,7 +29,7 @@ const writeFiles = async (files: IFiles[]) => {
 // Create the new folder
 export const createFolder = async (loc: IPath) => {
   if (loc.dirName) {
-    const exists: boolean = await fsExists(loc.dirPath);
+    const exists = await fsExists(loc.dirPath);
     if (exists) {
       throw new Error('Folder already exists');
     }

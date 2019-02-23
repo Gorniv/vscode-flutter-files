@@ -5,7 +5,7 @@ export const optionsCommands = new Map<OptionType, OptionItem>([
   [
     OptionType.Flat,
     {
-      commands: ['--flat'],
+      commands: ['--flat', '-f'],
       type: 'True | False',
       configPath: 'defaults.{resource}.flat',
       description: 'Flag to indicate if a dir is created.',

@@ -3,6 +3,8 @@ import { ICommand } from './models/command';
 import { CommandType } from './enums/command-type';
 
 export const commandsMap = new Map<CommandType, ICommand>([
+  [CommandType.BigPack, { fileName: 'you_awesome', resource: ResourceType.BigPack }],
+  [CommandType.SmallPack, { fileName: 'you_awesome', resource: ResourceType.SmallPack }],
   [CommandType.Bloc, { fileName: 'you_awesome', resource: ResourceType.Bloc }],
   [CommandType.Event, { fileName: 'you_awesome', resource: ResourceType.Event }],
   [CommandType.State, { fileName: 'you_awesome', resource: ResourceType.State }],

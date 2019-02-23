@@ -5,11 +5,12 @@ import { IConfig } from './models/config';
 import { toCamelCase, toUpperCase, toPrivateCase } from './formatting';
 import { promisify } from './promisify';
 import { TemplateType } from './enums/template-type';
+import { IPath } from './models/path';
 
 const fsReaddir = promisify(fs.readdir);
 const fsReadFile = promisify(fs.readFile);
 const TEMPLATES_FOLDER = 'templates';
-const TEMPLATE_ARGUMENTS = 'inputName, upperName, privateName, appName, params';
+const TEMPLATE_ARGUMENTS = 'inputName, upperName, privateName, appName, relative, params';
 
 export class FileContents {
   private templatesMap: Map<string, Function>;
@@ -24,8 +25,12 @@ export class FileContents {
     const templatesMap = await this.getTemplates();
 
     for (const [key, value] of templatesMap.entries()) {
-      const compiled = es6Renderer(value, TEMPLATE_ARGUMENTS);
-      this.templatesMap.set(key, compiled);
+      try {
+        const compiled = es6Renderer(value, TEMPLATE_ARGUMENTS);
+        this.templatesMap.set(key, compiled);
+      } catch (e) {
+        console.log(e);
+      }
     }
   }
 
@@ -48,10 +53,23 @@ export class FileContents {
     config: IConfig,
     inputName: string,
     params: string[] = [],
+    loc: IPath,
   ) {
+    const paths = loc.dirPath.split('/');
+    let relative;
+    let find = false;
+    for (const item of paths) {
+      if (find) {
+        relative = path.join(relative, item);
+      }
+      if (item === 'lib') {
+        find = true;
+        relative = '';
+      }
+    }
     const templateName: string = template;
     const upperName = toUpperCase(inputName);
-    const args = [inputName, upperName, toPrivateCase(upperName), config.appName, params];
+    const args = [inputName, upperName, toPrivateCase(upperName), config.appName, relative, params];
 
     return this.templatesMap.has(templateName) ? this.templatesMap.get(templateName)(...args) : '';
   }

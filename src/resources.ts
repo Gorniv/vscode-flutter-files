@@ -7,6 +7,51 @@ import { IConfig } from './models/config';
 
 export const resources = new Map<ResourceType, IResource>([
   [
+    ResourceType.BigPack,
+    {
+      locDirName: (loc, config: IConfig) =>
+        !config.defaults.gigpack.flat ? loc.fileName : loc.dirName,
+      locDirPath: (loc, config) => path.join(loc.dirPath, loc.dirName),
+      files: [
+        { name: (config: IConfig) => 'bloc.dart', type: TemplateType.Bloc },
+        { name: (config: IConfig) => 'event.dart', type: TemplateType.Event },
+        { name: () => 'page.dart', type: TemplateType.Page },
+        { name: () => 'provider.dart', type: TemplateType.Provider },
+        { name: () => 'repository.dart', type: TemplateType.Repository },
+        { name: () => 'screen.dart', type: TemplateType.Screen },
+        { name: () => 'model.dart', type: TemplateType.Model },
+        { name: () => 'state.dart', type: TemplateType.State },
+        { name: () => 'index.dart', type: TemplateType.Index },
+      ],
+      createFolder: (config: IConfig) =>
+        config && config.defaults && config.defaults.gigpack
+          ? !config.defaults.gigpack.flat
+          : false,
+      options: [OptionType.Flat, OptionType.AppName],
+    },
+  ],
+  [
+    ResourceType.SmallPack,
+    {
+      locDirName: (loc, config: IConfig) =>
+        !config.defaults.smallpack.flat ? loc.fileName : loc.dirName,
+      locDirPath: (loc, config) => path.join(loc.dirPath, loc.dirName),
+      files: [
+        { name: (config: IConfig) => 'bloc.dart', type: TemplateType.Bloc },
+        { name: (config: IConfig) => 'event.dart', type: TemplateType.Event },
+        { name: () => 'page.dart', type: TemplateType.Page },
+        { name: () => 'screen.dart', type: TemplateType.Screen },
+        { name: () => 'state.dart', type: TemplateType.State },
+        { name: () => 'index.dart', type: TemplateType.Index },
+      ],
+      createFolder: (config: IConfig) =>
+        config && config.defaults && config.defaults.smallpack
+          ? !config.defaults.smallpack.flat
+          : false,
+      options: [OptionType.Flat, OptionType.AppName],
+    },
+  ],
+  [
     ResourceType.Bloc,
     {
       files: [{ name: (config: IConfig) => 'bloc.dart', type: TemplateType.Bloc }],
