@@ -35,15 +35,6 @@ Menu Options  |
 ---           | 
 New Index      | 
 
-## Installation
-
-1. Install Visual Studio Code 1.5.0 or higher
-2. Launch Code
-3. From the command palette `Ctrl`-`Shift`-`P` (Windows, Linux) or `Cmd`-`Shift`-`P` (OSX)
-4. Select `Install Extension`
-5. Type `flutter files` and press enter
-6. Reload Visual Studio Code
-
 # Disclaimer
 
 **Important:** This extension due to the nature of it's purpose will create
