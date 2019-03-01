@@ -42,6 +42,8 @@ files on your hard drive and if necessary create the respective folder structure
 While it should not override any files during this process, I'm not giving any guarantees
 or take any responsibility in case of lost data. 
 
+Fork https://github.com/ivalexa/vscode-angular2-files
+
 # License
 
 MIT
