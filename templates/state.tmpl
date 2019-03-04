@@ -2,20 +2,40 @@ import 'package:equatable/equatable.dart';
 
 abstract class ${upperName}State extends Equatable {
   ${upperName}State([Iterable props]) : super(props);
+
+  /// Copy object for use in action
+  ${upperName}State getStateCopy();
 }
 
+/// UnInitialized
 class Un${upperName}State extends ${upperName}State {
   @override
   String toString() => 'Un${upperName}State';
+
+  @override
+  ${upperName}State getStateCopy() {
+    return Un${upperName}State();
+  }
 }
 
+/// Initialized
 class In${upperName}State extends ${upperName}State {
 
   @override
   String toString() => 'In${upperName}State';
+
+  @override
+  ${upperName}State getStateCopy() {
+    return In${upperName}State();
+  }
 }
 
 class Error${upperName}State extends ${upperName}State {
   @override
   String toString() => 'Error${upperName}State';
+
+  @override
+  ${upperName}State getStateCopy() {
+    return Error${upperName}State();
+  }
 }
