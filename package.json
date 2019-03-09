@@ -2,14 +2,14 @@
   "name": "vscode-flutter-files",
   "displayName": "Flutter Files",
   "description": "Quickly scaffold flutter bloc file templates",
-  "version": "1.1.0",
+  "version": "1.2.1",
   "icon": "assets/icon.png",
   "publisher": "gornivv",
   "author": {
     "name": "Kravchenko Igor"
   },
   "engines": {
-    "vscode": "1.31.1"
+    "vscode": "^1.31.0"
   },
   "repository": {
     "type": "git",
@@ -197,7 +197,9 @@
     "compile": "npm run templates && tsc -p ./",
     "postinstall": "node ./node_modules/vscode/bin/install",
     "test": "npm run compile && node ./node_modules/vscode/bin/test",
-    "format:check": "prettier --write --config ./.prettierrc --list-different \"src/**/*{.ts,.json}\""
+    "format:check": "prettier --write --config ./.prettierrc --list-different \"src/**/*{.ts,.json}\"",
+    "vsce:package":"vsce package",
+    "vsce:publish":"vsce publish"
   },
   "devDependencies": {
     "typescript": "3.2.4",
