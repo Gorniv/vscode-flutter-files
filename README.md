@@ -1,5 +1,9 @@
 # VS Code Flutter Files
 
+<a href="https://github.com/Solido/awesome-flutter">
+   <img alt="Awesome Flutter" src="https://img.shields.io/badge/Awesome-Flutter-blue.svg?longCache=true&style=flat-square" />
+</a>
+
 This extension allows **quickly scaffold flutter BLoC templates** in VS Code project.
 
 ![](https://github.com/Gorniv/vscode-flutter-files/raw/master/assets/flutter.gif)
