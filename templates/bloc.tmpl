@@ -16,6 +16,12 @@ class ${upperName}Bloc extends Bloc<${upperName}Event, ${upperName}State> {
     ${upperName}State currentState,
     ${upperName}Event event,
   ) async* {
-    yield await event.apply(currentState: currentState, bloc: this);
+    try{
+      yield await event.applyAsync(currentState: currentState, bloc: this);
+    }
+    catch(e){
+      print(e);
+      yield currentState;
+    }
   }
 }

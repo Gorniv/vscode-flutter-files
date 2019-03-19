@@ -2,7 +2,7 @@
   "name": "vscode-flutter-files",
   "displayName": "Flutter Files",
   "description": "Quickly scaffold flutter bloc file templates",
-  "version": "1.2.1",
+  "version": "1.2.2",
   "icon": "assets/icon.png",
   "publisher": "gornivv",
   "author": {

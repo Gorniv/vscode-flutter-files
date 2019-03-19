@@ -3,6 +3,9 @@ All notable changes to the "flutter-files" extension will be documented in this 
 
 Check [Keep a Changelog](http://keepachangelog.com/) for recommendations on how to structure this file.
 
+## [1.2.2] 19.03.2019
+- Update templates
+
 ## [1.2.1] 09.03.2019
 - fix: vscode engines
 

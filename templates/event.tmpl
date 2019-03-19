@@ -1,7 +1,8 @@
+import 'dart:async';
 import 'package:${appName}/${relative}/index.dart';
 
 abstract class ${upperName}Event {
-  Future<${upperName}State> apply(
+  Future<${upperName}State> applyAsync(
       {${upperName}State currentState, ${upperName}Bloc bloc});
   ${upperName}Provider _${privateName}Provider = new ${upperName}Provider();
 }
@@ -11,7 +12,7 @@ class Load${upperName}Event extends ${upperName}Event {
   String toString() => 'Load${upperName}Event';
 
   @override
-  Future<${upperName}State> apply(
+  Future<${upperName}State> applyAsync(
       {${upperName}State currentState, ${upperName}Bloc bloc}) async {
     try {
       await Future.delayed(new Duration(seconds: 2));
