@@ -2,7 +2,7 @@
   "name": "vscode-flutter-files",
   "displayName": "Flutter Files",
   "description": "Quickly scaffold flutter bloc file templates",
-  "version": "1.2.2",
+  "version": "1.2.3",
   "icon": "assets/icon.png",
   "publisher": "gornivv",
   "author": {
@@ -18,9 +18,21 @@
   "bugs": {
     "url": "https://github.com/Gorniv/vscode-flutter-files/issues"
   },
-  "keywords": ["Flutter", "angular-cli", "Dart", "BLoC", "Templates"],
-  "categories": ["Other", "Programming Languages", "Snippets"],
-  "activationEvents": ["*"],
+  "keywords": [
+    "Flutter",
+    "angular-cli",
+    "Dart",
+    "BLoC",
+    "Templates"
+  ],
+  "categories": [
+    "Other",
+    "Programming Languages",
+    "Snippets"
+  ],
+  "activationEvents": [
+    "*"
+  ],
   "main": "./out/extension.js",
   "contributes": {
     "configuration": {
@@ -191,28 +203,32 @@
     }
   },
   "scripts": {
-    "watch": "npm run templates && tsc -watch -p ./",
+    "vscode:prepublish": "npm run templates && webpack --mode production",
+    "compile": "npm run templates && webpack --mode none",
+    "watch": "npm run templates && webpack --mode none",
+    "test-compile": "tsc -p ./",
     "templates": "copyfiles templates/**/*.tmpl templates/**/*.tmpl ./out/",
-    "vscode:prepublish": "npm run templates && tsc -p ./",
-    "compile": "npm run templates && tsc -p ./",
     "postinstall": "node ./node_modules/vscode/bin/install",
     "test": "npm run compile && node ./node_modules/vscode/bin/test",
     "format:check": "prettier --write --config ./.prettierrc --list-different \"src/**/*{.ts,.json}\"",
-    "vsce:package":"vsce package",
-    "vsce:publish":"vsce publish"
+    "vsce:package": "vsce package",
+    "vsce:publish": "vsce publish"
   },
   "devDependencies": {
-    "typescript": "3.2.4",
-    "vscode": "1.1.30",
-    "tslint": "5.12.1",
-    "@types/node": "11.9.4",
     "@types/mocha": "5.2.6",
-    "tslint-config-airbnb": "5.11.1",
+    "@types/node": "11.13.0",
     "copyfiles": "2.1.0",
-    "prettier": "1.16.4"
+    "prettier": "1.16.4",
+    "ts-loader": "5.3.3",
+    "tslint": "5.15.0",
+    "tslint-config-airbnb": "5.11.1",
+    "typescript": "3.2.2",
+    "vscode": "1.1.33",
+    "webpack": "4.29.6",
+    "webpack-cli": "3.3.0"
   },
   "dependencies": {
-    "js-yaml": "3.12.1",
+    "js-yaml": "3.13.1",
     "express-es6-template-engine": "2.1.7"
   }
 }

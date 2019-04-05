@@ -10,6 +10,9 @@ This extension allows **quickly scaffold flutter BLoC templates** in VS Code pro
 
 ## Changelog
 
+## 1.2.3 
+- Update templates, use @immutable, new version BLoC
+
 ### 1.2.2
 - Update templates
 

@@ -1,10 +1,12 @@
 import 'dart:async';
 import 'package:${appName}/${relative}/index.dart';
+import 'package:meta/meta.dart';
 
+@immutable
 abstract class ${upperName}Event {
   Future<${upperName}State> applyAsync(
       {${upperName}State currentState, ${upperName}Bloc bloc});
-  ${upperName}Provider _${privateName}Provider = new ${upperName}Provider();
+  final ${upperName}Provider _${privateName}Provider = new ${upperName}Provider();
 }
 
 class Load${upperName}Event extends ${upperName}Event {
