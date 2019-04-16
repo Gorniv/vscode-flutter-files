@@ -55,12 +55,12 @@ export class FileContents {
     params: string[] = [],
     loc: IPath,
   ) {
-    const paths = loc.dirPath.split('/');
-    let relative;
+    const paths = loc.dirPath.split(path.sep);
+    let relative: string;
     let find = false;
     for (const item of paths) {
       if (find) {
-        relative = path.join(relative, item);
+        relative = `${relative}/${item}`;
       }
       if (item === 'lib') {
         find = true;
