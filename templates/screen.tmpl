@@ -45,6 +45,12 @@ class ${upperName}ScreenState extends State<${upperName}Screen> {
               child: CircularProgressIndicator(),
             );
           }
+          if (currentState is Error${upperName}State) {
+            return new Container(
+              child: new Center(
+              child: new Text(currentState.errorMessage ?? 'Error' ),
+            ));
+          }
           return new Container(
               child: new Center(
             child: new Text("В разработке"),

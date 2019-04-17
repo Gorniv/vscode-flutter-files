@@ -22,7 +22,6 @@ class Un${upperName}State extends ${upperName}State {
 
 /// Initialized
 class In${upperName}State extends ${upperName}State {
-
   @override
   String toString() => 'In${upperName}State';
 
@@ -33,11 +32,15 @@ class In${upperName}State extends ${upperName}State {
 }
 
 class Error${upperName}State extends ${upperName}State {
+  final String errorMessage;
+
+  Error${upperName}State(this.errorMessage);
+  
   @override
   String toString() => 'Error${upperName}State';
 
   @override
   ${upperName}State getStateCopy() {
-    return Error${upperName}State();
+    return Error${upperName}State(this.errorMessage);
   }
 }

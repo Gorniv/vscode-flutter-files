@@ -15,11 +15,10 @@ class ${upperName}Bloc extends Bloc<${upperName}Event, ${upperName}State> {
   Stream<${upperName}State> mapEventToState(
     ${upperName}Event event,
   ) async* {
-    try{
+    try {
       yield await event.applyAsync(currentState: currentState, bloc: this);
-    }
-    catch(e){
-      print(e);
+    } catch (_) {
+      print('${upperName}Bloc ' + _?.toString());
       yield currentState;
     }
   }
