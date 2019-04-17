@@ -16,3 +16,4 @@ out
 node_modules
 .vscode-test/**
 *.vsix
+npm-debug.log

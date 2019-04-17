@@ -3,6 +3,9 @@ All notable changes to the "flutter-files" extension will be documented in this 
 
 Check [Keep a Changelog](http://keepachangelog.com/) for recommendations on how to structure this file.
 
+## [1.2.4] 17.04.2019
+- Support windows path. Update templates
+
 ## [1.2.3] 05.04.2019
 - Update templates, use @immutable, new version BLoC
 

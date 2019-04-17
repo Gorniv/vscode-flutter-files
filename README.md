@@ -1,14 +1,19 @@
 # VS Code Flutter Files
 
-<a href="https://github.com/Solido/awesome-flutter">
-   <img alt="Awesome Flutter" src="https://img.shields.io/badge/Awesome-Flutter-blue.svg?longCache=true&style=flat-square" />
-</a>
+[![Awesome Flutter](https://img.shields.io/badge/Awesome-Flutter-blue.svg?longCache=true&style=flat-square)](https://github.com/Solido/awesome-flutter#vscode)
+[![Install](https://vsmarketplacebadge.apphb.com/installs-short/gornivv.vscode-flutter-files.svg)](https://marketplace.visualstudio.com/items?itemName=gornivv.vscode-flutter-files)
+
 
 This extension allows **quickly scaffold flutter BLoC templates** in VS Code project.
+
+This extension use https://github.com/felangel/bloc for BLoC
 
 ![](https://github.com/Gorniv/vscode-flutter-files/raw/master/assets/flutter.gif)
 
 ## Changelog
+
+## 1.2.4 
+- Support windows path. Update templates
 
 ## 1.2.3 
 - Update templates, use @immutable, new version BLoC
