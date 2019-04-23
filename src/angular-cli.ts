@@ -20,7 +20,6 @@ const fsReadFile = promisify(fs.readFile);
 
 export class AngularCli {
   constructor(private readonly fc = new FileContents()) {
-    fc.loadTemplates();
   }
 
   private async findModulePathRecursive(
@@ -237,7 +236,7 @@ export class AngularCli {
           );
           const result: IFiles = {
             name: newName,
-            content: this.fc.getTemplateContent(file.type, config, loc.fileName, loc.params, loc),
+            content: await this.fc.getTemplateContent(file.type, config, loc.fileName, loc.params, loc),
           };
           return result;
         } catch (ex) {

@@ -3,6 +3,9 @@ All notable changes to the "flutter-files" extension will be documented in this 
 
 Check [Keep a Changelog](http://keepachangelog.com/) for recommendations on how to structure this file.
 
+## [1.3.0] 23.04.2019
+- Support custom templates
+
 ## [1.2.4] 17.04.2019
 - Support windows path. Update templates
 
