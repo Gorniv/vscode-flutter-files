@@ -39,6 +39,7 @@ export class FileContents {
         console.log(e);
       }
     }
+    return templatesMap;
   }
 
   private async getTemplates(templatesPath: string) {
@@ -78,7 +79,7 @@ export class FileContents {
     const args = [inputName, upperName, toPrivateCase(upperName), config.appName, relative, params];
     // load dynamic templates
     this.localTemplatesMap = new Map<string, Function>();
-    await this.loadTemplates(workspace.rootPath, this.localTemplatesMap);
+    this.localTemplatesMap = await this.loadTemplates(workspace.rootPath, this.localTemplatesMap);
 
     let resultTemplate = this.localTemplatesMap.has(templateName)
       ? this.localTemplatesMap.get(templateName)(...args)
