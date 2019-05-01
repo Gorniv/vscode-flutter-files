@@ -15,6 +15,10 @@ Copy [templates](./templates) directory to your project(root path) and change an
 
 ## Changelog
 
+## 1.3.2
+
+- File(s) could not be created. TypeError: Cannot read property 'name' of undefined #7
+
 ## 1.3.1
 
 - Fix custom templates for pack

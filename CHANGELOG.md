@@ -4,6 +4,10 @@ All notable changes to the "flutter-files" extension will be documented in this 
 
 Check [Keep a Changelog](http://keepachangelog.com/) for recommendations on how to structure this file.
 
+## [1.3.2] 01.05.2019
+
+- File(s) could not be created. TypeError: Cannot read property 'name' of undefined #7
+
 ## [1.3.1] 29.04.2019
 
 - Fix custom templates for pack
