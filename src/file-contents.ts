@@ -81,7 +81,7 @@ export class FileContents {
     this.localTemplatesMap = new Map<string, Function>();
     this.localTemplatesMap = await this.loadTemplates(workspace.rootPath, this.localTemplatesMap);
 
-    let resultTemplate = this.localTemplatesMap.has(templateName)
+    let resultTemplate = this.localTemplatesMap && this.localTemplatesMap.has(templateName)
       ? this.localTemplatesMap.get(templateName)(...args)
       : undefined;
     if (!resultTemplate) {
