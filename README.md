@@ -9,6 +9,8 @@ This extension use https://github.com/felangel/bloc for BLoC
 
 ![](https://github.com/Gorniv/vscode-flutter-files/raw/master/assets/flutter.gif)
 
+## Custom(dynamic) templates
+
 ![](https://github.com/Gorniv/vscode-flutter-files/raw/master/assets/dynamic.gif)
 
 Copy [templates](./templates) directory to your project(root path) and change any of content files (bloc,event,model,page,provider,repository,scree,state)
