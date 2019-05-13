@@ -21,7 +21,7 @@ class Load${upperName}Event extends ${upperName}Event {
       this._${privateName}Provider.test();
       return new In${upperName}State();
     } catch (_) {
-      print('Load${upperName}Event ' + _?.toString());
+      print('Load${upperName}Event ' + _?.toString() + StackTrace.current.toString());
       return new Error${upperName}State(_?.toString());
     }
   }
