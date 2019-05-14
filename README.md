@@ -17,6 +17,10 @@ Copy [templates](./templates) directory to your project(root path) and change an
 
 ## Changelog
 
+## 1.3.4
+
+- Update templates: fix StackTrace
+
 ## 1.3.3
 
 - Update templates: add StackTrace

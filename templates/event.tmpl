@@ -20,8 +20,8 @@ class Load${upperName}Event extends ${upperName}Event {
       await Future.delayed(new Duration(seconds: 2));
       this._${privateName}Provider.test();
       return new In${upperName}State();
-    } catch (_) {
-      print('Load${upperName}Event ' + _?.toString() + StackTrace.current.toString());
+    } catch (_, stackTrace) {
+      print('$_ $stackTrace');
       return new Error${upperName}State(_?.toString());
     }
   }
