@@ -2,6 +2,7 @@
 
 [![Awesome Flutter](https://img.shields.io/badge/Awesome-Flutter-blue.svg?longCache=true&style=flat-square)](https://github.com/Solido/awesome-flutter#vscode)
 [![Install](https://vsmarketplacebadge.apphb.com/installs-short/gornivv.vscode-flutter-files.svg)](https://marketplace.visualstudio.com/items?itemName=gornivv.vscode-flutter-files)
+[![FOSSA Status](https://app.fossa.io/api/projects/git%2Bgithub.com%2FGorniv%2Fvscode-flutter-files.svg?type=shield)](https://app.fossa.io/projects/git%2Bgithub.com%2FGorniv%2Fvscode-flutter-files?ref=badge_shield)
 
 This extension allows **quickly scaffold flutter BLoC templates** in VS Code project.
 
@@ -98,3 +99,6 @@ Fork https://github.com/ivalexa/vscode-angular2-files
 # License
 
 MIT
+
+
+[![FOSSA Status](https://app.fossa.io/api/projects/git%2Bgithub.com%2FGorniv%2Fvscode-flutter-files.svg?type=large)](https://app.fossa.io/projects/git%2Bgithub.com%2FGorniv%2Fvscode-flutter-files?ref=badge_large)
