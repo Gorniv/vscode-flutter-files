@@ -4,6 +4,10 @@ All notable changes to the "flutter-files" extension will be documented in this 
 
 Check [Keep a Changelog](http://keepachangelog.com/) for recommendations on how to structure this file.
 
+## [1.4.0] 24.07.2019
+
+- fix: #10 and update bloc
+
 ## [1.3.4] 14.05.2019
 
 - Update templates: fix StackTrace

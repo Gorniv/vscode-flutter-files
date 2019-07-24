@@ -1,11 +1,16 @@
-import 'package:${appName}${relative}/index.dart';
+import 'dart:async';
 
 class ${upperName}Provider {
-  final ${upperName}Repository _${privateName}Repository = new ${upperName}Repository();
-
-  ${upperName}Provider();
-
-  void test() {
-    this._${privateName}Repository.test();
+  Future<void> loadAsync(String token) async {
+    /// write from keystore/keychain
+    await Future.delayed(new Duration(seconds: 2));
   }
+
+  Future<void> saveAsync(String token) async {
+    /// write from keystore/keychain
+    await Future.delayed(new Duration(seconds: 2));
+  }
+
+  void test() {}
 }
+

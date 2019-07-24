@@ -6,7 +6,7 @@ import 'package:meta/meta.dart';
 abstract class ${upperName}Event {
   Future<${upperName}State> applyAsync(
       {${upperName}State currentState, ${upperName}Bloc bloc});
-  final ${upperName}Provider _${privateName}Provider = new ${upperName}Provider();
+  final ${upperName}Repository _${privateName}Repository = new ${upperName}Repository();
 }
 
 class Load${upperName}Event extends ${upperName}Event {
@@ -18,7 +18,7 @@ class Load${upperName}Event extends ${upperName}Event {
       {${upperName}State currentState, ${upperName}Bloc bloc}) async {
     try {
       await Future.delayed(new Duration(seconds: 2));
-      this._${privateName}Provider.test();
+      this._${privateName}Repository.test();
       return new In${upperName}State();
     } catch (_, stackTrace) {
       print('$_ $stackTrace');

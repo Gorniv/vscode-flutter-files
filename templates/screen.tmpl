@@ -34,7 +34,7 @@ class ${upperName}ScreenState extends State<${upperName}Screen> {
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<${upperName}Event, ${upperName}State>(
+    return BlocBuilder<${upperName}Bloc, ${upperName}State>(
         bloc: widget._${privateName}Bloc,
         builder: (
           BuildContext context,
