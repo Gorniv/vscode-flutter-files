@@ -3,10 +3,13 @@ import 'package:meta/meta.dart';
 
 @immutable
 abstract class ${upperName}State extends Equatable {
-  ${upperName}State([Iterable props]) : super(props);
+  ${upperName}State([Iterable props]);
 
   /// Copy object for use in action
   ${upperName}State getStateCopy();
+
+  @override
+  List<Object> get props => [props];
 }
 
 /// UnInitialized

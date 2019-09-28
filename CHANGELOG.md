@@ -3,6 +3,9 @@
 All notable changes to the "flutter-files" extension will be documented in this file.
 
 Check [Keep a Changelog](http://keepachangelog.com/) for recommendations on how to structure this file.
+## [1.5.0] 28.09.2019
+
+- support equatable v0.6.0
 
 ## [1.4.0] 24.07.2019
 
