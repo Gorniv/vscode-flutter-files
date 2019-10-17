@@ -1,6 +1,7 @@
 import { IConfig } from './models/config';
-import { workspace, window } from 'vscode';
+import { workspace, window, Uri } from 'vscode';
 import * as fs from 'fs';
+import * as glob from 'glob';
 import { config as defaultConfig } from './config/cli-config';
 import { promisify } from './promisify';
 import deepMerge from './deep-merge';
@@ -9,14 +10,13 @@ import jsYaml = require('js-yaml');
 const readFileAsync = promisify(fs.readFile);
 
 export class ConfigurationManager {
-  private currentRootPath: string = null;
   private readonly CONFIG_FILES = ['pubspec.yaml'];
 
-  private async readConfigFile(): Promise<Object> {
-    const files = await workspace.findFiles('{pubspec.yaml}', '', 1);
-    this.currentRootPath = workspace.rootPath;
-    if (files.length > 0) {
-      const [{ fsPath: filePath }] = files;
+  private async readConfigFile(): Promise<Map<string, Object>> {
+    const files = await workspace.findFiles('{pubspec.yaml}', '');
+    const configMap = new Map<string, Object>();
+    while (files.length > 0) {
+      const [{ fsPath: filePath }] = files.splice(0, 1);
 
       const data = await readFileAsync(filePath, 'utf8');
 
@@ -32,21 +32,19 @@ export class ConfigurationManager {
         );
         throw Error('Invalid schema');
       }
-
-      return config;
+      configMap.set(workspace.getWorkspaceFolder(Uri.file(filePath)).name, config);
     }
 
-    return defaultConfig;
+    return configMap;
   }
 
   private parseConfig(config): IConfig {
     return deepMerge({}, defaultConfig, config);
   }
 
-  public async getConfig() {
+  public async getConfig(): Promise<Map<string, IConfig>> {
     const configFile = await this.readConfigFile();
-    const result = this.parseConfig(configFile);
-    return result;
+    return new Map([...configFile].map(([key, value]) => [key, this.parseConfig(value)]));
   }
 
   public watchConfigFiles(callback) {
