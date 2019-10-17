@@ -6,4 +6,5 @@ export const config: IConfig = {
     gigpack: { flat: false },
     smallpack: { flat: false },
   },
+  appPath: '',
 };

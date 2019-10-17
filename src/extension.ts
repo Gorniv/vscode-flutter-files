@@ -1,4 +1,4 @@
-import { ExtensionContext, commands, window, workspace } from 'vscode';
+import { ExtensionContext, commands, window, workspace, Uri } from 'vscode';
 import { ConfigurationManager } from './configuration-manager';
 import {
   showFileNameDialog,
@@ -14,21 +14,31 @@ import { AngularCli } from './angular-cli';
 import { ResourceType } from './enums/resource-type';
 import { IConfig } from './models/config';
 import { OptionType } from './enums/option-type';
+import { config as defaultConfig } from './config/cli-config';
 
 export async function activate(context: ExtensionContext) {
   const angularCli = new AngularCli();
   const cm = new ConfigurationManager();
-  let config: IConfig;
+  let configMap: Map<string, IConfig>;
 
-  setImmediate(async () => (config = await cm.getConfig()));
+  setImmediate(async () => (configMap = await cm.getConfig()));
 
   // watch and update on config file changes
-  cm.watchConfigFiles(async () => (config = await cm.getConfig()));
+  cm.watchConfigFiles(async () => (configMap = await cm.getConfig()));
 
   const showDynamicDialog = async (args: any, fileName: string, resource: ResourceType) => {
     const loc = await showFileNameDialog(args, resource, fileName);
 
-    let resourceConfig = config;
+    const workspaceFolder = workspace.getWorkspaceFolder(Uri.file(loc.fullPath));
+    const config =
+      (workspaceFolder &&
+        configMap.has(workspaceFolder.name) &&
+        configMap.get(workspaceFolder.name)) ||
+      defaultConfig;
+    let resourceConfig: IConfig = {
+      ...config,
+      appPath: (workspaceFolder && workspaceFolder.uri.fsPath) || workspace.rootPath,
+    };
 
     if (loc.params.includes(OptionType.ShowOptions)) {
       const selectedOptions = await showOptionsDialog(config, loc, resource);

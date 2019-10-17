@@ -41,4 +41,5 @@ export interface IDefaults {
 export interface IConfig {
   defaults: IDefaults;
   appName: string;
+  appPath: string;
 }
