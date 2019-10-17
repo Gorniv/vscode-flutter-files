@@ -1,7 +1,6 @@
 import { IConfig } from './models/config';
 import { workspace, window, Uri } from 'vscode';
 import * as fs from 'fs';
-import * as glob from 'glob';
 import { config as defaultConfig } from './config/cli-config';
 import { promisify } from './promisify';
 import deepMerge from './deep-merge';
