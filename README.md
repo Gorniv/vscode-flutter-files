@@ -17,6 +17,10 @@ Copy [templates](./templates) directory to your project(root path) and change an
 
 ## Changelog
 
+## 1.5.4
+
+- support flutter_bloc 0.22.1
+
 ## 1.5.3
 
 - add workspace support
