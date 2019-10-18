@@ -5,17 +5,30 @@
 
 This extension allows **quickly scaffold flutter BLoC templates** in VS Code project.
 
-This extension use https://github.com/felangel/bloc for BLoC
+This extension use <https://github.com/felangel/bloc> for BLoC
 
-![](https://github.com/Gorniv/vscode-flutter-files/raw/master/assets/flutter.gif)
+![demo](https://github.com/Gorniv/vscode-flutter-files/raw/master/assets/flutter.gif)
 
 ## Custom(dynamic) templates
 
-![](https://github.com/Gorniv/vscode-flutter-files/raw/master/assets/dynamic.gif)
+![demo](https://github.com/Gorniv/vscode-flutter-files/raw/master/assets/dynamic.gif)
 
 Copy [templates](./templates) directory to your project(root path) and change any of content files (bloc,event,model,page,provider,repository,scree,state)
 
 ## Changelog
+
+## 1.5.2
+
+- add workspace support
+- update templates
+
+## 1.5.1
+
+- fix Stack Overflow
+
+## 1.5.0
+
+- support equatable v0.6.0
 
 ## 1.4.0
 
@@ -90,7 +103,7 @@ You can find multiple options been added to the context menu:
 | ------------ |
 | New Index    |
 
-# Disclaimer
+## Disclaimer
 
 **Important:** This extension due to the nature of it's purpose will create
 files on your hard drive and if necessary create the respective folder structure.
@@ -99,6 +112,6 @@ or take any responsibility in case of lost data.
 
 Fork https://github.com/ivalexa/vscode-angular2-files
 
-# License
+## License
 
 MIT
