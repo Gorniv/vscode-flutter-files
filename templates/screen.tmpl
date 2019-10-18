@@ -13,7 +13,7 @@ class ${upperName}Screen extends StatefulWidget {
 
   @override
   ${upperName}ScreenState createState() {
-    return new ${upperName}ScreenState(_${privateName}Bloc);
+    return ${upperName}ScreenState(_${privateName}Bloc);
   }
 }
 
@@ -24,7 +24,7 @@ class ${upperName}ScreenState extends State<${upperName}Screen> {
   @override
   void initState() {
     super.initState();
-    this._${privateName}Bloc.dispatch(Load${upperName}Event());
+    this._load();
   }
 
   @override
@@ -46,15 +46,43 @@ class ${upperName}ScreenState extends State<${upperName}Screen> {
             );
           }
           if (currentState is Error${upperName}State) {
-            return new Container(
-              child: new Center(
-              child: new Text(currentState.errorMessage ?? 'Error' ),
+            return Center(
+                child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: <Widget>[
+                Text(currentState.errorMessage ?? 'Error'),
+                Padding(
+                  padding: const EdgeInsets.only(top: 32.0),
+                  child: RaisedButton(
+                    color: Colors.blue,
+                    child: Text("reload"),
+                    onPressed: () => this._load(),
+                  ),
+                ),
+              ],
             ));
           }
-          return new Container(
-              child: new Center(
-            child: new Text("В разработке"),
-          ));
+          return Center(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: <Widget>[
+                Text("Flutter files: done"),
+                Padding(
+                  padding: const EdgeInsets.only(top: 32.0),
+                  child: RaisedButton(
+                    color: Colors.red,
+                    child: Text("throw error"),
+                    onPressed: () => this._load(true),
+                  ),
+                ),
+              ],
+            ),
+          );
         });
+  }
+
+  void _load([bool isError = false]) {
+    widget._${privateName}Bloc.dispatch(Un${upperName}Event());
+    widget._${privateName}Bloc.dispatch(Load${upperName}Event(isError));
   }
 }

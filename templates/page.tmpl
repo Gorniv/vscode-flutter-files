@@ -6,12 +6,12 @@ class ${upperName}Page extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    var _${privateName}Bloc = new ${upperName}Bloc();
-    return new Scaffold(
-      appBar: new AppBar(
-        title: new Text("${upperName}"),
+    var _${privateName}Bloc = ${upperName}Bloc();
+    return Scaffold(
+      appBar: AppBar(
+        title: Text("${upperName}"),
       ),
-      body: new ${upperName}Screen(${privateName}Bloc: _${privateName}Bloc),
+      body: ${upperName}Screen(${privateName}Bloc: _${privateName}Bloc),
     );
   }
 }

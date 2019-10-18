@@ -1,16 +1,17 @@
 import 'dart:async';
 import 'package:bloc/bloc.dart';
 import 'package:${appName}${relative}/index.dart';
+import 'dart:developer' as developer;
 
 class ${upperName}Bloc extends Bloc<${upperName}Event, ${upperName}State> {
   // todo: check singleton for logic in project
-  static final ${upperName}Bloc _${privateName}BlocSingleton = new ${upperName}Bloc._internal();
+  static final ${upperName}Bloc _${privateName}BlocSingleton = ${upperName}Bloc._internal();
   factory ${upperName}Bloc() {
     return _${privateName}BlocSingleton;
   }
   ${upperName}Bloc._internal();
   
-  ${upperName}State get initialState => new Un${upperName}State();
+  ${upperName}State get initialState => Un${upperName}State(0);
 
   @override
   Stream<${upperName}State> mapEventToState(
@@ -19,7 +20,7 @@ class ${upperName}Bloc extends Bloc<${upperName}Event, ${upperName}State> {
     try {
       yield await event.applyAsync(currentState: currentState, bloc: this);
     } catch (_, stackTrace) {
-      print('$_ $stackTrace');
+      developer.log('$_', name: '${upperName}Bloc', error: _, stackTrace: stackTrace);
       yield currentState;
     }
   }

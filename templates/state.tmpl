@@ -3,48 +3,76 @@ import 'package:meta/meta.dart';
 
 @immutable
 abstract class ${upperName}State extends Equatable {
+  /// notify change state without deep clone state
+  final int version;
+  
   final Iterable propss;
-  ${upperName}State([this.propss]);
+  ${upperName}State(this.version,[this.propss]);
 
   /// Copy object for use in action
+  /// if need use deep clone
   ${upperName}State getStateCopy();
 
+  ${upperName}State getNewVersion();
+
   @override
-  List<Object> get props => [propss];
+  List<Object> get props => (propss);
 }
 
 /// UnInitialized
 class Un${upperName}State extends ${upperName}State {
+
+  Un${upperName}State(version) : super(version);
+
   @override
   String toString() => 'Un${upperName}State';
 
   @override
-  ${upperName}State getStateCopy() {
-    return Un${upperName}State();
+  Un${upperName}State getStateCopy() {
+    return Un${upperName}State(0);
+  }
+
+  @override
+  Un${upperName}State getNewVersion() {
+    return Un${upperName}State(version+1);
   }
 }
 
 /// Initialized
 class In${upperName}State extends ${upperName}State {
-  @override
-  String toString() => 'In${upperName}State';
+  final String hello;
+
+  In${upperName}State(version, this.hello) : super(version, [hello]);
 
   @override
-  ${upperName}State getStateCopy() {
-    return In${upperName}State();
+  String toString() => 'In${upperName}State $hello';
+
+  @override
+  In${upperName}State getStateCopy() {
+    return In${upperName}State(this.version, this.hello);
+  }
+
+  @override
+  In${upperName}State getNewVersion() {
+    return In${upperName}State(version+1, this.hello);
   }
 }
 
 class Error${upperName}State extends ${upperName}State {
   final String errorMessage;
 
-  Error${upperName}State(this.errorMessage);
+  Error${upperName}State(version, this.errorMessage): super(version, [errorMessage]);
   
   @override
   String toString() => 'Error${upperName}State';
 
   @override
-  ${upperName}State getStateCopy() {
-    return Error${upperName}State(this.errorMessage);
+  Error${upperName}State getStateCopy() {
+    return Error${upperName}State(this.version, this.errorMessage);
+  }
+
+  @override
+  Error${upperName}State getNewVersion() {
+    return Error${upperName}State(version+1, this.errorMessage);
   }
 }
