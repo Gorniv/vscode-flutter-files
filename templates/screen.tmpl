@@ -82,7 +82,7 @@ class ${upperName}ScreenState extends State<${upperName}Screen> {
   }
 
   void _load([bool isError = false]) {
-    widget._${privateName}Bloc.dispatch(Un${upperName}Event());
-    widget._${privateName}Bloc.dispatch(Load${upperName}Event(isError));
+    widget._${privateName}Bloc.add(Un${upperName}Event());
+    widget._${privateName}Bloc.add(Load${upperName}Event(isError));
   }
 }

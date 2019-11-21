@@ -4,6 +4,10 @@ All notable changes to the "flutter-files" extension will be documented in this 
 
 Check [Keep a Changelog](http://keepachangelog.com/) for recommendations on how to structure this file.
 
+## [1.5.5] 21.11.2019
+
+- support flutter_bloc ^2.0.0
+
 ## [1.5.4] 18.10.2019
 
 - support flutter_bloc 0.22.1

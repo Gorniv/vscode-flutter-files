@@ -12,9 +12,9 @@ class ${upperName}Bloc extends Bloc<${upperName}Event, ${upperName}State> {
   ${upperName}Bloc._internal();
   
   @override
-  dispose(){
-    _${privateName}BlocSingleton.dispose();
-    super.dispose();
+  Future<void> close() async{
+    // dispose objects
+    super.close();
   }
 
   ${upperName}State get initialState => Un${upperName}State(0);
