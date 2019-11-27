@@ -2,7 +2,7 @@
   "name": "vscode-flutter-files",
   "displayName": "Flutter Files",
   "description": "Quickly scaffold flutter bloc file templates",
-  "version": "1.5.5",
+  "version": "1.6.0",
   "icon": "assets/icon.png",
   "publisher": "gornivv",
   "author": {
@@ -214,7 +214,8 @@
     "vsce:package": "vsce package",
     "vsce:publish": "vsce publish",
     "dry": "standard-version --dry-run",
-    "standard": "standard-version"
+    "standard": "standard-version",
+    "release": "npm run standard && npm run vsce:publish"
   },
   "devDependencies": {
     "@types/mocha": "5.2.7",

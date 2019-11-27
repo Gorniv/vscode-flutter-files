@@ -1,8 +1,35 @@
-# Change Log
+# Changelog
 
-All notable changes to the "flutter-files" extension will be documented in this file.
+All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
-Check [Keep a Changelog](http://keepachangelog.com/) for recommendations on how to structure this file.
+## 1.6.0 (2019-11-27)
+
+
+### Features
+
+* equatable v0.6.0 ([7668837](https://github.com/Gorniv/vscode-flutter-files/commit/7668837bf11dcec55e517a7894713e09de9806e7))
+* flutter_bloc: 2.0.0 [#14](https://github.com/Gorniv/vscode-flutter-files/issues/14) ([e92e913](https://github.com/Gorniv/vscode-flutter-files/commit/e92e913644dfed233efd172e4b7a2e2b2f26060c))
+* support flutter_bloc 0.22.1 ([7e19570](https://github.com/Gorniv/vscode-flutter-files/commit/7e19570aa02b42dd253a85e394548b30266a2a5a))
+* update readme ([2c2495f](https://github.com/Gorniv/vscode-flutter-files/commit/2c2495ff0ac4b04b2a2ee839d5e8b22b1ee1e5f2))
+* update templates ([76601aa](https://github.com/Gorniv/vscode-flutter-files/commit/76601aaf1cf0433853719ab40b743470fb74221a))
+* update templates ([c7b236c](https://github.com/Gorniv/vscode-flutter-files/commit/c7b236c2c4f7ecb4bcec2e5aa77b5ab6cfbb32f1))
+* Update templates - add StackTrace ([a591756](https://github.com/Gorniv/vscode-flutter-files/commit/a591756e024e428df05d6aea911511ee0f4184fc))
+* Update templates: model, repository, state ([1e6bc12](https://github.com/Gorniv/vscode-flutter-files/commit/1e6bc128dcce4c87f48230e1327c15e86d07da4c))
+* use custom template [#4](https://github.com/Gorniv/vscode-flutter-files/issues/4) ([288c596](https://github.com/Gorniv/vscode-flutter-files/commit/288c596979c1a837c9bd2f0970b0d8a3710ab727))
+
+
+### Bug Fixes
+
+* [#10](https://github.com/Gorniv/vscode-flutter-files/issues/10) and update bloc ([d4dcc78](https://github.com/Gorniv/vscode-flutter-files/commit/d4dcc78f8e5d136c5fda85f38252ef91dc47efc2))
+* custom template for pack ([a4c9798](https://github.com/Gorniv/vscode-flutter-files/commit/a4c97983845714f29d41f0a2cf12b53d2caac447))
+* File(s) could not be created. TypeError: Cannot read property 'name' of undefined [#7](https://github.com/Gorniv/vscode-flutter-files/issues/7) ([6eababc](https://github.com/Gorniv/vscode-flutter-files/commit/6eababc607c93e3ca866cdbe6acf0b435e69d766))
+* final ([b4486be](https://github.com/Gorniv/vscode-flutter-files/commit/b4486beb04c5ce6aecf3b48770a84f5f90a55387))
+* New Big Pack Bloc Stack Overflow issue [#11](https://github.com/Gorniv/vscode-flutter-files/issues/11) ([e6039ad](https://github.com/Gorniv/vscode-flutter-files/commit/e6039ade1d74fa5b058d4552c9229499dfc710a8))
+* stack overflow ([c09ecd1](https://github.com/Gorniv/vscode-flutter-files/commit/c09ecd161a4bab58c37536bf0adf9b9e63910c1f))
+* the wrong path(windows) [#6](https://github.com/Gorniv/vscode-flutter-files/issues/6) ([757a2ed](https://github.com/Gorniv/vscode-flutter-files/commit/757a2ed09fb6eeeb9d70cb789fc47e9139244609))
+* update print stackTrace ([3239677](https://github.com/Gorniv/vscode-flutter-files/commit/3239677345961595b38bf0ae30b18c89bbae5b8c))
+* use [@immutable](https://github.com/immutable), new version BLoC, webpack ([c0e4f71](https://github.com/Gorniv/vscode-flutter-files/commit/c0e4f71fa9314f9881550c8d69416fc286d3c875))
+* vscode engines [#2](https://github.com/Gorniv/vscode-flutter-files/issues/2) ([e7aa5b6](https://github.com/Gorniv/vscode-flutter-files/commit/e7aa5b618c923f333f4b026c946bdd33735db9ce))
 
 ## [1.5.5] 21.11.2019
 
