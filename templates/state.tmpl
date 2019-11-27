@@ -1,11 +1,10 @@
 import 'package:equatable/equatable.dart';
-import 'package:meta/meta.dart';
 
 abstract class ${upperName}State extends Equatable {
   /// notify change state without deep clone state
   final int version;
   
-  final Iterable propss;
+  final List propss;
   ${upperName}State(this.version,[this.propss]);
 
   /// Copy object for use in action
@@ -21,7 +20,7 @@ abstract class ${upperName}State extends Equatable {
 /// UnInitialized
 class Un${upperName}State extends ${upperName}State {
 
-  Un${upperName}State(version) : super(version);
+  Un${upperName}State(int version) : super(version);
 
   @override
   String toString() => 'Un${upperName}State';
@@ -41,7 +40,7 @@ class Un${upperName}State extends ${upperName}State {
 class In${upperName}State extends ${upperName}State {
   final String hello;
 
-  In${upperName}State(version, this.hello) : super(version, [hello]);
+  In${upperName}State(int version, this.hello) : super(version, [hello]);
 
   @override
   String toString() => 'In${upperName}State $hello';
@@ -60,7 +59,7 @@ class In${upperName}State extends ${upperName}State {
 class Error${upperName}State extends ${upperName}State {
   final String errorMessage;
 
-  Error${upperName}State(version, this.errorMessage): super(version, [errorMessage]);
+  Error${upperName}State(int version, this.errorMessage): super(version, [errorMessage]);
   
   @override
   String toString() => 'Error${upperName}State';
