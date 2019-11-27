@@ -212,23 +212,26 @@
     "test": "npm run compile && node ./node_modules/vscode/bin/test",
     "format:check": "prettier --write --config ./.prettierrc --list-different \"src/**/*{.ts,.json}\"",
     "vsce:package": "vsce package",
-    "vsce:publish": "vsce publish"
+    "vsce:publish": "vsce publish",
+    "dry": "standard-version --dry-run",
+    "standard": "standard-version"
   },
   "devDependencies": {
     "@types/mocha": "5.2.7",
-    "@types/node": "12.6.8",
+    "@types/node": "12.12.14",
     "copyfiles": "2.1.1",
-    "prettier": "1.18.2",
-    "ts-loader": "6.0.4",
-    "tslint": "5.18.0",
-    "tslint-config-airbnb": "5.11.1",
-    "typescript": "3.5.3",
-    "vscode": "1.1.35",
-    "webpack": "4.37.0",
-    "webpack-cli": "3.3.6"
+    "prettier": "1.19.1",
+    "standard-version": "7.0.1",
+    "ts-loader": "6.2.1",
+    "tslint-config-airbnb": "5.11.2",
+    "tslint": "5.20.1",
+    "typescript": "3.7.2",
+    "vscode": "1.1.36",
+    "webpack-cli": "3.3.10",
+    "webpack": "4.41.2"
   },
   "dependencies": {
-    "js-yaml": "3.13.1",
-    "express-es6-template-engine": "2.1.9"
+    "express-es6-template-engine": "2.2.0",
+    "js-yaml": "3.13.1"
   }
 }
