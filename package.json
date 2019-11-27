@@ -215,7 +215,7 @@
     "vsce:publish": "vsce publish",
     "dry": "standard-version --dry-run",
     "standard": "standard-version",
-    "release": "npm run standard && npm run vsce:publish"
+    "release": "npm run standard && npm run vsce:publish && npm publish"
   },
   "devDependencies": {
     "@types/mocha": "5.2.7",
