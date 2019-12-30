@@ -19,11 +19,11 @@ Copy [templates](./templates) directory to your project(root path) and change an
 
 ## Changelog
 
-## 1.5.6
+## 1.7.0
 
 - update templates
 
-## 1.5.5
+## 1.6.0
 
 - support flutter_bloc ^2.0.0
 
