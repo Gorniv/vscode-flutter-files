@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.7.0](https://github.com/Gorniv/vscode-flutter-files/compare/v1.6.0...v1.7.0) (2019-12-30)
+
+
+### Features
+
+* upgrade templates ([fdb4e01](https://github.com/Gorniv/vscode-flutter-files/commit/fdb4e017ae92a8e3c3acd67cb26f091dd649727b))
+
 ## 1.6.0 (2019-11-27)
 
 
