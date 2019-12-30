@@ -7,6 +7,8 @@ This extension allows **quickly scaffold flutter BLoC templates** in VS Code pro
 
 This extension use <https://github.com/felangel/bloc> for BLoC
 
+## Support me - install my music player: [meows.app](https://meows.app?utm_source=ext&utm_medium=f_f)
+
 ![demo](https://github.com/Gorniv/vscode-flutter-files/raw/master/assets/flutter.gif)
 
 ## Custom(dynamic) templates
@@ -16,6 +18,10 @@ This extension use <https://github.com/felangel/bloc> for BLoC
 Copy [templates](./templates) directory to your project(root path) and change any of content files (bloc,event,model,page,provider,repository,scree,state)
 
 ## Changelog
+
+## 1.5.6
+
+- update templates
 
 ## 1.5.5
 

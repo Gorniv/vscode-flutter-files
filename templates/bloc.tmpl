@@ -15,9 +15,10 @@ class ${upperName}Bloc extends Bloc<${upperName}Event, ${upperName}State> {
   @override
   Future<void> close() async{
     // dispose objects
-    super.close();
+    await super.close();
   }
 
+  @override
   ${upperName}State get initialState => Un${upperName}State(0);
 
   @override
