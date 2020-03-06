@@ -13,13 +13,12 @@ class ${upperName}Screen extends StatefulWidget {
 
   @override
   ${upperName}ScreenState createState() {
-    return ${upperName}ScreenState(_${privateName}Bloc);
+    return ${upperName}ScreenState();
   }
 }
 
 class ${upperName}ScreenState extends State<${upperName}Screen> {
-  final ${upperName}Bloc _${privateName}Bloc;
-  ${upperName}ScreenState(this._${privateName}Bloc);
+  ${upperName}ScreenState();
 
   @override
   void initState() {
@@ -62,22 +61,29 @@ class ${upperName}ScreenState extends State<${upperName}Screen> {
               ],
             ));
           }
-          return Center(
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: <Widget>[
-                Text('Flutter files: done'),
-                Padding(
-                  padding: const EdgeInsets.only(top: 32.0),
-                  child: RaisedButton(
-                    color: Colors.red,
-                    child: Text('throw error'),
-                    onPressed: () => this._load(true),
+           if (currentState is In${upperName}State) {
+            return Center(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: <Widget>[
+                  Text(currentState.hello),
+                  Text('Flutter files: done'),
+                  Padding(
+                    padding: const EdgeInsets.only(top: 32.0),
+                    child: RaisedButton(
+                      color: Colors.red,
+                      child: Text('throw error'),
+                      onPressed: () => this._load(true),
+                    ),
                   ),
-                ),
-              ],
-            ),
+                ],
+              ),
+            );
+          }
+          return Center(
+              child: CircularProgressIndicator(),
           );
+          
         });
   }
 

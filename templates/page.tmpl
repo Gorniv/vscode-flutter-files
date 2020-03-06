@@ -1,12 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:${appName}${relative}/index.dart';
 
-class ${upperName}Page extends StatelessWidget {
+class ${upperName}Page extends StatefulWidget {
   static const String routeName = '/${privateName}';
 
   @override
+  _${upperName}PageState createState() => _${upperName}PageState();
+}
+
+class _${upperName}PageState extends State<${upperName}Page> {
+  final _${privateName}Bloc = ${upperName}Bloc();
+
+  @override
   Widget build(BuildContext context) {
-    var _${privateName}Bloc = ${upperName}Bloc();
     return Scaffold(
       appBar: AppBar(
         title: Text('${upperName}'),

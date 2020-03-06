@@ -14,7 +14,7 @@ abstract class ${upperName}State extends Equatable {
   ${upperName}State getNewVersion();
 
   @override
-  List<Object> get props => (propss);
+  List<Object> get props => ([version, ...propss ?? []]);
 }
 
 /// UnInitialized
