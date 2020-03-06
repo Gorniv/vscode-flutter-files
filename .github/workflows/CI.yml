@@ -53,10 +53,10 @@ jobs:
     - name: Gen var
       id: previoustag
       run: |
-       echo "::set-output name=num::$(git ls-remote --tags https://github.com/easivio/vscode-flutter-files.git v\* | cut -c 53-57| sort -n -r | head -1)"
-       echo "::set-output name=version::$(git ls-remote --tags https://github.com/easivio/vscode-flutter-files.git v\* | cut -c 52-57| sort -n -r | head -1)"
-       echo "::set-env name=num::$(git ls-remote --tags https://github.com/easivio/vscode-flutter-files.git v\* | cut -c 53-57| sort -n -r | head -1)"
-       echo "::set-env name=version::$(git ls-remote --tags https://github.com/easivio/vscode-flutter-files.git v\* | cut -c 52-57| sort -n -r | head -1)"
+       echo "::set-output name=num::$(git ls-remote --tags https://github.com/gorniv/vscode-flutter-files.git v\* | cut -c 53-57| sort -n -r | head -1)"
+       echo "::set-output name=version::$(git ls-remote --tags https://github.com/gorniv/vscode-flutter-files.git v\* | cut -c 52-57| sort -n -r | head -1)"
+       echo "::set-env name=num::$(git ls-remote --tags https://github.com/gorniv/vscode-flutter-files.git v\* | cut -c 53-57| sort -n -r | head -1)"
+       echo "::set-env name=version::$(git ls-remote --tags https://github.com/gorniv/vscode-flutter-files.git v\* | cut -c 52-57| sort -n -r | head -1)"
 
     - name: Get the num of the version
       id: num
@@ -84,6 +84,6 @@ jobs:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       with:
         upload_url: ${{ steps.create_release.outputs.upload_url }} # This pulls from the CREATE RELEASE step above, referencing it's ID to get its outputs object, which include a `upload_url`. See this blog post for more info: https://jasonet.co/posts/new-features-of-github-actions/#passing-data-to-future-steps 
-        asset_path: ./vscode-easivio-files-${{ env.num }}.vsix
-        asset_name: vscode-easivio-files-${{ env.num }}.vsix
+        asset_path: ./vscode-gorniv-files-${{ env.num }}.vsix
+        asset_name: vscode-gorniv-files-${{ env.num }}.vsix
         asset_content_type: application/vsix
