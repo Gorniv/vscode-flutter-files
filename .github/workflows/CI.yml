@@ -1,0 +1,89 @@
+
+name: CI
+
+on:
+  push:
+    branches: [ master ]
+  pull_request:
+    branches: [ master ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        node-version: [12.x]
+
+    steps:
+    - uses: actions/checkout@v2
+      
+    - name: Use Node.js ${{ matrix.node-version }}
+      uses: actions/setup-node@v1
+      with:
+        node-version: ${{ matrix.node-version }}
+        
+    - name: Cache Node
+      id: cache-nodes
+      uses: actions/cache@v1
+      with:
+        path: nodes-cache
+        key: ${{ runner.os }}-nodes
+
+    - name: Install Npm
+      if: steps.cache-nodes.outputs.cache-hit != 'true'
+      run: npm install 
+        
+    - name: Install vsce
+      if: steps.cache-nodes.outputs.cache-hit != 'true'
+      run: npm install -g vsce
+      
+    - name: Generate Package
+      run: vsce package
+
+    - name: Auto TAG from Version
+      id: tagger
+      uses: azu/action-package-version-to-git-tag@v1
+      with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          github_repo: ${{ github.repository }}
+          git_commit_sha: ${{ github.sha }}
+          git_tag_prefix: "v"
+
+    - name: Gen var
+      id: previoustag
+      run: |
+       echo "::set-output name=num::$(git ls-remote --tags https://github.com/easivio/vscode-flutter-files.git v\* | cut -c 53-57| sort -n -r | head -1)"
+       echo "::set-output name=version::$(git ls-remote --tags https://github.com/easivio/vscode-flutter-files.git v\* | cut -c 52-57| sort -n -r | head -1)"
+       echo "::set-env name=num::$(git ls-remote --tags https://github.com/easivio/vscode-flutter-files.git v\* | cut -c 53-57| sort -n -r | head -1)"
+       echo "::set-env name=version::$(git ls-remote --tags https://github.com/easivio/vscode-flutter-files.git v\* | cut -c 52-57| sort -n -r | head -1)"
+
+    - name: Get the num of the version
+      id: num
+      run: |
+        echo ${{ steps.previoustag.outputs.num }}
+        echo ${{ steps.previoustag.outputs.version }}
+        echo ${{ env.num }}
+        echo ${{ env.version }}
+        
+    - name: Create Release
+      id: create_release
+      uses: actions/create-release@v1
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      with:
+        tag_name: ${{ env.version }}
+        release_name: Release ${{ env.version }}
+        draft: true
+        prerelease: false
+
+    - name: Upload Release Asset
+      id: upload-release-asset 
+      uses: actions/upload-release-asset@v1
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      with:
+        upload_url: ${{ steps.create_release.outputs.upload_url }} # This pulls from the CREATE RELEASE step above, referencing it's ID to get its outputs object, which include a `upload_url`. See this blog post for more info: https://jasonet.co/posts/new-features-of-github-actions/#passing-data-to-future-steps 
+        asset_path: ./vscode-easivio-files-${{ env.num }}.vsix
+        asset_name: vscode-easivio-files-${{ env.num }}.vsix
+        asset_content_type: application/vsix
