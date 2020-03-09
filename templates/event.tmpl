@@ -6,15 +6,15 @@ import 'package:meta/meta.dart';
 
 @immutable
 abstract class ${upperName}Event {
-  Future<${upperName}State> applyAsync(
+  Stream<${upperName}State> applyAsync(
       {${upperName}State currentState, ${upperName}Bloc bloc});
   final ${upperName}Repository _${privateName}Repository = ${upperName}Repository();
 }
 
 class Un${upperName}Event extends ${upperName}Event {
   @override
-  Future<${upperName}State> applyAsync({${upperName}State currentState, ${upperName}Bloc bloc}) async {
-    return Un${upperName}State(0);
+  Stream<${upperName}State> applyAsync({${upperName}State currentState, ${upperName}Bloc bloc}) async* {
+    yield Un${upperName}State(0);
   }
 }
 
@@ -27,18 +27,16 @@ class Load${upperName}Event extends ${upperName}Event {
   Load${upperName}Event(this.isError);
 
   @override
-  Future<${upperName}State> applyAsync(
-      {${upperName}State currentState, ${upperName}Bloc bloc}) async {
+  Stream<${upperName}State> applyAsync(
+      {${upperName}State currentState, ${upperName}Bloc bloc}) async* {
     try {
-      if (currentState is In${upperName}State) {
-        return currentState.getNewVersion();
-      }
-      await Future.delayed(Duration(seconds: 2));
+      yield Un${upperName}State(0);
+      await Future.delayed(Duration(seconds: 1));
       this._${privateName}Repository.test(this.isError);
-      return In${upperName}State(0, 'Hello world');
+      yield In${upperName}State(0, 'Hello world');
     } catch (_, stackTrace) {
       developer.log('$_', name: 'Load${upperName}Event', error: _, stackTrace: stackTrace);
-      return Error${upperName}State(0, _?.toString());
+      yield Error${upperName}State(0, _?.toString());
     }
   }
 }
