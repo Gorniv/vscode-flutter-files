@@ -2,6 +2,19 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [2.1.0](https://github.com/Gorniv/vscode-flutter-files/compare/v1.9.0...v2.1.0) (2020-05-01)
+
+
+### Features
+
+* add new command - copy templates ([096fc10](https://github.com/Gorniv/vscode-flutter-files/commit/096fc1085381dce44c1a8a62ed7dc4ee37a3f479))
+* support multi templates ([f1732de](https://github.com/Gorniv/vscode-flutter-files/commit/f1732defb9b3b5969e2dfee6673db39de8fce3c0))
+
+
+### Bug Fixes
+
+* change linter ([97cb622](https://github.com/Gorniv/vscode-flutter-files/commit/97cb6224cbfcd4aa180d278510046f787163ebb8))
+
 ## [1.9.0](https://github.com/Gorniv/vscode-flutter-files/compare/v1.8.0...v1.9.0) (2020-03-09)
 
 
