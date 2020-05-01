@@ -47,12 +47,12 @@ class In${upperName}State extends ${upperName}State {
 
   @override
   In${upperName}State getStateCopy() {
-    return In${upperName}State(this.version, this.hello);
+    return In${upperName}State(version, hello);
   }
 
   @override
   In${upperName}State getNewVersion() {
-    return In${upperName}State(version+1, this.hello);
+    return In${upperName}State(version+1, hello);
   }
 }
 
@@ -66,11 +66,12 @@ class Error${upperName}State extends ${upperName}State {
 
   @override
   Error${upperName}State getStateCopy() {
-    return Error${upperName}State(this.version, this.errorMessage);
+    return Error${upperName}State(version, errorMessage);
   }
 
   @override
   Error${upperName}State getNewVersion() {
-    return Error${upperName}State(version+1, this.errorMessage);
+    return Error${upperName}State(version+1, 
+    errorMessage);
   }
 }

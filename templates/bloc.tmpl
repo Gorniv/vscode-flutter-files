@@ -26,7 +26,7 @@ class ${upperName}Bloc extends Bloc<${upperName}Event, ${upperName}State> {
     ${upperName}Event event,
   ) async* {
     try {
-      yield* await event.applyAsync(currentState: state, bloc: this);
+      yield* event.applyAsync(currentState: state, bloc: this);
     } catch (_, stackTrace) {
       developer.log('$_', name: '${upperName}Bloc', error: _, stackTrace: stackTrace);
       yield state;

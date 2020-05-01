@@ -32,7 +32,7 @@ class Load${upperName}Event extends ${upperName}Event {
     try {
       yield Un${upperName}State(0);
       await Future.delayed(Duration(seconds: 1));
-      this._${privateName}Repository.test(this.isError);
+      _${privateName}Repository.test(isError);
       yield In${upperName}State(0, 'Hello world');
     } catch (_, stackTrace) {
       developer.log('$_', name: 'Load${upperName}Event', error: _, stackTrace: stackTrace);

@@ -23,7 +23,7 @@ class ${upperName}ScreenState extends State<${upperName}Screen> {
   @override
   void initState() {
     super.initState();
-    this._load();
+    _load();
   }
 
   @override
@@ -55,7 +55,7 @@ class ${upperName}ScreenState extends State<${upperName}Screen> {
                   child: RaisedButton(
                     color: Colors.blue,
                     child: Text('reload'),
-                    onPressed: () => this._load(),
+                    onPressed: _load,
                   ),
                 ),
               ],
@@ -73,7 +73,7 @@ class ${upperName}ScreenState extends State<${upperName}Screen> {
                     child: RaisedButton(
                       color: Colors.red,
                       child: Text('throw error'),
-                      onPressed: () => this._load(true),
+                      onPressed: () => _load(true),
                     ),
                   ),
                 ],

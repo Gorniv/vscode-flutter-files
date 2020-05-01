@@ -218,21 +218,21 @@
     "release": "npm run standard && npm run vsce:publish && npm publish"
   },
   "devDependencies": {
-    "@types/mocha": "5.2.7",
-    "@types/node": "12.12.14",
-    "copyfiles": "2.1.1",
-    "prettier": "1.19.1",
-    "standard-version": "7.0.1",
-    "ts-loader": "6.2.1",
+    "@types/mocha": "7.0.2",
+    "@types/node": "13.13.2",
+    "copyfiles": "2.2.0",
+    "prettier": "2.0.5",
+    "standard-version": "7.1.0",
+    "ts-loader": "7.0.1",
     "tslint-config-airbnb": "5.11.2",
-    "tslint": "5.20.1",
-    "typescript": "3.7.2",
+    "tslint": "6.1.1",
+    "typescript": "3.8.3",
     "vscode": "1.1.36",
-    "webpack-cli": "3.3.10",
-    "webpack": "4.41.2"
+    "webpack-cli": "3.3.11",
+    "webpack": "4.43.0"
   },
   "dependencies": {
-    "express-es6-template-engine": "2.2.0",
+    "express-es6-template-engine": "2.2.2",
     "js-yaml": "3.13.1"
   }
 }
