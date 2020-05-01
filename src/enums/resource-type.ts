@@ -10,4 +10,5 @@ export enum ResourceType {
   Screen = 'screen',
   State = 'state',
   Index = 'index',
+  Templates = 'Templates',
 }

@@ -9,6 +9,7 @@ import { optionsCommands } from './option-commands';
 import { IConfig } from './models/config';
 import { OptionItem } from './models/option-item';
 import { FileContents } from './file-contents';
+import { createDirectory, copyRecursiveSync } from './ioutil';
 
 export const displayStatusMessage = (type: string, name: string, timeout = 2000) =>
   vscode.window.setStatusBarMessage(`${type} ${name} was successfully generated`, timeout);
@@ -47,6 +48,12 @@ export const showFileNameDialog = async (
     throw new Error('Please open a project first. Thanks! :-)');
   } else {
     let fileName = `${type}`;
+    if (type === ResourceType.Templates) {
+      const from = path.join(__dirname, FileContents.TEMPLATES_FOLDER);
+      const to = path.join(vscode.workspace.rootPath, FileContents.TEMPLATES_FOLDER);
+      await copyRecursiveSync(from, to);
+      return;
+    }
     if (type !== ResourceType.Index) {
       fileName = await vscode.window.showInputBox({
         prompt: `Type the name of the new ${type}`,

@@ -9,5 +9,6 @@ export enum CommandType {
   Provider = 'extension.addFlutter2Provider',
   Repository = 'extension.addFlutter2Repository',
   Screen = 'extension.addFlutter2Screen',
+  Templates = 'extension.addFlutter2zTemplates',
   Index = 'extension.addFlutter2zIndex',
 }

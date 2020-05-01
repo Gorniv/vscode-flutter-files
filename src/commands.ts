@@ -15,4 +15,5 @@ export const commandsMap = new Map<CommandType, ICommand>([
   [CommandType.Screen, { fileName: 'you_awesome', resource: ResourceType.Screen }],
   [CommandType.State, { fileName: 'you_awesome', resource: ResourceType.State }],
   [CommandType.Index, { fileName: 'you_awesome', resource: ResourceType.Index }],
+  [CommandType.Templates, { fileName: '', resource: ResourceType.Templates }],
 ]);

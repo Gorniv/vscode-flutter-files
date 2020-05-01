@@ -1,8 +1,8 @@
 {
   "name": "vscode-flutter-files",
-  "displayName": "Flutter Files",
+  "displayName": "[FF] Flutter Files",
   "description": "Quickly scaffold flutter bloc file templates",
-  "version": "1.9.0",
+  "version": "2.0.0",
   "icon": "assets/icon.png",
   "publisher": "gornivv",
   "author": {
@@ -18,21 +18,9 @@
   "bugs": {
     "url": "https://github.com/Gorniv/vscode-flutter-files/issues"
   },
-  "keywords": [
-    "Flutter",
-    "angular-cli",
-    "Dart",
-    "BLoC",
-    "Templates"
-  ],
-  "categories": [
-    "Other",
-    "Programming Languages",
-    "Snippets"
-  ],
-  "activationEvents": [
-    "*"
-  ],
+  "keywords": ["Flutter", "angular-cli", "Dart", "BLoC", "Templates"],
+  "categories": ["Other", "Programming Languages", "Snippets"],
+  "activationEvents": ["*"],
   "main": "./out/extension.js",
   "contributes": {
     "configuration": {
@@ -89,6 +77,11 @@
           "default": true,
           "description": "Shows or hides the menu item."
         },
+        "flutter-files.menu.templates": {
+          "type": "boolean",
+          "default": true,
+          "description": "Shows or hides the menu item."
+        },
         "flutter-files.menu.index": {
           "type": "boolean",
           "default": true,
@@ -99,47 +92,51 @@
     "commands": [
       {
         "command": "extension.addFlutter2BigPack",
-        "title": "New Big Pack Bloc"
+        "title": "[FF] New Big Pack Bloc"
       },
       {
         "command": "extension.addFlutter2SmallPack",
-        "title": "New Small Pack Bloc"
+        "title": "[FF] New Small Pack Bloc"
       },
       {
         "command": "extension.addFlutter2Bloc",
-        "title": "New Bloc"
+        "title": "[FF] New Bloc"
       },
       {
         "command": "extension.addFlutter2Event",
-        "title": "New Event"
+        "title": "[FF] New Event"
       },
       {
         "command": "extension.addFlutter2Model",
-        "title": "New Model"
+        "title": "[FF] New Model"
       },
       {
         "command": "extension.addFlutter2Page",
-        "title": "New Page"
+        "title": "[FF] New Page"
       },
       {
         "command": "extension.addFlutter2Provider",
-        "title": "New Provider"
+        "title": "[FF] New Provider"
       },
       {
         "command": "extension.addFlutter2Repository",
-        "title": "New Repository"
+        "title": "[FF] New Repository"
       },
       {
         "command": "extension.addFlutter2Screen",
-        "title": "New Screen"
+        "title": "[FF] New Screen"
       },
       {
         "command": "extension.addFlutter2State",
-        "title": "New State"
+        "title": "[FF] New State"
+      },
+      {
+        "command": "extension.addFlutter2zTemplates",
+        "title": "[FF] Copy templates to project"
       },
       {
         "command": "extension.addFlutter2zIndex",
-        "title": "New Index"
+        "title": "[FF] New Index"
       }
     ],
     "menus": {
@@ -195,9 +192,14 @@
           "group": "1Flutter"
         },
         {
+          "when": "config.flutter-files.menu.templates",
+          "command": "extension.addFlutter2zTemplates",
+          "group": "2Flutter"
+        },
+        {
           "when": "config.flutter-files.menu.index",
           "command": "extension.addFlutter2zIndex",
-          "group": "2Flutter Index"
+          "group": "3Flutter Index"
         }
       ]
     }

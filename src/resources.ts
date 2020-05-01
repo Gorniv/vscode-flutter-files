@@ -136,4 +136,11 @@ export const resources = new Map<ResourceType, IResource>([
       options: [OptionType.Flat, OptionType.AppName],
     },
   ],
+  [
+    ResourceType.Templates,
+    {
+      files: [],
+      createFolder: (config: IConfig) => {},
+    },
+  ],
 ]);
