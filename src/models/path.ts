@@ -7,5 +7,6 @@ export interface IPath {
   fullPath: string;
   rootPath: string;
   paramsMap?: Map<OptionType, string>;
+  templateDirectory: string;
   params: OptionType[];
 }

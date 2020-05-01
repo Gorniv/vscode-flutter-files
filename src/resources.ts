@@ -10,7 +10,7 @@ export const resources = new Map<ResourceType, IResource>([
     ResourceType.BigPack,
     {
       locDirName: (loc, config: IConfig) =>
-        !config.defaults.gigpack.flat ? loc.fileName : loc.dirName,
+        !config.defaults.bigpack.flat ? loc.fileName : loc.dirName,
       locDirPath: (loc, config) => path.join(loc.dirPath, loc.dirName),
       files: [
         { name: (config: IConfig) => 'bloc.dart', type: TemplateType.Bloc },
@@ -24,8 +24,8 @@ export const resources = new Map<ResourceType, IResource>([
         { name: () => 'index.dart', type: TemplateType.Index },
       ],
       createFolder: (config: IConfig) =>
-        config && config.defaults && config.defaults.gigpack
-          ? !config.defaults.gigpack.flat
+        config && config.defaults && config.defaults.bigpack
+          ? !config.defaults.bigpack.flat
           : false,
       options: [OptionType.Flat, OptionType.AppName],
     },

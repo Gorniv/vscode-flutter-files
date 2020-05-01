@@ -1,5 +1,5 @@
 export enum ResourceType {
-  BigPack = 'gigpack',
+  BigPack = 'bigpack',
   SmallPack = 'smallpack',
   Bloc = 'bloc',
   Event = 'event',

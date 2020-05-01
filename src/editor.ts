@@ -8,6 +8,7 @@ import { resources } from './resources';
 import { optionsCommands } from './option-commands';
 import { IConfig } from './models/config';
 import { OptionItem } from './models/option-item';
+import { FileContents } from './file-contents';
 
 export const displayStatusMessage = (type: string, name: string, timeout = 2000) =>
   vscode.window.setStatusBarMessage(`${type} ${name} was successfully generated`, timeout);
@@ -57,13 +58,53 @@ export const showFileNameDialog = async (
       throw new Error("That's not a valid name! (no whitespaces or special characters)");
     } else {
       let dirName = '';
-
+      const fc = new FileContents();
+      console.log('start');
+      const dirsRoot = await fc.loadDirTemplates(vscode.workspace.rootPath);
+      console.log(dirsRoot);
+      if (dirsRoot && dirsRoot.length === 0) {
+        dirsRoot.push('');
+      }
+      const dirs = await fc.loadDirTemplates(__dirname);
+      const allDir = [
+        ...(dirsRoot?.map((c) => {
+          return c.concat('(project)');
+        }) ?? []),
+        ...dirs,
+      ];
+      let index = 0;
+      const directory = await vscode.window.showQuickPick(
+        allDir.map((c) => {
+          index += 1;
+          return `${index}. ${c}`;
+        }),
+        {
+          canPickMany: false,
+          placeHolder: 'Select type templates',
+        },
+      );
+      const indexStr = directory.split('.')[0];
+      const indexDirectory = parseInt(indexStr, 0);
+      let templateDirectory = '';
+      if (dirsRoot && indexDirectory <= dirsRoot.length) {
+        templateDirectory = path.join(
+          vscode.workspace.rootPath,
+          FileContents.TEMPLATES_FOLDER,
+          dirsRoot[indexDirectory - 1],
+        );
+      } else {
+        templateDirectory = path.join(
+          __dirname,
+          FileContents.TEMPLATES_FOLDER,
+          dirs[indexDirectory - (dirsRoot?.length ?? 0) - 1],
+        );
+      }
       const [showOptionsCmd] = optionsCommands.get(OptionType.ShowOptions).commands;
       const resoureParamsMap = resources.get(type).options
         ? resources.get(type).options.map((op) => {
             // tslint:disable-next-line: ter-arrow-parens
-          return optionsCommands.get(op).commands.map((v) => [v, op] as [string, OptionType]);
-        })
+            return optionsCommands.get(op).commands.map((v) => [v, op] as [string, OptionType]);
+          })
         : [];
       const optionsMap = new Map<string, OptionType>(
         Array.prototype.concat.apply(
@@ -115,16 +156,17 @@ export const showFileNameDialog = async (
         [dirName, fileName] = fileName.split('\\');
       }
       const dirPath = path.join(rootPath, dirName);
-
-      return {
+      const result = {
         fullPath,
         fileName,
         dirName,
         dirPath,
         rootPath,
         paramsMap,
+        templateDirectory,
         params: [...paramsMap.keys()],
       };
+      return result;
     }
   }
 };

@@ -12,28 +12,26 @@ const fsReaddir = promisify(fs.readdir);
 const fsReadFile = promisify(fs.readFile);
 const fsExists = promisify(fs.exists);
 
-const TEMPLATES_FOLDER = 'templates';
-const TEMPLATE_ARGUMENTS = 'inputName, upperName, privateName, appName, relative, params';
-
 export class FileContents {
+  static TEMPLATES_FOLDER = 'templates';
+  static TEMPLATE_ARGUMENTS = 'inputName, upperName, privateName, appName, relative, params';
+
   private templatesMap: Map<string, Function>;
   private localTemplatesMap: Map<string, Function>;
 
   constructor() {
     this.templatesMap = new Map<string, Function>();
-    this.loadTemplates(__dirname, this.templatesMap);
   }
 
   async loadTemplates(pathDirectory: string, templatesMap: Map<string, Function>) {
-    const templatesPath = path.join(pathDirectory, TEMPLATES_FOLDER);
-    if (!fs.existsSync(templatesPath)) {
+    if (!fs.existsSync(pathDirectory)) {
       return;
     }
 
-    const tempMap = await this.getTemplates(templatesPath);
+    const tempMap: Map<string, string> = await this.getTemplates(pathDirectory);
     for (const [key, value] of tempMap.entries()) {
       try {
-        const compiled = es6Renderer(value, TEMPLATE_ARGUMENTS);
+        const compiled = es6Renderer(value, FileContents.TEMPLATE_ARGUMENTS);
         templatesMap.set(key, compiled);
       } catch (e) {
         console.log(e);
@@ -42,7 +40,7 @@ export class FileContents {
     return templatesMap;
   }
 
-  private async getTemplates(templatesPath: string) {
+  private async getTemplates(templatesPath: string): Promise<Map<string, string>> {
     const templatesFiles: string[] = await fsReaddir(templatesPath, 'utf-8');
     // tslint:disable-next-line:ter-arrow-parens
     const templatesFilesPromises = templatesFiles.map((t) =>
@@ -53,6 +51,23 @@ export class FileContents {
 
     // tslint:disable-next-line:ter-arrow-parens
     return new Map(templates.map((x) => x as [string, string]));
+  }
+
+  async loadDirTemplates(pathDirectory: string) {
+    const templatesPath = path.join(pathDirectory, FileContents.TEMPLATES_FOLDER);
+    if (!fs.existsSync(templatesPath)) {
+      return undefined;
+    }
+
+    const directories: string[] = await this.getDirTemplates(templatesPath);
+    return directories.filter((c) => {
+      return !c.endsWith('.tmpl');
+    });
+  }
+
+  private async getDirTemplates(templatesPath: string): Promise<string[]> {
+    const templatesFiles: string[] = await fsReaddir(templatesPath, 'utf-8');
+    return templatesFiles;
   }
 
   public async getTemplateContent(
@@ -79,11 +94,15 @@ export class FileContents {
     const args = [inputName, upperName, toPrivateCase(upperName), config.appName, relative, params];
     // load dynamic templates
     this.localTemplatesMap = new Map<string, Function>();
-    this.localTemplatesMap = await this.loadTemplates(config.appPath, this.localTemplatesMap);
+    this.localTemplatesMap = await this.loadTemplates(
+      loc.templateDirectory,
+      this.localTemplatesMap,
+    );
 
-    let resultTemplate = this.localTemplatesMap && this.localTemplatesMap.has(templateName)
-      ? this.localTemplatesMap.get(templateName)(...args)
-      : undefined;
+    let resultTemplate =
+      this.localTemplatesMap && this.localTemplatesMap.has(templateName)
+        ? this.localTemplatesMap.get(templateName)(...args)
+        : undefined;
     if (!resultTemplate) {
       /// use template from extension
       resultTemplate = this.templatesMap.has(templateName)

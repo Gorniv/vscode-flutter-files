@@ -1,0 +1,39 @@
+import 'package:equatable/equatable.dart';
+
+abstract class ${upperName}State extends Equatable {
+
+  final List propss;
+  ${upperName}State([this.propss]);
+
+  @override
+  List<Object> get props => (propss ?? []);
+}
+
+/// UnInitialized
+class Un${upperName}State extends ${upperName}State {
+
+  Un${upperName}State();
+
+  @override
+  String toString() => 'Un${upperName}State';
+}
+
+/// Initialized
+class In${upperName}State extends ${upperName}State {
+  final String hello;
+
+  In${upperName}State(this.hello) : super([hello]);
+
+  @override
+  String toString() => 'In${upperName}State $hello';
+
+}
+
+class Error${upperName}State extends ${upperName}State {
+  final String errorMessage;
+
+  Error${upperName}State(this.errorMessage): super([errorMessage]);
+  
+  @override
+  String toString() => 'Error${upperName}State';
+}

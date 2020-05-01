@@ -25,7 +25,7 @@ export interface IProperties {
 }
 
 export interface IDefaults {
-  gigpack?: IProperties;
+  bigpack?: IProperties;
   smallpack?: IProperties;
   bloc?: IProperties;
   event?: IProperties;
