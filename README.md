@@ -13,32 +13,67 @@ This extension use <https://github.com/felangel/bloc> for BLoC
 
 ## Custom(dynamic) templates
 
-Copy [templates](./templates) directory to your project(by command "[FF] Copy templates to project") and change any of content files (bloc,event,model,page,provider,repository,scree,state)
+Copy [templates](./templates) directory to your project (by command "[FF] Copy templates to project") and change any of content files (bloc,event,model,page,provider,repository,scree,state)
 
 ## Changelog
 
-## 1.7.0
+## 2.1.0 (2020-05-01)
+
+### Features
+
+- add new command - copy templates ([096fc10](https://github.com/Gorniv/vscode-flutter-files/commit/096fc1085381dce44c1a8a62ed7dc4ee37a3f479))
+- support multi templates ([f1732de](https://github.com/Gorniv/vscode-flutter-files/commit/f1732defb9b3b5969e2dfee6673db39de8fce3c0))
+
+### Bug Fixes
+
+- change linter ([97cb622](https://github.com/Gorniv/vscode-flutter-files/commit/97cb6224cbfcd4aa180d278510046f787163ebb8))
+
+## 1.9.0 (2020-03-09)
+
+### Features
+
+- use Stream for event ([8c17a78](https://github.com/Gorniv/vscode-flutter-files/commit/8c17a784a850f58ae72653eaeb7cf6ff8be20fa5))
+
+## 1.8.0 (2020-03-06)
+
+### Features
+
+- update templates ([891ba4c](https://github.com/Gorniv/vscode-flutter-files/commit/891ba4c47cf9eec7e6b4dd5044e29a421ef31f70))
+
+## 1.7.0 (2019-12-30)
+
+### Features
 
 - update templates
 
-## 1.6.0
+## 1.6.0 (2019-11-27)
+
+### Features
 
 - support flutter_bloc ^2.0.0
 
-## 1.5.4
+## 1.5.4 
+
+### Features
 
 - support flutter_bloc 0.22.1
 
 ## 1.5.3
+
+### Features
 
 - add workspace support
 - update templates
 
 ## 1.5.1
 
+### Bug Fixes
+
 - fix Stack Overflow
 
 ## 1.5.0
+
+### Features
 
 - support equatable v0.6.0
 
