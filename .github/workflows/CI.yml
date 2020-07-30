@@ -51,10 +51,10 @@ jobs:
     - name: Gen var
       id: previoustag
       run: |
-       echo "::set-output name=num::$(git ls-remote --tags https://github.com/gorniv/vscode-flutter-files.git v\* | cut -c 53-57| sort -n -r | head -1)"
-       echo "::set-output name=version::$(git ls-remote --tags https://github.com/gorniv/vscode-flutter-files.git v\* | cut -c 52-57| sort -n -r | head -1)"
-       echo "::set-env name=num::$(git ls-remote --tags https://github.com/gorniv/vscode-flutter-files.git v\* | cut -c 53-57| sort -n -r | head -1)"
-       echo "::set-env name=version::$(git ls-remote --tags https://github.com/gorniv/vscode-flutter-files.git v\* | cut -c 52-57| sort -n -r | head -1)"
+       echo "::set-output name=num::$(git ls-remote --tags --refs -q --sort -version:refname https://github.com/gorniv/vscode-flutter-files.git v\* | head -n 1 | awk -F refs/tags/v {'print $2'})"
+       echo "::set-output name=version::$(git ls-remote --tags --refs -q --sort -version:refname https://github.com/gorniv/vscode-flutter-files.git v\* | head -n 1 | awk -F refs/tags/ {'print $2'})"
+       echo "::set-env name=num::$(git ls-remote --tags --refs -q --sort -version:refname https://github.com/gorniv/vscode-flutter-files.git v\* | head -n 1 | awk -F refs/tags/v {'print $2'})"
+       echo "::set-env name=version::$(git ls-remote --tags --refs -q --sort -version:refname https://github.com/gorniv/vscode-flutter-files.git v\* | head -n 1 | awk -F refs/tags/ {'print $2'})"
 
     - name: Get the num of the version
       id: num
