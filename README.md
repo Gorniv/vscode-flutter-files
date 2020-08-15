@@ -17,6 +17,13 @@ Copy [templates](./templates) directory to your project (by command "[FF] Copy t
 
 ## Changelog
 
+## 2.2.0 (2020-08-15)
+
+### Features
+
+* support v.6 bloc ([01d4ce2](https://github.com/Gorniv/vscode-flutter-files/commit/01d4ce2dff1e8746e8348661415ddf5f93caf287))
+* support v5 ([965a07c](https://github.com/Gorniv/vscode-flutter-files/commit/965a07cdef5a3393bdc398518c397b7a80b6a33f))
+
 ## 2.1.0 (2020-05-01)
 
 ### Features
