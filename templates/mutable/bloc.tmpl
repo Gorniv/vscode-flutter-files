@@ -6,6 +6,7 @@ import 'package:${appName}${relative}/index.dart';
 
 class ${upperName}Bloc extends Bloc<${upperName}Event, ${upperName}State> {
   // todo: check singleton for logic in project
+  // use GetIt for DI in projct
   static final ${upperName}Bloc _${privateName}BlocSingleton = ${upperName}Bloc._internal();
   factory ${upperName}Bloc() {
     return _${privateName}BlocSingleton;
