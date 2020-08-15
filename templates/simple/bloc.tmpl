@@ -6,8 +6,7 @@ import 'package:${appName}${relative}/index.dart';
 
 class ${upperName}Bloc extends Bloc<${upperName}Event, ${upperName}State> {
 
-  @override
-  ${upperName}State get initialState => Un${upperName}State();
+  ${upperName}Bloc(${upperName}State initialState) : super(initialState);
 
   @override
   Stream<${upperName}State> mapEventToState(

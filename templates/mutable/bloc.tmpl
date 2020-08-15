@@ -10,7 +10,7 @@ class ${upperName}Bloc extends Bloc<${upperName}Event, ${upperName}State> {
   factory ${upperName}Bloc() {
     return _${privateName}BlocSingleton;
   }
-  ${upperName}Bloc._internal();
+  ${upperName}Bloc._internal(): super(Un${upperName}State(0));
   
   @override
   Future<void> close() async{
