@@ -23,11 +23,11 @@ export class ConfigurationManager {
 
       // prevent parsing issues
       try {
-        const pubspec = jsYaml.safeLoad(data);
+        const pubspec = jsYaml.load(data);
         config.appName = pubspec.name;
       } catch (ex) {
         window.showErrorMessage(
-          'Invalid schema detected in pubspec.yaml, please correct and try again!',
+          `Invalid schema detected in pubspec.yaml, please correct and try again! error: ${ex}`,
         );
         throw Error('Invalid schema');
       }
