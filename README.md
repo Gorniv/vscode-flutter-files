@@ -17,12 +17,18 @@ Copy [templates](./templates) directory to your project (by command "[FF] Copy t
 
 ## Changelog
 
+## [3.1.0](https://github.com/Gorniv/vscode-flutter-files/compare/v2.2.0...v3.1.0) (2021-02-03)
+
+### Features
+
+- dynamic commands and config ([7142dee](https://github.com/Gorniv/vscode-flutter-files/commit/7142dee64d3fac7ab2e4377d8b394952e20265a4))
+
 ## 2.2.0 (2020-08-15)
 
 ### Features
 
-* support v.6 bloc ([01d4ce2](https://github.com/Gorniv/vscode-flutter-files/commit/01d4ce2dff1e8746e8348661415ddf5f93caf287))
-* support v5 ([965a07c](https://github.com/Gorniv/vscode-flutter-files/commit/965a07cdef5a3393bdc398518c397b7a80b6a33f))
+- support v.6 bloc ([01d4ce2](https://github.com/Gorniv/vscode-flutter-files/commit/01d4ce2dff1e8746e8348661415ddf5f93caf287))
+- support v5 ([965a07c](https://github.com/Gorniv/vscode-flutter-files/commit/965a07cdef5a3393bdc398518c397b7a80b6a33f))
 
 ## 2.1.0 (2020-05-01)
 
@@ -59,7 +65,7 @@ Copy [templates](./templates) directory to your project (by command "[FF] Copy t
 
 - support flutter_bloc ^2.0.0
 
-## 1.5.4 
+## 1.5.4
 
 ### Features
 
