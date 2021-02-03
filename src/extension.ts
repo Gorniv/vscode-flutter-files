@@ -1,33 +1,31 @@
-import { ExtensionContext, commands, window, workspace, Uri } from 'vscode';
+import { ExtensionContext, commands, workspace, Uri } from 'vscode';
 import { ConfigurationManager } from './configuration-manager';
-import {
-  showFileNameDialog,
-  showWarning,
-  showOptionsDialog,
-  displayStatusMessage,
-  configureOptionsValues,
-  mapConfigValues,
-} from './editor';
+import { showFileNameDialog, displayStatusMessage } from './editor';
 import { commandsMap } from './commands';
 import { toTileCase } from './formatting';
 import { AngularCli } from './angular-cli';
 import { ResourceType } from './enums/resource-type';
 import { IConfig } from './models/config';
-import { OptionType } from './enums/option-type';
 import { config as defaultConfig } from './config/cli-config';
+import { ConfigExt } from './config-ext';
+import { ConfigurationManagerExt } from './configuration-manager-ext';
 
 export async function activate(context: ExtensionContext) {
   const angularCli = new AngularCli();
   const cm = new ConfigurationManager();
+  const cmExt = new ConfigurationManagerExt();
   let configMap: Map<string, IConfig>;
+  let configExtMap: Map<string, ConfigExt>;
 
   setImmediate(async () => (configMap = await cm.getConfig()));
+  setImmediate(async () => (configExtMap = await cmExt.getConfig()));
 
   // watch and update on config file changes
   cm.watchConfigFiles(async () => (configMap = await cm.getConfig()));
+  cmExt.watchConfigFiles(async () => (configExtMap = await cmExt.getConfig()));
 
   const showDynamicDialog = async (args: any, fileName: string, resource: ResourceType) => {
-    const loc = await showFileNameDialog(args, resource, fileName);
+    const loc = await showFileNameDialog(args, resource, fileName, configExtMap);
 
     const workspaceFolder = workspace.getWorkspaceFolder(Uri.file(loc.fullPath));
     const config =
@@ -40,28 +38,18 @@ export async function activate(context: ExtensionContext) {
       appPath: (workspaceFolder && workspaceFolder.uri.fsPath) || workspace.rootPath,
     };
 
-    if (loc.params.includes(OptionType.ShowOptions)) {
-      const selectedOptions = await showOptionsDialog(config, loc, resource);
-      if (selectedOptions) {
-        const optionsValuesMap = await configureOptionsValues(
-          config,
-          loc,
-          resource,
-          selectedOptions,
-        );
-        loc.params = [...new Set([...loc.params, ...optionsValuesMap.keys()])];
-        resourceConfig = mapConfigValues(config, resource, optionsValuesMap);
-      }
-    } else {
-      if (loc && loc.paramsMap && loc.paramsMap.size > 0) {
-        resourceConfig = mapConfigValues(config, resource, loc.paramsMap);
-      }
-    }
-
-    await angularCli.generateResources(resource, loc, resourceConfig);
+    let arr = [...configExtMap];
+    let lastIndex = configExtMap.size - 1;
+    let confLast = arr[lastIndex][1];
+    let defaultConfigExt = confLast.configs[0];
+    await angularCli.generateResources(
+      resource,
+      loc,
+      resourceConfig,
+      defaultConfigExt,
+    );
     displayStatusMessage(toTileCase(resource), loc.fileName);
   };
-
   for (const [key, value] of commandsMap) {
     const command = commands.registerCommand(key, (args) => {
       return showDynamicDialog(args, value.fileName, value.resource);

@@ -2,7 +2,7 @@
   "name": "vscode-flutter-files",
   "displayName": "[FF] Flutter Files",
   "description": "Quickly scaffold flutter bloc file templates",
-  "version": "2.2.0",
+  "version": "3.0.0",
   "icon": "assets/icon.png",
   "publisher": "gornivv",
   "author": {
@@ -27,6 +27,11 @@
       "type": "object",
       "title": "Flutter Files menu option configuration",
       "properties": {
+        "flutter-files.menu.dynamic": {
+          "type": "boolean",
+          "default": true,
+          "description": "Shows or hides the menu item."
+        },
         "flutter-files.menu.bigpack": {
           "type": "boolean",
           "default": true,
@@ -91,6 +96,10 @@
     },
     "commands": [
       {
+        "command": "extension.addFlutter2_Dynamic",
+        "title": "[FF] New with dynamic config"
+      },
+      {
         "command": "extension.addFlutter2BigPack",
         "title": "[FF] New Big Pack Bloc"
       },
@@ -141,6 +150,11 @@
     ],
     "menus": {
       "explorer/context": [
+        {
+          "when": "config.flutter-files.menu.dynamic",
+          "command": "extension.addFlutter2_Dynamic",
+          "group": "0Flutter Pack"
+        },
         {
           "when": "config.flutter-files.menu.bigpack",
           "command": "extension.addFlutter2BigPack",
@@ -209,7 +223,7 @@
     "compile": "npm run templates && webpack --mode none",
     "watch": "npm run templates && webpack --mode none",
     "test-compile": "tsc -p ./",
-    "templates": "copyfiles templates/**/*.tmpl templates/**/*.tmpl ./out/",
+    "templates": "copyfiles templates/**/*.tmpl templates/**/*.tmpl ./out/ && copyfiles templates/**/*.json templates/**/*.json ./out/",
     "postinstall": "node ./node_modules/vscode/bin/install",
     "test": "npm run compile && node ./node_modules/vscode/bin/test",
     "format:check": "prettier --write --config ./.prettierrc --list-different \"src/**/*{.ts,.json}\"",

@@ -1,4 +1,5 @@
 export enum ResourceType {
+  Dynamic = 'dynamic',
   BigPack = 'bigpack',
   SmallPack = 'smallpack',
   Bloc = 'bloc',

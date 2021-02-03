@@ -1,11 +1,9 @@
 import { IResourceFile } from './resource-file';
-import { OptionType } from '../enums/option-type';
 
 export interface IResource {
   locDirName?: Function;
   locDirPath?: Function;
-  files: IResourceFile[];
+  files: string[];
   createFolder?: Function;
   declaration?: string;
-  options?: OptionType[];
 }

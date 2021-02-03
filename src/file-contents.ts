@@ -2,11 +2,9 @@ import * as fs from 'fs';
 import * as path from 'path';
 import * as es6Renderer from 'express-es6-template-engine';
 import { IConfig } from './models/config';
-import { toCamelCase, toUpperCase, toPrivateCase } from './formatting';
+import { toUpperCase, toPrivateCase } from './formatting';
 import { promisify } from './promisify';
-import { TemplateType } from './enums/template-type';
 import { IPath } from './models/path';
-import { workspace, window } from 'vscode';
 
 const fsReaddir = promisify(fs.readdir);
 const fsReadFile = promisify(fs.readFile);
@@ -61,7 +59,7 @@ export class FileContents {
 
     const directories: string[] = await this.getDirTemplates(templatesPath);
     return directories.filter((c) => {
-      return !c.endsWith('.tmpl');
+      return !c.endsWith('.tmpl') && !c.endsWith('.json');
     });
   }
 
@@ -71,10 +69,9 @@ export class FileContents {
   }
 
   public async getTemplateContent(
-    template: TemplateType,
+    template: string,
     config: IConfig,
     inputName: string,
-    params: string[] = [],
     loc: IPath,
   ) {
     const paths = loc.dirPath.split(path.sep);
@@ -89,9 +86,9 @@ export class FileContents {
         relative = '';
       }
     }
-    const templateName: string = template;
+    const templateName: string = `${template}.tmpl`;
     const upperName = toUpperCase(inputName);
-    const args = [inputName, upperName, toPrivateCase(upperName), config.appName, relative, params];
+    const args = [inputName, upperName, toPrivateCase(upperName), config.appName, relative];
     // load dynamic templates
     this.localTemplatesMap = new Map<string, Function>();
     this.localTemplatesMap = await this.loadTemplates(

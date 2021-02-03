@@ -25,6 +25,7 @@ export interface IProperties {
 }
 
 export interface IDefaults {
+  dynamic?: IProperties;
   bigpack?: IProperties;
   smallpack?: IProperties;
   bloc?: IProperties;

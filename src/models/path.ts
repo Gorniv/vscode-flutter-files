@@ -1,4 +1,4 @@
-import { OptionType } from '../enums/option-type';
+import { Command, ConfigElement } from '../config-ext';
 
 export interface IPath {
   fileName: string;
@@ -6,7 +6,6 @@ export interface IPath {
   dirPath: string;
   fullPath: string;
   rootPath: string;
-  paramsMap?: Map<OptionType, string>;
   templateDirectory: string;
-  params: OptionType[];
+  command: Command;
 }
