@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [3.1.0](https://github.com/Gorniv/vscode-flutter-files/compare/v2.2.0...v3.1.0) (2021-02-03)
+
+
+### Features
+
+* dynamic commands and config ([7142dee](https://github.com/Gorniv/vscode-flutter-files/commit/7142dee64d3fac7ab2e4377d8b394952e20265a4))
+
 ## [2.2.0](https://github.com/Gorniv/vscode-flutter-files/compare/v2.1.0...v2.2.0) (2020-08-15)
 
 
