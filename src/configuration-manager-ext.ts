@@ -19,7 +19,10 @@ export class ConfigurationManagerExt {
     const configMap = new Map<string, Object>();
     while (files.length > 0) {
       const filePath: string = files.splice(0, 1)?.toString();
-
+      const fsExists = fs.existsSync(filePath);
+      if (fsExists != true) {
+        continue;
+      }
       const data = await readFileAsync(filePath, 'utf8');
       const config: ConfigExt = JSON.parse(data);
 
@@ -42,9 +45,12 @@ export class ConfigurationManagerExt {
   public watchConfigFiles(callback) {
     const files = this.getFiles();
     files.forEach((file) => {
-      fs.watch(file, (eventType, filename) => {
-        callback();
-      });
+      const fsExists = fs.existsSync(file);
+      if (fsExists == true) {
+        fs.watch(file, (eventType, filename) => {
+          callback();
+        });
+      }
     });
   }
 }
