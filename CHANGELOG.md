@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [4.1.0](https://github.com/Gorniv/vscode-flutter-files/compare/v3.1.2...v4.1.0) (2021-07-07)
+
+
+### Features
+
+* support null safety ([162582d](https://github.com/Gorniv/vscode-flutter-files/commit/162582d9d5ed4910339cef1c8833dc49e215b903))
+
 ### [3.1.2](https://github.com/Gorniv/vscode-flutter-files/compare/v3.1.1...v3.1.2) (2021-02-04)
 
 
