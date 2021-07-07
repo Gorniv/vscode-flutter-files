@@ -1,4 +1,4 @@
-import { window, workspace, TextEditor, commands, Uri, WorkspaceEdit } from 'vscode';
+import { window, workspace, TextEditor, commands, Uri } from 'vscode';
 import * as fs from 'fs';
 import { IPath } from './models/path';
 import { IFiles } from './models/file';
