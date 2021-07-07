@@ -13,7 +13,7 @@ abstract class ${upperName}Event {
 
 class Un${upperName}Event extends ${upperName}Event {
   @override
-  Stream<${upperName}State> applyAsync({${upperName}State currentState, ${upperName}Bloc bloc}) async* {
+  Stream<${upperName}State> applyAsync({${upperName}State? currentState, ${upperName}Bloc? bloc}) async* {
     yield Un${upperName}State(0);
   }
 }
@@ -28,15 +28,15 @@ class Load${upperName}Event extends ${upperName}Event {
 
   @override
   Stream<${upperName}State> applyAsync(
-      {${upperName}State currentState, ${upperName}Bloc bloc}) async* {
+      {${upperName}State? currentState, ${upperName}Bloc? bloc}) async* {
     try {
       yield Un${upperName}State(0);
-      await Future.delayed(Duration(seconds: 1));
+      await Future.delayed(const Duration(seconds: 1));
       _${privateName}Repository.test(isError);
       yield In${upperName}State(0, 'Hello world');
     } catch (_, stackTrace) {
       developer.log('$_', name: 'Load${upperName}Event', error: _, stackTrace: stackTrace);
-      yield Error${upperName}State(0, _?.toString());
+      yield Error${upperName}State(0, _.toString());
     }
   }
 }

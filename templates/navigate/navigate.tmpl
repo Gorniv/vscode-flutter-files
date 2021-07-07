@@ -10,7 +10,7 @@ class ${upperName}Navigate {
 
   // config for configurate Router
   static RouteConfig routeConfig = RouteConfig(
-    state: (Uri uri) => RouteState(uri: path.toUri()),
+    state: (Uri? uri) => RouteState(uri: path.toUri()),
     // condition for using this page
     isThisPage: (RouteState state) {
       if (state?.firstPath == path) {
@@ -23,7 +23,7 @@ class ${upperName}Navigate {
       return null;
     },
     // get Page for Router
-    page: ({RouteState state}) {
+    page: ({RouteState? state}) {
       return MaterialPage(
           key: const ValueKey('${upperName}Page'),
           child: ${upperName}Page(),

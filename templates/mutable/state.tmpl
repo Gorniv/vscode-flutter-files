@@ -1,11 +1,10 @@
 import 'package:equatable/equatable.dart';
 
 abstract class ${upperName}State extends Equatable {
+  ${upperName}State(this.version);
+ 
   /// notify change state without deep clone state
   final int version;
-  
-  final List propss;
-  ${upperName}State(this.version,[this.propss]);
 
   /// Copy object for use in action
   /// if need use deep clone
@@ -14,7 +13,7 @@ abstract class ${upperName}State extends Equatable {
   ${upperName}State getNewVersion();
 
   @override
-  List<Object> get props => ([version, ...propss ?? []]);
+  List<Object> get props => [version];
 }
 
 /// UnInitialized
@@ -38,9 +37,10 @@ class Un${upperName}State extends ${upperName}State {
 
 /// Initialized
 class In${upperName}State extends ${upperName}State {
+  
+  In${upperName}State(int version, this.hello) : super(version);
+ 
   final String hello;
-
-  In${upperName}State(int version, this.hello) : super(version, [hello]);
 
   @override
   String toString() => 'In${upperName}State $hello';
@@ -54,12 +54,15 @@ class In${upperName}State extends ${upperName}State {
   In${upperName}State getNewVersion() {
     return In${upperName}State(version+1, hello);
   }
+
+  @override
+  List<Object> get props => [version, hello];
 }
 
 class Error${upperName}State extends ${upperName}State {
+  Error${upperName}State(int version, this.errorMessage): super(version);
+ 
   final String errorMessage;
-
-  Error${upperName}State(int version, this.errorMessage): super(version, [errorMessage]);
   
   @override
   String toString() => 'Error${upperName}State';
@@ -74,4 +77,7 @@ class Error${upperName}State extends ${upperName}State {
     return Error${upperName}State(version+1, 
     errorMessage);
   }
+
+  @override
+  List<Object> get props => [version, errorMessage];
 }

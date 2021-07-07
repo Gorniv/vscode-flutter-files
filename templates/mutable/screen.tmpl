@@ -4,8 +4,8 @@ import 'package:${appName}${relative}/index.dart';
 
 class ${upperName}Screen extends StatefulWidget {
   const ${upperName}Screen({
-    Key key,
-    @required ${upperName}Bloc ${privateName}Bloc,
+    required ${upperName}Bloc ${privateName}Bloc,
+    Key? key,
   })  : _${privateName}Bloc = ${privateName}Bloc,
         super(key: key);
 
@@ -34,7 +34,7 @@ class ${upperName}ScreenState extends State<${upperName}Screen> {
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<${upperName}Bloc, ${upperName}State>(
-        cubit: widget._${privateName}Bloc,
+        bloc: widget._${privateName}Bloc,
         builder: (
           BuildContext context,
           ${upperName}State currentState,
@@ -49,7 +49,7 @@ class ${upperName}ScreenState extends State<${upperName}Screen> {
                 child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
-                Text(currentState.errorMessage ?? 'Error'),
+                Text(currentState.errorMessage),
                 Padding(
                   padding: const EdgeInsets.only(top: 32.0),
                   child: RaisedButton(
@@ -67,7 +67,7 @@ class ${upperName}ScreenState extends State<${upperName}Screen> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: <Widget>[
                   Text(currentState.hello),
-                  Text('Flutter files: done'),
+                  const Text('Flutter files: done'),
                   Padding(
                     padding: const EdgeInsets.only(top: 32.0),
                     child: RaisedButton(

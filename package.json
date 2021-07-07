@@ -2,7 +2,7 @@
   "name": "vscode-flutter-files",
   "displayName": "[FF] Flutter Files",
   "description": "Quickly scaffold flutter bloc file templates",
-  "version": "3.1.2",
+  "version": "4.0.0",
   "icon": "assets/icon.png",
   "publisher": "gornivv",
   "author": {
@@ -246,21 +246,20 @@
     "release": "npm run standard && npm run vsce:publish && npm publish"
   },
   "devDependencies": {
-    "@types/mocha": "8.2.0",
-    "@types/node": "14.14.22",
+    "@types/mocha": "8.2.3",
+    "@types/node": "16.0.1",
     "copyfiles": "2.4.1",
-    "prettier": "2.2.1",
-    "standard-version": "9.1.0",
-    "ts-loader": "8.0.14",
-    "tslint-config-airbnb": "5.11.2",
+    "prettier": "2.3.2",
+    "standard-version": "9.3.0",
+    "ts-loader": "9.2.3",
     "tslint": "6.1.3",
-    "typescript": "4.1.3",
-    "vscode": "1.1.37",
-    "webpack-cli": "4.4.0",
-    "webpack": "5.19.0"
+    "typescript": "4.3.5",
+    "vscode": "^0.9.9",
+    "webpack": "5.43.0",
+    "webpack-cli": "4.7.2"
   },
   "dependencies": {
     "express-es6-template-engine": "2.2.3",
-    "js-yaml": "4.0.0"
+    "js-yaml": "4.1.0"
   }
 }
