@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [4.2.0](https://github.com/Gorniv/vscode-flutter-files/compare/v4.1.1...v4.2.0) (2021-11-16)
+
+
+### Features
+
+* new template for v.8 type ([7715833](https://github.com/Gorniv/vscode-flutter-files/commit/77158332b85a17780b67936278fa815b55c94cf7))
+
 ### [4.1.1](https://github.com/Gorniv/vscode-flutter-files/compare/v4.1.0...v4.1.1) (2021-07-07)
 
 ## [4.1.0](https://github.com/Gorniv/vscode-flutter-files/compare/v3.1.2...v4.1.0) (2021-07-07)
