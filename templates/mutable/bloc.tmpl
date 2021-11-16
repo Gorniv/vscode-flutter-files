@@ -11,7 +11,19 @@ class ${upperName}Bloc extends Bloc<${upperName}Event, ${upperName}State> {
   factory ${upperName}Bloc() {
     return _${privateName}BlocSingleton;
   }
-  ${upperName}Bloc._internal(): super(Un${upperName}State(0));
+  
+  ${upperName}Bloc._internal(): super(Un${upperName}State(0)){
+    on<${upperName}Event>((event, emit) {
+      return emit.forEach<${upperName}State>(
+        event.applyAsync(currentState: state, bloc: this),
+        onData: (state) => state,
+        onError: (error, stackTrace) {
+          developer.log('$error', name: '${upperName}Bloc', error: error, stackTrace: stackTrace);
+          return Error${upperName}State(0, error.toString());
+        },
+      );
+    });
+  }
   
   @override
   Future<void> close() async{
@@ -22,15 +34,4 @@ class ${upperName}Bloc extends Bloc<${upperName}Event, ${upperName}State> {
   @override
   ${upperName}State get initialState => Un${upperName}State(0);
 
-  @override
-  Stream<${upperName}State> mapEventToState(
-    ${upperName}Event event,
-  ) async* {
-    try {
-      yield* event.applyAsync(currentState: state, bloc: this);
-    } catch (_, stackTrace) {
-      developer.log('$_', name: '${upperName}Bloc', error: _, stackTrace: stackTrace);
-      yield state;
-    }
-  }
 }
