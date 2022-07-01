@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [4.3.0](https://github.com/Gorniv/vscode-flutter-files/compare/v3.1.2...v4.3.0) (2022-07-01)
+
+
+### Features
+
+* new template for v.8 type ([7715833](https://github.com/Gorniv/vscode-flutter-files/commit/77158332b85a17780b67936278fa815b55c94cf7))
+* support null safety ([162582d](https://github.com/Gorniv/vscode-flutter-files/commit/162582d9d5ed4910339cef1c8833dc49e215b903))
+
 ### [4.2.1](https://github.com/Gorniv/vscode-flutter-files/compare/v4.2.0...v4.2.1) (2021-11-16)
 
 ## [4.2.0](https://github.com/Gorniv/vscode-flutter-files/compare/v4.1.1...v4.2.0) (2021-11-16)
