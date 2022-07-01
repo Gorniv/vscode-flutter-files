@@ -9,6 +9,8 @@ This extension use <https://github.com/felangel/bloc> for BLoC
 
 How it works(Russian lang) - https://vas3k.club/post/10567/
 
+## Support me - Add me on [linkedin](https://www.linkedin.com/in/gorniv/)
+
 ## Support me - install my music player: [meows.app](https://meows.app?utm_source=ext&utm_medium=f_f)
 
 ![demo](https://github.com/Gorniv/vscode-flutter-files/raw/master/assets/flutter.gif)
