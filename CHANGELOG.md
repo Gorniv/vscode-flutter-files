@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [4.4.0](https://github.com/Gorniv/vscode-flutter-files/compare/v4.3.1...v4.4.0) (2022-10-01)
+
+
+### Features
+
+* support multi folder in templates.(base) ([484c58d](https://github.com/Gorniv/vscode-flutter-files/commit/484c58d6202731cb8ce2847471168d6d46954d94))
+
 ### [4.3.1](https://github.com/Gorniv/vscode-flutter-files/compare/v4.3.0...v4.3.1) (2022-07-01)
 
 ## [4.3.0](https://github.com/Gorniv/vscode-flutter-files/compare/v3.1.2...v4.3.0) (2022-07-01)
