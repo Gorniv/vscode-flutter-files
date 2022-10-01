@@ -7,7 +7,7 @@ import { FileContents } from './file-contents';
 import { IFiles } from './models/file';
 import { promisify } from './promisify';
 import { toUpperCase } from './formatting';
-import { createFiles, createFolder } from './ioutil';
+import { createDirectory, createFiles, createFolder } from './ioutil';
 import { ResourcesDynamic } from './resources';
 import { ResourceType } from './enums/resource-type';
 import { ConfigElement } from './config-ext';
@@ -47,9 +47,22 @@ export class AngularCli {
       .filter((file) => file !== 'index')
       .map(async (file) => {
         try {
-          const fileName: string = `${file}.dart`;
+          const splitDir = '\\';
+          var newDirs = file.split(splitDir);
+          var tempDir = '';
+          var fileTemp: string = file;
+          if (newDirs.length != 1) {
+            for (let index = 0; index < newDirs.length - 1; index++) {
+              const newDir = newDirs[index];
+              createDirectory(path.join(loc.dirPath, newDir));
+              tempDir = path.join(tempDir, newDir);
+              fileTemp = fileTemp.replace(newDir + splitDir, '');
+            }
+          }
+          const fileName: string = `${fileTemp}.dart`;
           const newName: string = path.join(
             loc.dirPath,
+            tempDir,
             fileName.startsWith('_') ? `${loc.fileName}${fileName}` : `${loc.fileName}_${fileName}`,
           );
           const result: IFiles = {
@@ -59,7 +72,7 @@ export class AngularCli {
           return result;
         } catch (ex) {
           console.log(ex);
-          await window.showErrorMessage(`Error: ${ex}`);
+          window.showErrorMessage(`Error: ${ex}`);
         }
       });
     let files = await Promise.all(filesASync);
@@ -90,7 +103,7 @@ export class AngularCli {
           return result;
         } catch (ex) {
           console.log(ex);
-          await window.showErrorMessage(`Error: ${ex}`);
+          window.showErrorMessage(`Error: ${ex}`);
         }
       });
     let indexFiles = await Promise.all(filesIndex);

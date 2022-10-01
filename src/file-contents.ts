@@ -5,6 +5,7 @@ import { IConfig } from './models/config';
 import { toUpperCase, toPrivateCase } from './formatting';
 import { promisify } from './promisify';
 import { IPath } from './models/path';
+import { resolve } from 'path';
 
 const fsReaddir = promisify(fs.readdir);
 const fsReadFile = promisify(fs.readFile);
@@ -39,12 +40,19 @@ export class FileContents {
   }
 
   private async getTemplates(templatesPath: string): Promise<Map<string, string>> {
-    const templatesFiles: string[] = await fsReaddir(templatesPath, 'utf-8');
+    const templatesFiles: string[] = (await getFiles(templatesPath))
+      .map((f) => f.replace(templatesPath, ''))
+      .map((f: string) => f.substring(1));
+
     // tslint:disable-next-line:ter-arrow-parens
-    const templatesFilesPromises = templatesFiles.map((t) =>
-      // tslint:disable-next-line:ter-arrow-parens
-      fsReadFile(path.join(templatesPath, t), 'utf8').then((data) => [t, data]),
-    );
+    const templatesFilesPromises = templatesFiles.map((t) => {
+      try {
+        // tslint:disable-next-line:ter-arrow-parens
+        return fsReadFile(path.join(templatesPath, t), 'utf8').then((data) => [t, data]);
+      } catch (e) {
+        console.log(e);
+      }
+    });
     const templates = await Promise.all(templatesFilesPromises);
 
     // tslint:disable-next-line:ter-arrow-parens
@@ -95,17 +103,33 @@ export class FileContents {
       loc.templateDirectory,
       this.localTemplatesMap,
     );
-
+    var key = templateName.replace('\\', path.sep);
     let resultTemplate =
-      this.localTemplatesMap && this.localTemplatesMap.has(templateName)
-        ? this.localTemplatesMap.get(templateName)(...args)
+      this.localTemplatesMap && this.localTemplatesMap.has(key)
+        ? this.localTemplatesMap.get(key)(...args)
         : undefined;
     if (!resultTemplate) {
       /// use template from extension
-      resultTemplate = this.templatesMap.has(templateName)
-        ? this.templatesMap.get(templateName)(...args)
-        : '';
+      resultTemplate = this.templatesMap.has(key) ? this.templatesMap.get(key)(...args) : '';
     }
     return resultTemplate;
   }
+}
+
+function getFiles(dir: string): any[] {
+  var results = [];
+  var list = fs.readdirSync(dir);
+  list.forEach(function (file) {
+    file = dir + '/' + file;
+    var stat = fs.statSync(file);
+    if (stat && stat.isDirectory()) {
+      /* Recurse into a subdirectory */
+      var recFiles = getFiles(file);
+      results = results.concat(recFiles);
+    } else {
+      /* Is a file */
+      results.push(file);
+    }
+  });
+  return results;
 }
