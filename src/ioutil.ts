@@ -24,7 +24,13 @@ export const createFiles = async (loc: IPath, files: IFiles[]) => {
 
 const writeFiles = async (files: IFiles[]) => {
   // tslint:disable-next-line:ter-arrow-parens
-  const filesPromises: Promise<any>[] = files.map((file) => fsWriteFile(file.name, file.content));
+  const filesPromises: Promise<any>[] = files.map((file) => {
+    try {
+      return fsWriteFile(file.name, file.content.toString());
+    } catch (_) {
+      console.log(_);
+    }
+  });
 
   await Promise.all(filesPromises);
 };

@@ -6,7 +6,6 @@
       "commands": [
         {
           "name": "[FF] New Big Pack Bloc",
-          "key": "bigpack",
           "templates": ["*"],
           "files": [
             "bloc",
@@ -22,7 +21,6 @@
         },
         {
           "name": "[FF] New Small Pack Bloc",
-          "key": "smallpack",
           "templates": ["*"],
           "files": ["bloc", "event", "index", "page", "screen", "state"]
         },
