@@ -30,6 +30,11 @@ export class AngularCli {
       ? ResourcesDynamic.resourcesCommand(loc.command)
       : ResourcesDynamic.resourcesDynamic(configExt).get(name);
 
+    if (!resource) {
+      window.showErrorMessage(`Error: can't found key = '${name}' in ff.config.json`);
+      return;
+    }
+
     loc.dirName = resource.hasOwnProperty('locDirName')
       ? resource.locDirName(loc, config)
       : loc.dirName;

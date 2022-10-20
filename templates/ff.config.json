@@ -7,6 +7,7 @@
         {
           "name": "[FF] New Big Pack Bloc",
           "templates": ["*"],
+          "key": "bigpack",
           "files": [
             "bloc",
             "event",
@@ -22,6 +23,7 @@
         {
           "name": "[FF] New Small Pack Bloc",
           "templates": ["*"],
+          "key": "smallpack",
           "files": ["bloc", "event", "index", "page", "screen", "state"]
         },
         {
