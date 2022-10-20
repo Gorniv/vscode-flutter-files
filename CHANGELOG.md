@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [4.4.2](https://github.com/Gorniv/vscode-flutter-files/compare/v4.4.1...v4.4.2) (2022-10-20)
+
+
+### Bug Fixes
+
+* 4.4.1 can not gen new big pack in vscode [#40](https://github.com/Gorniv/vscode-flutter-files/issues/40) ([3947f8b](https://github.com/Gorniv/vscode-flutter-files/commit/3947f8b3db7d2ca35f045505dd23b85f9725aae9))
+
 ### [4.4.1](https://github.com/Gorniv/vscode-flutter-files/compare/v4.4.0...v4.4.1) (2022-10-18)
 
 ## [4.4.0](https://github.com/Gorniv/vscode-flutter-files/compare/v4.3.1...v4.4.0) (2022-10-01)
