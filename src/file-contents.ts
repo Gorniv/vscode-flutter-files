@@ -27,12 +27,14 @@ export class FileContents {
       return;
     }
 
-    const tempMap: Map<string, string> = await this.getTemplates(pathDirectory);
+    let tempMap: Map<string, string> = await this.getTemplates(pathDirectory);
     for (const [key, value] of tempMap.entries()) {
       try {
-        const compiled = es6Renderer(value, FileContents.TEMPLATE_ARGUMENTS);
+        let compiled = es6Renderer(value, FileContents.TEMPLATE_ARGUMENTS);
         templatesMap.set(key, compiled);
       } catch (e) {
+        let compiled = es6Renderer(e, FileContents.TEMPLATE_ARGUMENTS);
+        templatesMap.set(key, compiled);
         console.log(e);
       }
     }

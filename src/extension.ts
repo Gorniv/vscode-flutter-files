@@ -28,7 +28,7 @@ export async function activate(context: ExtensionContext) {
     const loc = await showFileNameDialog(args, resource, fileName, configExtMap);
 
     const workspaceFolder = workspace.getWorkspaceFolder(Uri.file(loc.fullPath));
-    const config =
+    let config =
       (workspaceFolder &&
         configMap.has(workspaceFolder.name) &&
         configMap.get(workspaceFolder.name)) ||
@@ -50,7 +50,7 @@ export async function activate(context: ExtensionContext) {
     );
     displayStatusMessage(toTileCase(resource), loc.fileName);
   };
-  for (const [key, value] of commandsMap) {
+  for (let [key, value] of commandsMap) {
     const command = commands.registerCommand(key, (args) => {
       return showDynamicDialog(args, value.fileName, value.resource);
     });
