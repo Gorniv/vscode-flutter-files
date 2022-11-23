@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [4.5.0](https://github.com/Gorniv/vscode-flutter-files/compare/v4.4.2...v4.5.0) (2022-11-23)
+
+
+### Features
+
+* improve error template ([bd51e6a](https://github.com/Gorniv/vscode-flutter-files/commit/bd51e6a7fa30d5588f9c29079872cb2dc7af8369))
+
 ### [4.4.2](https://github.com/Gorniv/vscode-flutter-files/compare/v4.4.1...v4.4.2) (2022-10-20)
 
 
