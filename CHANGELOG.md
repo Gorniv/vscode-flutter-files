@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [4.6.0](https://github.com/Gorniv/vscode-flutter-files/compare/v4.5.0...v4.6.0) (2022-11-24)
+
+
+### Features
+
+* use ff_bloc ([1f5eed0](https://github.com/Gorniv/vscode-flutter-files/commit/1f5eed09c782bfa6d50f81abef86adf360243d1d))
+
 ## [4.5.0](https://github.com/Gorniv/vscode-flutter-files/compare/v4.4.2...v4.5.0) (2022-11-23)
 
 
