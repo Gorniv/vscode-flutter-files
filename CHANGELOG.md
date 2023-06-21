@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [4.7.1](https://github.com/Gorniv/vscode-flutter-files/compare/v4.7.0...v4.7.1) (2023-06-21)
+
+
+### Bug Fixes
+
+* badge ([de9cb68](https://github.com/Gorniv/vscode-flutter-files/commit/de9cb68040f580ad4a4b010022a64bc9a1092433))
+
 ## [4.7.0](https://github.com/Gorniv/vscode-flutter-files/compare/v4.6.0...v4.7.0) (2023-06-21)
 
 
