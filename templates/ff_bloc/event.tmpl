@@ -8,6 +8,7 @@ import 'package:${appName}${relative}/index.dart';
 @immutable
 abstract class ${upperName}Event implements FFBlocEvent<${upperName}State, ${upperName}Bloc> {}
 
+/// Initial Event with load data
 class Load${upperName}Event extends ${upperName}Event {
   Load${upperName}Event({required this.id});
   final String? id;
@@ -19,8 +20,11 @@ class Load${upperName}Event extends ${upperName}Event {
 
   @override
   Stream<${upperName}State> applyAsync({required ${upperName}Bloc bloc}) async* {
+    // set loading true for show loading
     yield bloc.state.copyWithoutError(isLoading: true);
+    // fetch data
     final result = await bloc.provider.fetchAsync(id);
+    // set data to state
     yield bloc.state.copyWithoutError(
       isLoading: false,
       data: ${upperName}ViewModel(items: result),

@@ -5,13 +5,16 @@
 
 This extension allows **quickly scaffold flutter BLoC templates** in VS Code project.
 
-This extension use <https://github.com/felangel/bloc> for BLoC
+This extension use:
+- <https://github.com/felangel/bloc> for BLoC (base)
+- <https://pub.dev/packages/ff_bloc> for (my way from real code)
 
 How it works(Russian lang) - https://vas3k.club/post/10567/
 
-## Support me - Add me on [linkedin](https://www.linkedin.com/in/gorniv/)
-
-## Support me - install my music player: [meows.app](https://meows.app?utm_source=ext&utm_medium=f_f)
+## Support me:
+- Add me on [linkedin](https://www.linkedin.com/in/gorniv/)
+- install app for developers: [aso.dev](https://aso.dev?utm_source=ext&utm_medium=f_f)
+- install my music player for Apple Music: [meows.app](https://meows.app?utm_source=ext&utm_medium=f_f)
 
 ![demo](https://github.com/Gorniv/vscode-flutter-files/raw/master/assets/flutter.gif)
 

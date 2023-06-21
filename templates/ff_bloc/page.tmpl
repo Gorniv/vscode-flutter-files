@@ -9,13 +9,20 @@ class ${upperName}Page extends StatefulWidget {
     });
   static const String routeName = '/${privateName}';
   
-  final ${upperName}Bloc bloc;
+  final ${upperName}Bloc? bloc;
 
   @override
   State<${upperName}Page> createState() => _${upperName}PageState();
 }
 
 class _${upperName}PageState extends State<${upperName}Page> {
+
+  ${upperName}Bloc? _bloc;
+  ${upperName}Bloc get bloc {
+    // get it by DI in real code.
+    _bloc ??= widget.bloc ?? ${upperName}Bloc();
+    return _bloc!;
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -27,24 +34,24 @@ class _${upperName}PageState extends State<${upperName}Page> {
           IconButton(
             icon: const Icon(Icons.error),
             onPressed: () {
-              widget.bloc.add(ErrorYouAwesomeEvent());
+              bloc.add(ErrorYouAwesomeEvent());
             },
           ),
           IconButton(
             icon: const Icon(Icons.add),
             onPressed: () {
-              widget.bloc.add(Add${upperName}Event());
+              bloc.add(Add${upperName}Event());
             },
           ),
           IconButton(
             icon: const Icon(Icons.clear),
             onPressed: () {
-              widget.bloc.add(Clear${upperName}Event());
+              bloc.add(Clear${upperName}Event());
             },
           ),
         ],
       ),
-      body: ${upperName}Screen(bloc: widget.bloc),
+      body: ${upperName}Screen(bloc: bloc),
     );
   }
 }

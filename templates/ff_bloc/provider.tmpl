@@ -5,6 +5,7 @@ import 'package:${appName}${relative}/index.dart';
 class ${upperName}Provider {
 
   Future<List<${upperName}Model>?> fetchAsync(String? id) async {
+    // write logic here to send request to server
     if (id == null) {
       return null;
     }
@@ -13,6 +14,7 @@ class ${upperName}Provider {
 
 
   Future<List<${upperName}Model>?> addMore(List<${upperName}Model>? now) async {
+    // write logic here to send request to server
     final result = [
       ...(now ?? <${upperName}Model>[]),
       ${upperName}Model(name: now?.length.toString() ?? '0')

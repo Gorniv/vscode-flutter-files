@@ -23,6 +23,7 @@ class ${upperName}ScreenState extends State<${upperName}Screen> {
   @override
   void initState() {
     super.initState();
+    // load data on init widget if bloc has not data
     if (!widget.bloc.state.hasData) {
       _load();
     }
@@ -30,6 +31,7 @@ class ${upperName}ScreenState extends State<${upperName}Screen> {
 
   @override
   void dispose() {
+    // dispose bloc if you use subscriptions in bloc
     super.dispose();
   }
 
@@ -41,6 +43,7 @@ class ${upperName}ScreenState extends State<${upperName}Screen> {
         BuildContext context,
         ${upperName}State currentState,
       ) {
+        // declaration of bloc states
         return currentState.when(
           onLoading: ()=>const CircularProgressIndicator(),
           onEmpty: (data) =>  _Empty(),
