@@ -24,6 +24,81 @@ Copy [templates](./templates) directory to your project (by command "[FF] Copy t
 
 ## Changelog
 
+
+## [4.7.0](https://github.com/Gorniv/vscode-flutter-files/compare/v4.6.0...v4.7.0) (2023-06-21)
+
+
+### Features
+
+* upgrade templates, readme ([7e2c899](https://github.com/Gorniv/vscode-flutter-files/commit/7e2c89959c983a727228111453ef667cb2ad54be))
+
+## [4.6.0](https://github.com/Gorniv/vscode-flutter-files/compare/v4.5.0...v4.6.0) (2022-11-24)
+
+
+### Features
+
+* use ff_bloc ([1f5eed0](https://github.com/Gorniv/vscode-flutter-files/commit/1f5eed09c782bfa6d50f81abef86adf360243d1d))
+
+## [4.5.0](https://github.com/Gorniv/vscode-flutter-files/compare/v4.4.2...v4.5.0) (2022-11-23)
+
+
+### Features
+
+* improve error template ([bd51e6a](https://github.com/Gorniv/vscode-flutter-files/commit/bd51e6a7fa30d5588f9c29079872cb2dc7af8369))
+
+### [4.4.2](https://github.com/Gorniv/vscode-flutter-files/compare/v4.4.1...v4.4.2) (2022-10-20)
+
+
+### Bug Fixes
+
+* 4.4.1 can not gen new big pack in vscode [#40](https://github.com/Gorniv/vscode-flutter-files/issues/40) ([3947f8b](https://github.com/Gorniv/vscode-flutter-files/commit/3947f8b3db7d2ca35f045505dd23b85f9725aae9))
+
+### [4.4.1](https://github.com/Gorniv/vscode-flutter-files/compare/v4.4.0...v4.4.1) (2022-10-18)
+
+## [4.4.0](https://github.com/Gorniv/vscode-flutter-files/compare/v4.3.1...v4.4.0) (2022-10-01)
+
+
+### Features
+
+* support multi folder in templates.(base) ([484c58d](https://github.com/Gorniv/vscode-flutter-files/commit/484c58d6202731cb8ce2847471168d6d46954d94))
+
+### [4.3.1](https://github.com/Gorniv/vscode-flutter-files/compare/v4.3.0...v4.3.1) (2022-07-01)
+
+## [4.3.0](https://github.com/Gorniv/vscode-flutter-files/compare/v3.1.2...v4.3.0) (2022-07-01)
+
+
+### Features
+
+* new template for v.8 type ([7715833](https://github.com/Gorniv/vscode-flutter-files/commit/77158332b85a17780b67936278fa815b55c94cf7))
+* support null safety ([162582d](https://github.com/Gorniv/vscode-flutter-files/commit/162582d9d5ed4910339cef1c8833dc49e215b903))
+
+### [4.2.1](https://github.com/Gorniv/vscode-flutter-files/compare/v4.2.0...v4.2.1) (2021-11-16)
+
+## [4.2.0](https://github.com/Gorniv/vscode-flutter-files/compare/v4.1.1...v4.2.0) (2021-11-16)
+
+
+### Features
+
+* new template for v.8 type ([7715833](https://github.com/Gorniv/vscode-flutter-files/commit/77158332b85a17780b67936278fa815b55c94cf7))
+
+### [4.1.1](https://github.com/Gorniv/vscode-flutter-files/compare/v4.1.0...v4.1.1) (2021-07-07)
+
+## [4.1.0](https://github.com/Gorniv/vscode-flutter-files/compare/v3.1.2...v4.1.0) (2021-07-07)
+
+
+### Features
+
+* support null safety ([162582d](https://github.com/Gorniv/vscode-flutter-files/commit/162582d9d5ed4910339cef1c8833dc49e215b903))
+
+### [3.1.2](https://github.com/Gorniv/vscode-flutter-files/compare/v3.1.1...v3.1.2) (2021-02-04)
+
+
+### Bug Fixes
+
+* ff.config.json ([7a05444](https://github.com/Gorniv/vscode-flutter-files/commit/7a05444de7f86406c488a8b9b6e94e218616be2e))
+
+### [3.1.1](https://github.com/Gorniv/vscode-flutter-files/compare/v3.1.0...v3.1.1) (2021-02-03)
+
 ## [3.1.0](https://github.com/Gorniv/vscode-flutter-files/compare/v2.2.0...v3.1.0) (2021-02-03)
 
 ### Features
