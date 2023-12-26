@@ -9,6 +9,8 @@ import { IConfig } from './models/config';
 import { config as defaultConfig } from './config/cli-config';
 import { ConfigExt } from './config-ext';
 import { ConfigurationManagerExt } from './configuration-manager-ext';
+import { CommandType } from './enums/command-type';
+import * as vscode from 'vscode';
 
 export async function activate(context: ExtensionContext) {
   const angularCli = new AngularCli();
@@ -50,6 +52,10 @@ export async function activate(context: ExtensionContext) {
     );
     displayStatusMessage(toTileCase(resource), loc.fileName);
   };
+  const command = commands.registerCommand(CommandType.AsoDev, (args) => {
+    return vscode.env.openExternal(vscode.Uri.parse('https://aso.dev'));
+  });
+  context.subscriptions.push(command);
   for (let [key, value] of commandsMap) {
     const command = commands.registerCommand(key, (args) => {
       return showDynamicDialog(args, value.fileName, value.resource);

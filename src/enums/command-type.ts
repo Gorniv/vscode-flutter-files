@@ -1,5 +1,6 @@
 export enum CommandType {
   Dynamic = 'extension.addFlutter2_Dynamic',
+  AsoDev = 'extension.addFlutterAsoDev',
   BigPack = 'extension.addFlutter2BigPack',
   SmallPack = 'extension.addFlutter2SmallPack',
   Bloc = 'extension.addFlutter2Bloc',

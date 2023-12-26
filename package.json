@@ -39,6 +39,11 @@
       "type": "object",
       "title": "Flutter Files menu option configuration",
       "properties": {
+        "flutter-files.menu.asodev": {
+          "type": "boolean",
+          "default": true,
+          "description": "Shows or hides the menu item."
+        },
         "flutter-files.menu.dynamic": {
           "type": "boolean",
           "default": true,
@@ -108,6 +113,10 @@
     },
     "commands": [
       {
+        "command": "extension.addFlutterAsoDev",
+        "title": "Copilot for App Store Connect"
+      },
+      {
         "command": "extension.addFlutter2_Dynamic",
         "title": "[FF] New with dynamic config"
       },
@@ -162,6 +171,11 @@
     ],
     "menus": {
       "explorer/context": [
+        {
+          "when": "config.flutter-files.menu.asodev",
+          "command": "extension.addFlutterAsoDev",
+          "group": "_Flutter_Pack_Support"
+        },
         {
           "when": "config.flutter-files.menu.dynamic",
           "command": "extension.addFlutter2_Dynamic",
