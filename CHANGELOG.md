@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [4.8.0](https://github.com/Gorniv/vscode-flutter-files/compare/v4.7.1...v4.8.0) (2023-12-26)
+
+
+### Features
+
+* share my project for ios developers - aso.dev ([4d07ae6](https://github.com/Gorniv/vscode-flutter-files/commit/4d07ae6795deec5cff2c2590c1ffa18540f8e0ad))
+
 ### [4.7.1](https://github.com/Gorniv/vscode-flutter-files/compare/v4.7.0...v4.7.1) (2023-06-21)
 
 
