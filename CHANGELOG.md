@@ -2,6 +2,8 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [4.9.1](https://github.com/Gorniv/vscode-flutter-files/compare/v4.9.0...v4.9.1) (2024-06-24)
+
 ## [4.9.0](https://github.com/Gorniv/vscode-flutter-files/compare/v4.8.1...v4.9.0) (2024-06-24)
 
 
