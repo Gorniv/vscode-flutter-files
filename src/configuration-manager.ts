@@ -10,6 +10,7 @@ const readFileAsync = promisify(fs.readFile);
 
 export class ConfigurationManager {
   private readonly CONFIG_FILES = ['pubspec.yaml'];
+  private static readonly analysis_options_file = 'analysis_options.yaml';
 
   private async readConfigFile(): Promise<Map<string, Object>> {
     const files = await workspace.findFiles('{pubspec.yaml}', '');
@@ -39,6 +40,34 @@ export class ConfigurationManager {
 
   private parseConfig(config): IConfig {
     return deepMerge({}, defaultConfig, config);
+  }
+  static _singleQuote = undefined;
+  public static async quote(): Promise<String> {
+    return (await ConfigurationManager._isSingleQuote()) ? "'" : '"';
+  }
+
+  public static async _isSingleQuote(): Promise<boolean> {
+    if (ConfigurationManager._singleQuote !== undefined) {
+      return ConfigurationManager._singleQuote;
+    }
+    try {
+      const files = await workspace.findFiles(`{${this.analysis_options_file}}`, '');
+      if (files.length === 0) {
+        console.error('analysis_options.yaml not found');
+        return true;
+      }
+      const [{ fsPath: filePath }] = files.splice(0, 1);
+      const fileData = fs.readFileSync(filePath, 'utf8');
+      const result =
+        fileData.includes('prefer_double_quotes: false') ||
+        fileData.includes('prefer_single_quotes: true') ||
+        (fileData.includes('prefer_single_quotes') && !fileData.includes('prefer_double_quotes'));
+      ConfigurationManager._singleQuote = result;
+      return result;
+    } catch (ex) {
+      console.error(ex);
+      return true;
+    }
   }
 
   public async getConfig(): Promise<Map<string, IConfig>> {

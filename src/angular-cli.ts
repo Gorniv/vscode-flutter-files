@@ -11,6 +11,7 @@ import { createDirectory, createFiles, createFolder } from './ioutil';
 import { ResourcesDynamic } from './resources';
 import { ResourceType } from './enums/resource-type';
 import { ConfigElement } from './config-ext';
+import { ConfigurationManager } from './configuration-manager';
 
 const fsWriteFile = promisify(fs.writeFile);
 const fsReaddir = promisify(fs.readdir);
@@ -84,35 +85,71 @@ export class AngularCli {
     files = files.filter((c) => c.content != '');
     await createFiles(loc, files);
 
+    let indexFiles = await this.createIndexFile({ files: resource.files }, loc);
+    indexFiles = indexFiles.filter((c) => c.content != '');
+    await createFiles(loc, indexFiles);
+  }
+
+  // Function to read directory recursively and gather .dart files
+  async readDirectoryRecursive(dirPath: string, fileList: string[] = []): Promise<string[]> {
+    const files = await fs.promises.readdir(dirPath);
+    if (fileList.length > 0 && files.includes('index.dart')) {
+      fileList.push(path.join(dirPath, 'index.dart'));
+      return fileList;
+    }
+
+    for (const file of files) {
+      const filePath = path.join(dirPath, file);
+      const stat = await fs.promises.stat(filePath);
+
+      if (stat.isDirectory()) {
+        await this.readDirectoryRecursive(filePath, fileList); // Recursively read subdirectory
+      } else {
+        if (
+          file.toLowerCase().endsWith('.dart') &&
+          !file.toLowerCase().includes('.g.dart') &&
+          !file.toLowerCase().includes('.freezed.dart')
+        ) {
+          fileList.push(filePath);
+        }
+      }
+    }
+
+    return fileList;
+  }
+
+  async createIndexFile(
+    resource: { files: string[] },
+    loc: { dirPath: string },
+  ): Promise<IFiles[]> {
     const filesIndex: Promise<IFiles>[] = resource.files
-      // tslint:disable-next-line:ter-arrow-parens
-      // .filter((file) => (file.condition ? file.condition(config, []) : true))
-      // tslint:disable-next-line:ter-arrow-parens
       .filter((file) => file === 'index')
       .map(async (file) => {
         try {
-          const fileName: string = `${file}.dart`;
-          const files: string[] = await fsReaddir(loc.dirPath);
+          const fileName = `${file}.dart`;
+          const files = await this.readDirectoryRecursive(loc.dirPath);
           let contentStr = '';
-          // tslint:disable-next-line:ter-arrow-parens
-          for (const file of files.filter((c) => c.toLowerCase().includes('.dart'))) {
-            if (file === 'index') {
+          const quota = await ConfigurationManager.quote();
+          for (const filePath of files) {
+            const relativeFilePath = path.relative(loc.dirPath, filePath).replace(/\\/g, '/');
+            if (relativeFilePath === 'index.dart') {
               continue;
             }
-            contentStr += `export '${file}';\r\n`;
+            contentStr += `export ${quota}${relativeFilePath}${quota};\r\n`;
           }
+
           const result: IFiles = {
             name: path.join(loc.dirPath, fileName),
             content: contentStr,
           };
+
           return result;
         } catch (ex) {
-          console.log(ex);
+          console.error(ex);
           window.showErrorMessage(`Error: ${ex}`);
         }
       });
-    let indexFiles = await Promise.all(filesIndex);
-    indexFiles = indexFiles.filter((c) => c.content != '');
-    await createFiles(loc, indexFiles);
+
+    return Promise.all(filesIndex);
   }
 }
