@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [4.9.0](https://github.com/Gorniv/vscode-flutter-files/compare/v4.8.1...v4.9.0) (2024-06-24)
+
+
+### Features
+
+* improve create index(filter .g and .freezed, use quota from settings project) ([48d9818](https://github.com/Gorniv/vscode-flutter-files/commit/48d9818153398142cedd26539cc538d2f29bd6bc))
+
 ### [4.8.1](https://github.com/Gorniv/vscode-flutter-files/compare/v4.8.0...v4.8.1) (2023-12-26)
 
 ## [4.8.0](https://github.com/Gorniv/vscode-flutter-files/compare/v4.7.1...v4.8.0) (2023-12-26)
