@@ -2,14 +2,14 @@
   "name": "vscode-flutter-files",
   "displayName": "[FF] Flutter Files",
   "description": "Quickly scaffold flutter bloc file templates",
-  "version": "4.9.1",
+  "version": "5.0.0",
   "icon": "assets/icon.png",
   "publisher": "gornivv",
   "author": {
     "name": "Kravchenko Igor"
   },
   "engines": {
-    "vscode": "^1.31.0"
+    "vscode": "^1.85.0"
   },
   "repository": {
     "type": "git",
@@ -18,21 +18,8 @@
   "bugs": {
     "url": "https://github.com/Gorniv/vscode-flutter-files/issues"
   },
-  "keywords": [
-    "Flutter",
-    "angular-cli",
-    "Dart",
-    "BLoC",
-    "Templates"
-  ],
-  "categories": [
-    "Other",
-    "Programming Languages",
-    "Snippets"
-  ],
-  "activationEvents": [
-    "*"
-  ],
+  "keywords": ["Flutter", "angular-cli", "Dart", "BLoC", "Templates"],
+  "categories": ["Other", "Programming Languages", "Snippets"],
   "main": "./out/extension.js",
   "contributes": {
     "configuration": {
@@ -245,37 +232,36 @@
     }
   },
   "scripts": {
-    "vscode:prepublish": "npm run templates && webpack --mode production",
-    "compile": "npm run templates && webpack --mode none",
-    "watch": "npm run templates && webpack --mode none",
-    "test-compile": "tsc -p ./",
-    "templates": "copyfiles templates/**/*.tmpl templates/**/*.tmpl ./out/ && copyfiles templates/**/*.json templates/**/*.json ./out/",
-    "postinstall": "node ./node_modules/vscode/bin/install",
-    "test": "npm run compile && node ./node_modules/vscode/bin/test",
-    "format:check": "prettier --write --config ./.prettierrc --list-different \"src/**/*{.ts,.json}\"",
+    "vscode:prepublish": "npm run package",
+    "compile": "npm run templates && webpack --mode development",
+    "watch": "npm run templates && webpack --mode development --watch",
+    "package": "npm run templates && webpack --mode production --devtool hidden-source-map",
+    "typecheck": "tsc -p . --noEmit",
+    "templates": "node scripts/copy-templates.js",
+    "test": "npm run check",
+    "check": "npm run format:check && npm run test:templates && npm run test:unit && npm run typecheck && npm run package",
+    "test:templates": "node scripts/smoke-templates.js",
+    "test:unit": "node scripts/run-unit-tests.js",
+    "format": "prettier --write --config ./.prettierrc \"src/**/*.ts\" \"test/**/*.ts\" \"scripts/*.js\" \"*.{json,js}\" \".vscode/*.json\"",
+    "format:check": "prettier --check --config ./.prettierrc \"src/**/*.ts\" \"test/**/*.ts\" \"scripts/*.js\" \"*.{json,js}\" \".vscode/*.json\"",
     "vsce:package": "vsce package",
     "vsce:publish": "vsce publish",
-    "dry": "standard-version --dry-run",
-    "standard": "standard-version",
-    "release": "npm run standard && npm run vsce:publish && npm publish"
+    "release": "npm run check && npm run vsce:publish",
+    "release:patch": "npm version patch && npm run release",
+    "release:minor": "npm version minor && npm run release",
+    "release:major": "npm version major && npm run release"
   },
   "devDependencies": {
-    "@types/mocha": "9.0.0",
-    "@types/node": "16.11.7",
-    "copyfiles": "2.4.1",
-    "prettier": "2.4.1",
-    "standard-version": "9.3.2",
-    "ts-loader": "9.2.6",
-    "tslint": "6.1.3",
-    "typescript": "4.4.4",
-    "vscode": "1.1.37",
-    "vscode-languageserver": "7.0.0",
-    "vscode-languageserver-textdocument": "1.0.2",
-    "webpack": "5.64.1",
-    "webpack-cli": "4.9.1"
+    "@types/node": "18.19.130",
+    "@types/vscode": "1.85.0",
+    "@vscode/vsce": "3.9.2",
+    "prettier": "3.9.6",
+    "ts-loader": "9.6.2",
+    "typescript": "5.9.3",
+    "webpack": "5.110.1",
+    "webpack-cli": "7.2.3"
   },
   "dependencies": {
-    "express-es6-template-engine": "2.2.3",
-    "js-yaml": "4.1.0"
+    "js-yaml": "5.4.1"
   }
 }

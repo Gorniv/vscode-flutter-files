@@ -13,6 +13,7 @@ pubspec.lock
 doc/api/
 
 out
+.test-out
 node_modules
 .vscode-test/**
 *.vsix

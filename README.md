@@ -3,24 +3,28 @@
 [![Awesome Flutter](https://img.shields.io/badge/Awesome-Flutter-blue.svg?longCache=true&style=flat-square)](https://github.com/Solido/awesome-flutter#vscode)
 [![Installs](https://img.shields.io/visual-studio-marketplace/i/gornivv.vscode-flutter-files)](https://marketplace.visualstudio.com/items?itemName=gornivv.vscode-flutter-files)
 
-This extension allows **quickly scaffold flutter BLoC templates** in VS Code project.
+This extension lets you **quickly scaffold Flutter BLoC templates** in a VS Code project.
 
-This extension use:
+This extension uses:
+
 - <https://github.com/felangel/bloc> for BLoC (base)
 - <https://pub.dev/packages/ff_bloc> for (my way from real code)
 
-How it works(Russian lang) - https://vas3k.club/post/10567/
+How it works (Russian) - <https://vas3k.club/post/10567/>
 
-## Please, support me:
+Requires VS Code 1.85 or newer.
+
+## Please support me
+
 - Add me on [linkedin](https://www.linkedin.com/in/gorniv/)
-- install my 'Tool for iOS developers: [aso.dev](https://aso.dev?utm_source=ext&utm_medium=f_f)'
-- install my 'Music player for Apple Music: [meows.app](https://meows.app?utm_source=ext&utm_medium=f_f)'
+- Install my tool for iOS developers: [aso.dev](https://aso.dev?utm_source=ext&utm_medium=f_f)
+- Install my music player for Apple Music: [meows.app](https://meows.app?utm_source=ext&utm_medium=f_f)
 
 ![demo](https://github.com/Gorniv/vscode-flutter-files/raw/master/assets/flutter.gif)
 
 ## Custom(dynamic) templates
 
-Copy [templates](./templates) directory to your project (by command "[FF] Copy templates to project") and change any of content files (bloc,event,model,page,provider,repository,scree,state)
+Run `[FF] Copy templates to project`, then edit the copied files in your project's `templates` directory (`bloc`, `event`, `model`, `page`, `provider`, `repository`, `screen`, and `state`).
 
 ## Changelog
 
@@ -58,6 +62,13 @@ You can find multiple options been added to the context menu:
 files on your hard drive and if necessary create the respective folder structure.
 While it should not override any files during this process, I'm not giving any guarantees
 or take any responsibility in case of lost data.
+
+## Development
+
+Use Node.js 22 and install dependencies with `npm ci`.
+
+- `npm test` checks formatting, renders every bundled template, runs unit tests with coverage thresholds, type-checks the extension, and creates a production bundle.
+- `npm run vsce:package` creates an installable VSIX package.
 
 Fork https://github.com/ivalexa/vscode-angular2-files
 

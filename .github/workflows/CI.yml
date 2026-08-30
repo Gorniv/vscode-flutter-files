@@ -3,85 +3,38 @@ name: CI
 
 on:
   push:
-    branches: [ master ]
+    branches: [master]
+  pull_request:
+    branches: [master]
+  workflow_dispatch:
+
+permissions:
+  contents: read
 
 jobs:
   build:
     runs-on: ubuntu-latest
 
-    strategy:
-      matrix:
-        node-version: [12.x]
-
     steps:
-    - uses: actions/checkout@v2
-      
-    - name: Use Node.js ${{ matrix.node-version }}
-      uses: actions/setup-node@v1
-      with:
-        node-version: ${{ matrix.node-version }}
-        
-    - name: Cache Node
-      id: cache-nodes
-      uses: actions/cache@v1
-      with:
-        path: nodes-cache
-        key: ${{ runner.os }}-nodes
+      - uses: actions/checkout@v4
 
-    - name: Install Npm
-      if: steps.cache-nodes.outputs.cache-hit != 'true'
-      run: npm install 
-        
-    - name: Install vsce
-      if: steps.cache-nodes.outputs.cache-hit != 'true'
-      run: npm install -g vsce
-      
-    - name: Generate Package
-      run: vsce package
+      - name: Use Node.js 22
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
 
-    - name: Auto TAG from Version
-      id: tagger
-      uses: azu/action-package-version-to-git-tag@v1
-      with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          github_repo: ${{ github.repository }}
-          git_commit_sha: ${{ github.sha }}
-          git_tag_prefix: "v"
+      - name: Install dependencies
+        run: npm ci
 
-    - name: Gen var
-      id: previoustag
-      run: |
-       echo "::set-output name=num::$(git ls-remote --tags --refs -q --sort -version:refname https://github.com/gorniv/vscode-flutter-files.git v\* | head -n 1 | awk -F refs/tags/v {'print $2'})"
-       echo "::set-output name=version::$(git ls-remote --tags --refs -q --sort -version:refname https://github.com/gorniv/vscode-flutter-files.git v\* | head -n 1 | awk -F refs/tags/ {'print $2'})"
-       echo "::set-env name=num::$(git ls-remote --tags --refs -q --sort -version:refname https://github.com/gorniv/vscode-flutter-files.git v\* | head -n 1 | awk -F refs/tags/v {'print $2'})"
-       echo "::set-env name=version::$(git ls-remote --tags --refs -q --sort -version:refname https://github.com/gorniv/vscode-flutter-files.git v\* | head -n 1 | awk -F refs/tags/ {'print $2'})"
+      - name: Check and build
+        run: npm test
 
-    - name: Get the num of the version
-      id: num
-      run: |
-        echo ${{ steps.previoustag.outputs.num }}
-        echo ${{ steps.previoustag.outputs.version }}
-        echo ${{ env.num }}
-        echo ${{ env.version }}
-        
-    - name: Create Release
-      id: create_release
-      uses: actions/create-release@v1
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      with:
-        tag_name: ${{ env.version }}
-        release_name: Release ${{ env.version }}
-        draft: true
-        prerelease: false
+      - name: Package VSIX
+        run: npm run vsce:package -- --out vscode-flutter-files.vsix
 
-    - name: Upload Release Asset
-      id: upload-release-asset 
-      uses: actions/upload-release-asset@v1
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      with:
-        upload_url: ${{ steps.create_release.outputs.upload_url }} # This pulls from the CREATE RELEASE step above, referencing it's ID to get its outputs object, which include a `upload_url`. See this blog post for more info: https://jasonet.co/posts/new-features-of-github-actions/#passing-data-to-future-steps 
-        asset_path: ./vscode-flutter-files-${{ env.num }}.vsix
-        asset_name: vscode-flutter-files-${{ env.num }}.vsix
-        asset_content_type: application/vsix
+      - name: Upload VSIX
+        uses: actions/upload-artifact@v4
+        with:
+          name: vscode-flutter-files
+          path: vscode-flutter-files.vsix

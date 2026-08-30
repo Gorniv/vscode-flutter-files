@@ -1,4 +1,4 @@
-import { Command, ConfigElement } from '../config-ext';
+import { Command } from '../config-ext';
 
 export interface IPath {
   fileName: string;
@@ -7,5 +7,5 @@ export interface IPath {
   fullPath: string;
   rootPath: string;
   templateDirectory: string;
-  command: Command;
+  command?: Command;
 }

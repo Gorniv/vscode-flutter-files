@@ -1,13 +1,11 @@
-import { ExtensionContext, commands, workspace, Uri } from 'vscode';
+import { ExtensionContext, Uri, commands, workspace } from 'vscode';
 import { ConfigurationManager } from './configuration-manager';
 import { showFileNameDialog, displayStatusMessage } from './editor';
 import { commandsMap } from './commands';
 import { toTileCase } from './formatting';
 import { AngularCli } from './angular-cli';
 import { ResourceType } from './enums/resource-type';
-import { IConfig } from './models/config';
 import { config as defaultConfig } from './config/cli-config';
-import { ConfigExt } from './config-ext';
 import { ConfigurationManagerExt } from './configuration-manager-ext';
 import { CommandType } from './enums/command-type';
 import * as vscode from 'vscode';
@@ -16,48 +14,54 @@ export async function activate(context: ExtensionContext) {
   const angularCli = new AngularCli();
   const cm = new ConfigurationManager();
   const cmExt = new ConfigurationManagerExt();
-  let configMap: Map<string, IConfig>;
-  let configExtMap: Map<string, ConfigExt>;
-
-  setImmediate(async () => (configMap = await cm.getConfig()));
-  setImmediate(async () => (configExtMap = await cmExt.getConfig()));
+  let [configMap, configExtMap] = await Promise.all([cm.getConfig(), cmExt.getConfig()]);
 
   // watch and update on config file changes
-  cm.watchConfigFiles(async () => (configMap = await cm.getConfig()));
-  cmExt.watchConfigFiles(async () => (configExtMap = await cmExt.getConfig()));
+  context.subscriptions.push(
+    cm.watchConfigFiles(async () => {
+      configMap = await cm.getConfig();
+    }),
+    cmExt.watchConfigFiles(async () => {
+      configExtMap = await cmExt.getConfig();
+    }),
+  );
 
-  const showDynamicDialog = async (args: any, fileName: string, resource: ResourceType) => {
-    const loc = await showFileNameDialog(args, resource, fileName, configExtMap);
+  const showDynamicDialog = async (
+    args: Uri | undefined,
+    fileName: string,
+    resource: ResourceType,
+  ): Promise<void> => {
+    try {
+      const loc = await showFileNameDialog(args, resource, fileName, configExtMap);
+      if (!loc) {
+        return;
+      }
 
-    const workspaceFolder = workspace.getWorkspaceFolder(Uri.file(loc.fullPath));
-    let config =
-      (workspaceFolder &&
-        configMap.has(workspaceFolder.name) &&
-        configMap.get(workspaceFolder.name)) ||
-      defaultConfig;
-    let resourceConfig: IConfig = {
-      ...config,
-      appPath: (workspaceFolder && workspaceFolder.uri.fsPath) || workspace.rootPath,
-    };
+      const workspaceFolder = workspace.getWorkspaceFolder(Uri.file(loc.fullPath));
+      const config = configMap.get(workspaceFolder?.uri.fsPath ?? '') ?? defaultConfig;
+      const resourceConfig = {
+        ...config,
+        appPath: workspaceFolder?.uri.fsPath ?? loc.rootPath,
+      };
 
-    let arr = [...configExtMap];
-    let lastIndex = configExtMap.size - 1;
-    let confLast = arr[lastIndex][1];
-    let defaultConfigExt = confLast.configs[0];
-    await angularCli.generateResources(
-      resource,
-      loc,
-      resourceConfig,
-      defaultConfigExt,
-    );
-    displayStatusMessage(toTileCase(resource), loc.fileName);
+      const defaultConfigExt = [...configExtMap.values()].at(-1)?.configs[0];
+      if (!defaultConfigExt) {
+        throw new Error('No commands found in ff.config.json');
+      }
+      await angularCli.generateResources(resource, loc, resourceConfig, defaultConfigExt);
+      displayStatusMessage(toTileCase(resource), loc.fileName);
+    } catch (error) {
+      const message = error instanceof Error ? error.message : String(error);
+      await vscode.window.showErrorMessage(`Flutter Files: ${message}`);
+    }
   };
-  const command = commands.registerCommand(CommandType.AsoDev, (args) => {
+
+  const command = commands.registerCommand(CommandType.AsoDev, () => {
     return vscode.env.openExternal(vscode.Uri.parse('https://aso.dev'));
   });
   context.subscriptions.push(command);
-  for (let [key, value] of commandsMap) {
-    const command = commands.registerCommand(key, (args) => {
+  for (const [key, value] of commandsMap) {
+    const command = commands.registerCommand(key, (args: Uri | undefined) => {
       return showDynamicDialog(args, value.fileName, value.resource);
     });
     context.subscriptions.push(command);

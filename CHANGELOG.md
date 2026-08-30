@@ -1,6 +1,21 @@
 # Changelog
 
-All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
+All notable changes to this project will be documented in this file.
+
+## [5.0.0](https://github.com/Gorniv/vscode-flutter-files/compare/v4.9.1...v5.0.0) (2026-08-30)
+
+### Added
+
+- Added unit coverage for template rendering, path validation, file generation, resource mapping, and `index.dart` exports.
+
+### Changed
+
+- Modernized the VS Code extension toolchain, packaging, and CI workflow.
+- Removed the deprecated `vscode` development package and unused legacy tooling.
+
+### Security
+
+- Updated runtime and build dependencies to remove known vulnerable transitive packages.
 
 ### [4.9.1](https://github.com/Gorniv/vscode-flutter-files/compare/v4.9.0...v4.9.1) (2024-06-24)
 

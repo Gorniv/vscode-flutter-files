@@ -1,81 +1,72 @@
 import * as fs from 'fs';
 import * as path from 'path';
-import * as es6Renderer from 'express-es6-template-engine';
 import { IConfig } from './models/config';
 import { toUpperCase, toPrivateCase } from './formatting';
-import { promisify } from './promisify';
 import { IPath } from './models/path';
-import { resolve } from 'path';
 
-const fsReaddir = promisify(fs.readdir);
-const fsReadFile = promisify(fs.readFile);
-const fsExists = promisify(fs.exists);
+type TemplateRenderer = (...args: string[]) => string;
+
+const compileTemplate = (content: string, argumentNames: string[]): TemplateRenderer => {
+  const render = Function(...argumentNames, `return \`${content}\`;`) as TemplateRenderer;
+  return (...args: string[]) => render(...args);
+};
 
 export class FileContents {
   static TEMPLATES_FOLDER = 'templates';
-  static TEMPLATE_ARGUMENTS = 'inputName, upperName, privateName, appName, relative, params';
+  static TEMPLATE_ARGUMENTS = [
+    'inputName',
+    'upperName',
+    'privateName',
+    'appName',
+    'relative',
+    'params',
+  ];
 
-  private templatesMap: Map<string, Function>;
-  private localTemplatesMap: Map<string, Function>;
+  private readonly templatesMap = new Map<string, TemplateRenderer>();
 
-  constructor() {
-    this.templatesMap = new Map<string, Function>();
-  }
-
-  async loadTemplates(pathDirectory: string, templatesMap: Map<string, Function>) {
+  async loadTemplates(
+    pathDirectory: string,
+    templatesMap: Map<string, TemplateRenderer>,
+  ): Promise<Map<string, TemplateRenderer>> {
     if (!fs.existsSync(pathDirectory)) {
-      return;
+      return templatesMap;
     }
 
-    let tempMap: Map<string, string> = await this.getTemplates(pathDirectory);
+    const tempMap = await this.getTemplates(pathDirectory);
     for (const [key, value] of tempMap.entries()) {
       try {
-        let compiled = es6Renderer(value, FileContents.TEMPLATE_ARGUMENTS);
-        templatesMap.set(key, compiled);
-      } catch (e) {
-        let compiled = es6Renderer(e, FileContents.TEMPLATE_ARGUMENTS);
-        templatesMap.set(key, compiled);
-        console.log(e);
+        templatesMap.set(key, compileTemplate(value, FileContents.TEMPLATE_ARGUMENTS));
+      } catch (error) {
+        throw new Error(`Failed to compile template ${key}`, { cause: error });
       }
     }
     return templatesMap;
   }
 
   private async getTemplates(templatesPath: string): Promise<Map<string, string>> {
-    const templatesFiles: string[] = (await getFiles(templatesPath))
-      .map((f) => f.replace(templatesPath, ''))
-      .map((f: string) => f.substring(1));
-
-    // tslint:disable-next-line:ter-arrow-parens
-    const templatesFilesPromises = templatesFiles.map((t) => {
-      try {
-        // tslint:disable-next-line:ter-arrow-parens
-        return fsReadFile(path.join(templatesPath, t), 'utf8').then((data) => [t, data]);
-      } catch (e) {
-        console.log(e);
-      }
-    });
-    const templates = await Promise.all(templatesFilesPromises);
-
-    // tslint:disable-next-line:ter-arrow-parens
-    return new Map(templates.map((x) => x as [string, string]));
+    const templateFiles = (await getFiles(templatesPath)).map((file) =>
+      path.relative(templatesPath, file),
+    );
+    const templates = await Promise.all(
+      templateFiles.map(
+        async (file) =>
+          [file, await fs.promises.readFile(path.join(templatesPath, file), 'utf8')] as const,
+      ),
+    );
+    return new Map(templates);
   }
 
-  async loadDirTemplates(pathDirectory: string) {
+  async loadDirTemplates(pathDirectory: string): Promise<string[]> {
     const templatesPath = path.join(pathDirectory, FileContents.TEMPLATES_FOLDER);
     if (!fs.existsSync(templatesPath)) {
-      return undefined;
+      return [];
     }
 
-    const directories: string[] = await this.getDirTemplates(templatesPath);
-    return directories.filter((c) => {
-      return !c.endsWith('.tmpl') && !c.endsWith('.json');
-    });
-  }
-
-  private async getDirTemplates(templatesPath: string): Promise<string[]> {
-    const templatesFiles: string[] = await fsReaddir(templatesPath, 'utf-8');
-    return templatesFiles;
+    const entries = await fs.promises.readdir(templatesPath, { withFileTypes: true });
+    return entries
+      .filter((entry) => entry.isDirectory())
+      .map((entry) => entry.name)
+      .sort();
   }
 
   public async getTemplateContent(
@@ -83,55 +74,33 @@ export class FileContents {
     config: IConfig,
     inputName: string,
     loc: IPath,
-  ) {
-    const paths = loc.dirPath.split(path.sep);
-    let relative: string;
-    let find = false;
-    for (const item of paths) {
-      if (find) {
-        relative = `${relative}/${item}`;
-      }
-      if (item === 'lib') {
-        find = true;
-        relative = '';
-      }
-    }
-    const templateName: string = `${template}.tmpl`;
+  ): Promise<string> {
+    const pathSegments = loc.dirPath.split(path.sep);
+    const libIndex = pathSegments.lastIndexOf('lib');
+    const relative = libIndex === -1 ? '' : `/${pathSegments.slice(libIndex + 1).join('/')}`;
+    const templateName = `${template}.tmpl`;
     const upperName = toUpperCase(inputName);
     const args = [inputName, upperName, toPrivateCase(upperName), config.appName, relative];
-    // load dynamic templates
-    this.localTemplatesMap = new Map<string, Function>();
-    this.localTemplatesMap = await this.loadTemplates(
+    const localTemplatesMap = await this.loadTemplates(
       loc.templateDirectory,
-      this.localTemplatesMap,
+      new Map<string, TemplateRenderer>(),
     );
-    var key = templateName.replace('\\', path.sep);
-    let resultTemplate =
-      this.localTemplatesMap && this.localTemplatesMap.has(key)
-        ? this.localTemplatesMap.get(key)(...args)
-        : undefined;
-    if (!resultTemplate) {
-      /// use template from extension
-      resultTemplate = this.templatesMap.has(key) ? this.templatesMap.get(key)(...args) : '';
-    }
-    return resultTemplate;
+    const key = templateName.replaceAll('\\', path.sep);
+    return localTemplatesMap.get(key)?.(...args) ?? this.templatesMap.get(key)?.(...args) ?? '';
   }
 }
 
-function getFiles(dir: string): any[] {
-  var results = [];
-  var list = fs.readdirSync(dir);
-  list.forEach(function (file) {
-    file = dir + '/' + file;
-    var stat = fs.statSync(file);
-    if (stat && stat.isDirectory()) {
-      /* Recurse into a subdirectory */
-      var recFiles = getFiles(file);
-      results = results.concat(recFiles);
+async function getFiles(directory: string): Promise<string[]> {
+  const results: string[] = [];
+  const entries = await fs.promises.readdir(directory);
+  for (const entry of entries) {
+    const filePath = path.join(directory, entry);
+    const stat = await fs.promises.stat(filePath);
+    if (stat.isDirectory()) {
+      results.push(...(await getFiles(filePath)));
     } else {
-      /* Is a file */
-      results.push(file);
+      results.push(filePath);
     }
-  });
+  }
   return results;
 }
